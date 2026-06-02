@@ -40,6 +40,10 @@ except psycopg2.OperationalError as e:
 done
 
 echo "--------------------------------------------"
+echo "Collecting static files..."
+python manage.py collectstatic --noinput
+
+echo "--------------------------------------------"
 echo "Running database migrations..."
 python manage.py migrate --noinput
 
