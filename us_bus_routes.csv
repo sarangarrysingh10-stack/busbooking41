@@ -1,0 +1,99 @@
+Route_ID,From_City,From_State,To_City,To_State,Bus_Operator,Bus_Type,Distance_Miles,Distance_KM,Primary_Highway,Departure_Time,Arrival_Time,Duration_Hours,Ticket_Price_USD,Seats_Available,Total_Seats,Amenities,Booking_Type
+1,New York,New York,Philadelphia,Pennsylvania,Greyhound Express,Seater,97,156,I-95,07:00,09:00,2.5,25,45,45,"WiFi, Charging, AC",Online/Station
+2,New York,New York,Philadelphia,Pennsylvania,FlixBus Morning,Seater,97,156,I-95,09:00,11:00,2.5,19,50,50,"WiFi, AC",Online/Station
+3,New York,New York,Philadelphia,Pennsylvania,Megabus Express,Seater,97,156,I-95,14:00,16:00,2.5,15,55,55,"WiFi, Charging",Online
+4,New York,New York,Philadelphia,Pennsylvania,Greyhound Night,AC,97,156,I-95,22:00,00:00,2.5,35,40,40,"WiFi, Blanket, AC",Online/Station
+5,New York,New York,Boston,Massachusetts,Greyhound Express,Seater,232,373,I-95,08:00,13:30,4.5,45,45,45,"WiFi, Charging, AC",Online/Station
+6,New York,New York,Boston,Massachusetts,FlixBus Comfort,Luxury,232,373,I-95,10:00,15:30,4.5,65,30,30,"WiFi, Meals, USB, Recliner",Online/Station
+7,New York,New York,Boston,Massachusetts,Peter Pan Night,AC,232,373,I-95,22:00,03:30,4.5,55,40,40,"WiFi, Blanket, Pillow",Online
+8,New York,New York,Washington DC,DC,Bolt Bus,Seater,255,410,I-95,06:30,13:00,5.0,39,50,50,"WiFi, Charging, AC",Online
+9,New York,New York,Washington DC,DC,Luxury Liner,Luxury,255,410,I-95,16:00,22:30,5.0,75,25,25,"WiFi, Meals, Lounge, AC",Online
+10,New York,New York,Albany,New York,Empire State Express,Seater,155,249,I-87,07:30,10:00,3.5,28,50,50,"WiFi, Charging, AC",Online
+11,New York,New York,Buffalo,New York,Niagara Express,Seater,351,565,I-90,08:00,15:30,7.0,55,45,45,"WiFi, Charging, AC",Online
+12,New York,New York,Providence,Rhode Island,Ocean State Express,Seater,183,295,I-95,08:00,11:30,4.0,32,45,45,"WiFi, Charging, AC",Online
+13,New York,New York,Hartford,Connecticut,Constitution Shuttle,Seater,118,190,I-95,07:00,09:30,2.5,24,50,50,"WiFi, AC",Online
+14,Albany,New York,Buffalo,New York,Mohawk Express,Seater,308,496,I-90,09:00,15:00,6.0,42,45,45,"WiFi, Charging, AC",Online
+15,Buffalo,New York,Cleveland,Ohio,Lake Front Express,Seater,211,340,I-90,10:00,13:30,4.5,32,50,50,"WiFi, AC",Online
+16,Boston,Massachusetts,Providence,Rhode Island,Bay State Shuttle,Seater,49,79,I-95,07:30,09:00,1.5,16,50,50,"WiFi, AC",Online
+17,Boston,Massachusetts,Hartford,Connecticut,New England Express,Seater,114,183,I-84,08:00,10:00,2.5,22,50,50,"WiFi, AC",Online
+18,Boston,Massachusetts,Burlington,Vermont,Green Mountain Express,Seater,227,365,I-89,08:00,12:30,4.5,38,45,45,"WiFi, Charging, AC",Online
+19,Boston,Massachusetts,Portland ME,Maine,Pine Tree Shuttle,Seater,120,193,I-95,07:00,09:30,2.5,24,50,50,"WiFi, AC",Online
+20,Boston,Massachusetts,Washington DC,DC,Northeast Corridor Bus,AC,493,793,I-95,07:00,17:30,9.5,65,45,45,"WiFi, Charging, Blanket, AC",Online
+21,Philadelphia,Pennsylvania,Washington DC,DC,Capitol Express,Seater,151,243,I-95,08:00,11:30,3.0,29,50,50,"WiFi, Charging, AC",Online
+22,Philadelphia,Pennsylvania,Baltimore,Maryland,Mid-Atlantic Shuttle,Seater,108,174,I-95,07:00,09:00,2.5,22,50,50,"WiFi, AC",Online
+23,Philadelphia,Pennsylvania,Pittsburgh,Pennsylvania,Keystone Express,Seater,322,518,I-76,08:00,14:00,6.5,45,45,45,"WiFi, Charging, AC",Online
+24,Philadelphia,Pennsylvania,Harrisburg,Pennsylvania,Keystone Connector,Seater,114,183,I-76,08:00,10:00,2.5,22,50,50,"WiFi, AC",Online
+25,Washington DC,DC,Philadelphia,Pennsylvania,Coastal Connector,Seater,151,243,I-95,07:30,11:00,3.0,29,50,50,"WiFi, Charging, AC",Online
+26,Washington DC,DC,Richmond,Virginia,Capital Region Express,Seater,118,190,I-95,07:00,09:00,2.5,24,50,50,"WiFi, AC",Online
+27,Richmond,Virginia,Norfolk,Virginia,Hampton Roads Shuttle,Seater,99,159,I-64,10:00,12:00,2.5,22,50,50,"WiFi, AC",Online
+28,Pittsburgh,Pennsylvania,Cleveland,Ohio,Steel City Express,Seater,140,225,I-76,09:00,11:30,3.0,26,50,50,"WiFi, AC",Online
+29,Pittsburgh,Pennsylvania,Washington DC,DC,Capital Connector,Seater,237,381,I-70,09:30,14:30,5.0,39,45,45,"WiFi, Charging, AC",Online
+30,Harrisburg,Pennsylvania,Philadelphia,Pennsylvania,Penn Express,Seater,114,183,I-76,08:00,10:00,2.5,22,50,50,"WiFi, AC",Online
+31,Los Angeles,California,San Francisco,California,Pacific Cruiser,AC,452,727,US-101,08:00,16:30,8.5,59,40,40,"WiFi, Charging, Blanket",Online
+32,Los Angeles,California,San Francisco,California,CA Express,Seater,452,727,I-5,12:00,20:00,8.5,45,50,50,"WiFi, AC",Online
+33,Los Angeles,California,Las Vegas,Nevada,Desert Runner,Seater,292,470,I-15,07:00,13:30,6.0,35,50,50,"WiFi, Charging, AC",Online
+34,Los Angeles,California,Las Vegas,Nevada,Vegas Night Express,Luxury,292,470,I-15,22:00,04:30,6.0,75,30,30,"WiFi, Meals, Recliner",Online
+35,Los Angeles,California,San Diego,California,SoCal Shuttle,Seater,131,211,I-5,08:00,10:30,3.0,22,55,55,"WiFi, AC",Online
+36,San Francisco,California,San Diego,California,Pacific Coast Express,AC,596,959,US-101/I-5,07:00,19:00,11.5,75,40,40,"WiFi, Blanket, Charging",Online
+37,San Francisco,California,Sacramento,California,Gold Rush Express,Seater,92,148,I-80,07:30,09:30,2.0,18,50,50,"WiFi, AC",Online
+38,San Diego,California,Phoenix,Arizona,Desert Coast Express,AC,404,650,I-8,22:00,07:00,8.0,65,40,40,"WiFi, Blanket, Meals",Online
+39,Phoenix,Arizona,Tucson,Arizona,Sonoran Express,Seater,129,208,I-10,07:00,09:30,3.0,25,50,50,"WiFi, AC",Online
+40,Phoenix,Arizona,Las Vegas,Nevada,Nevada Connect,Seater,328,528,US-93,09:00,15:30,6.5,45,45,45,"WiFi, Charging, AC",Online
+41,Phoenix,Arizona,Albuquerque,New Mexico,Southwest Cruiser,Seater,436,702,I-40,08:00,16:00,8.5,55,45,45,"WiFi, Charging, AC",Online
+42,Las Vegas,Nevada,Salt Lake City,Utah,Desert Gateway,AC,478,769,I-15,08:00,16:30,9.0,65,40,40,"WiFi, Charging, Blanket",Online
+43,Las Vegas,Nevada,San Francisco,California,Golden Gate Express,AC,543,874,US-95/I-80,08:00,21:00,10.5,79,40,40,"WiFi, Charging, Meals, Blanket",Online
+44,Denver,Colorado,Colorado Springs,Colorado,Peak Express,Seater,73,117,I-25,07:30,09:00,2.0,18,50,50,"WiFi, AC",Online
+45,Denver,Colorado,Salt Lake City,Utah,Mountain Express,AC,483,777,I-70/I-15,06:00,15:30,9.5,65,40,40,"WiFi, Charging, Blanket",Online
+46,Denver,Colorado,Albuquerque,New Mexico,Southwest Cruiser,Seater,451,726,I-25,08:00,16:00,8.5,55,45,45,"WiFi, Charging, AC",Online
+47,Salt Lake City,Utah,Boise,Idaho,Pacific Northwest Link,Seater,385,620,I-84,09:00,16:00,7.5,49,45,45,"WiFi, Charging, AC",Online
+48,Seattle,Washington,Portland OR,Oregon,PNW Connector,Seater,178,286,I-5,09:00,12:30,3.5,35,50,50,"WiFi, Charging, AC",Online
+49,Seattle,Washington,Spokane,Washington,Evergreen Express,Seater,286,460,I-90,09:00,14:00,5.5,42,45,45,"WiFi, Charging, AC",Online
+50,Portland OR,Oregon,Spokane,Washington,Inland Empire Runner,Seater,372,599,I-84/US-395,08:00,15:30,7.5,55,45,45,"WiFi, Charging, AC",Online
+51,Boise,Idaho,Portland OR,Oregon,Treasure Valley Express,AC,455,732,I-84,08:00,16:30,9.0,58,45,45,"WiFi, Charging, Blanket",Online
+52,Chicago,Illinois,Milwaukee,Wisconsin,Badger Express,Seater,96,154,I-94,07:00,09:00,2.0,22,50,50,"WiFi, AC",Online
+53,Chicago,Illinois,Indianapolis,Indiana,Indy Runner,Seater,206,332,I-65,08:30,12:30,4.0,35,45,45,"WiFi, Charging, AC",Online
+54,Chicago,Illinois,Detroit,Michigan,Motor City Express,Seater,297,478,I-94,07:30,12:30,6.0,42,45,45,"WiFi, Charging, AC",Online
+55,Chicago,Illinois,St. Louis,Missouri,Gateway Express,Seater,336,541,I-55,09:00,15:00,6.5,38,50,50,"WiFi, AC",Online
+56,Chicago,Illinois,Minneapolis,Minnesota,Twin Cities Express,AC,462,744,I-90/I-35,20:00,05:30,9.0,65,40,40,"WiFi, Blanket, Meals",Online
+57,Minneapolis,Minnesota,Milwaukee,Wisconsin,Great Lakes Express,Seater,382,615,I-94,08:00,14:30,7.5,48,45,45,"WiFi, Charging, AC",Online
+58,Detroit,Michigan,Cleveland,Ohio,Great Lakes Shuttle,Seater,110,177,I-90,08:00,10:30,2.5,29,50,50,"WiFi, AC",Online
+59,Cleveland,Ohio,Columbus OH,Ohio,Buckeye Express,Seater,154,248,I-71,09:00,12:00,3.5,25,50,50,"WiFi, AC",Online
+60,Columbus OH,Ohio,Cincinnati,Ohio,Crosstown Connector,Seater,122,196,I-71,09:00,11:30,2.5,22,50,50,"WiFi, AC",Online
+61,Cincinnati,Ohio,Louisville,Kentucky,River City Shuttle,Seater,109,175,I-71,08:30,10:30,2.5,24,50,50,"WiFi, AC",Online
+62,Cincinnati,Ohio,Indianapolis,Indiana,Crossroads Express,Seater,121,195,I-74,09:00,11:30,2.5,24,50,50,"WiFi, AC",Online
+63,Louisville,Kentucky,Nashville,Tennessee,Bluegrass Runner,Seater,189,304,I-65,10:00,13:30,4.0,32,45,45,"WiFi, AC",Online
+64,Indianapolis,Indiana,Chicago,Illinois,Windy City Shuttle,Seater,206,332,I-65,08:00,12:00,4.0,35,50,50,"WiFi, Charging, AC",Online
+65,St. Louis,Missouri,Kansas City,Missouri,Show Me Express,Seater,298,480,I-70,09:00,14:00,6.0,38,50,50,"WiFi, AC",Online
+66,St. Louis,Missouri,Nashville,Tennessee,Country Roads Express,Seater,329,529,I-64/I-24,09:00,16:00,6.5,48,45,45,"WiFi, Charging, AC",Online
+67,Kansas City,Missouri,Omaha,Nebraska,Heartland Runner,Seater,211,340,I-29,08:00,12:00,4.5,35,45,45,"WiFi, Charging, AC",Online
+68,Houston,Texas,Dallas,Texas,Texas Star,Seater,287,462,I-45,08:00,13:30,5.5,39,50,50,"WiFi, Charging, AC",Online
+69,Houston,Texas,San Antonio,Texas,Lone Star Express,Seater,231,372,I-10,09:00,13:00,4.5,32,50,50,"WiFi, Charging, AC",Online
+70,Houston,Texas,New Orleans,Louisiana,Gulf Express,AC,414,666,I-10,20:00,06:30,8.0,69,40,40,"WiFi, Blanket, Meals",Online
+71,Dallas,Texas,San Antonio,Texas,Texas Arrow,Seater,322,518,I-35,08:00,13:30,6.5,42,48,48,"WiFi, Charging, AC",Online
+72,Dallas,Texas,Oklahoma City,Oklahoma,Sooner Shuttle,Seater,237,381,I-35,09:00,13:30,5.0,35,50,50,"WiFi, AC",Online
+73,Dallas,Texas,Austin,Texas,Lone Star Shuttle,Seater,222,357,I-35,08:00,11:30,4.5,28,50,50,"WiFi, AC",Online
+74,San Antonio,Texas,El Paso,Texas,Trans-Texas Express,AC,678,1091,I-10,20:00,09:00,13.0,79,40,40,"WiFi, Blanket, Meals",Online
+75,El Paso,Texas,Albuquerque,New Mexico,Rio Grande Express,Seater,298,480,I-25,09:00,14:30,6.0,39,50,50,"WiFi, AC",Online
+76,Oklahoma City,Oklahoma,Dallas,Texas,Sooner Star,Seater,237,381,I-35,10:00,14:30,5.0,35,50,50,"WiFi, Charging, AC",Online
+77,Miami,Florida,Orlando,Florida,Sunshine Express,Seater,250,402,I-95/FL-91,08:30,13:00,5.0,39,45,45,"WiFi, Charging, AC",Online
+78,Miami,Florida,Tampa,Florida,Gulf Coast Express,Seater,257,414,I-75,09:00,14:30,5.0,42,45,45,"WiFi, Charging, AC",Online
+79,Miami,Florida,Atlanta,Georgia,Southeast Express,AC,787,1267,I-75,20:00,09:30,15.0,89,40,40,"WiFi, Blanket, Meals",Online
+80,Orlando,Florida,Tampa,Florida,Bay Link Shuttle,Seater,94,151,I-4,08:00,10:00,2.0,22,50,50,"WiFi, AC",Online
+81,Orlando,Florida,Jacksonville,Florida,First Coast Express,Seater,152,245,I-95,10:00,13:00,3.5,29,45,45,"WiFi, Charging, AC",Online
+82,Jacksonville,Florida,Atlanta,Georgia,Peach State Express,Seater,370,595,I-95/I-75,09:00,15:30,7.0,52,45,45,"WiFi, Charging, AC",Online
+83,Atlanta,Georgia,Nashville,Tennessee,Music City Express,Seater,279,449,I-24,09:00,15:30,5.5,42,45,45,"WiFi, Charging, AC",Online
+84,Atlanta,Georgia,Charlotte,North Carolina,Carolinas Connect,Seater,290,467,I-85,08:00,13:30,6.0,39,45,45,"WiFi, Charging, AC",Online
+85,Atlanta,Georgia,Birmingham,Alabama,Deep South Express,Seater,171,275,I-20,09:30,12:30,3.5,28,50,50,"WiFi, AC",Online
+86,Atlanta,Georgia,Savannah,Georgia,Peach Blossom Express,Seater,290,467,I-16,08:00,13:30,6.0,39,45,45,"WiFi, Charging, AC",Online
+87,Nashville,Tennessee,Memphis,Tennessee,Blues City Express,Seater,252,406,I-40,09:00,13:00,5.0,35,45,45,"WiFi, Charging, AC",Online
+88,Nashville,Tennessee,Louisville,Kentucky,Bluegrass Express,Seater,189,304,I-65,10:00,13:30,4.0,32,45,45,"WiFi, AC",Online
+89,Memphis,Tennessee,Little Rock,Arkansas,Natural State Shuttle,Seater,159,256,I-40,09:00,12:00,3.5,28,50,50,"WiFi, AC",Online
+90,Memphis,Tennessee,New Orleans,Louisiana,Mississippi Runner,AC,466,750,I-55,20:00,06:30,9.0,65,40,40,"WiFi, Blanket, Meals",Online
+91,New Orleans,Louisiana,Mobile,Alabama,Gulf Coast Shuttle,Seater,161,259,I-10,09:00,12:30,3.5,28,50,50,"WiFi, AC",Online
+92,New Orleans,Louisiana,Jackson MS,Mississippi,Magnolia Express,Seater,202,325,I-55,10:00,14:00,4.0,35,45,45,"WiFi, AC",Online
+93,Charlotte,North Carolina,Raleigh,North Carolina,Piedmont Runner,Seater,163,262,I-85,08:00,11:00,3.5,28,50,50,"WiFi, AC",Online
+94,Charlotte,North Carolina,Washington DC,DC,Mid-Atlantic Express,AC,422,679,I-85/I-95,20:00,06:00,8.0,65,40,40,"WiFi, Blanket, Charging",Online
+95,Charleston SC,South Carolina,Charlotte,North Carolina,Low Country Express,Seater,230,370,I-26/I-85,09:00,13:30,4.5,36,45,45,"WiFi, Charging, AC",Online
+96,Savannah,Georgia,Charleston SC,South Carolina,Coastal Express,Seater,100,161,I-95,09:00,11:00,2.5,22,50,50,"WiFi, AC",Online
+97,Birmingham,Alabama,Mobile,Alabama,Gulf State Shuttle,Seater,253,407,I-65,09:00,13:30,5.0,36,45,45,"WiFi, AC",Online
+98,Jackson MS,Mississippi,Memphis,Tennessee,Delta Blues Shuttle,Seater,246,396,I-55,09:00,13:00,5.0,35,45,45,"WiFi, AC",Online

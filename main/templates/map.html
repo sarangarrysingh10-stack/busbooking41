@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BusGo — Route Map</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  :root {
+    --bg: #0a0f1e;
+    --card: #1a2236;
+    --accent: #f97316;
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+    --border: rgba(255,255,255,0.08);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+
+  nav {
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    background: rgba(10,15,30,0.95);
+    z-index: 1000;
+    flex-shrink: 0;
+  }
+  .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; color: var(--text); text-decoration: none; }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+  .map-wrapper { display: flex; flex: 1; overflow: hidden; }
+
+  .sidebar {
+    width: 300px;
+    background: var(--card);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .sidebar-header { padding: 1.2rem 1.5rem; border-bottom: 1px solid var(--border); }
+  .sidebar-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.8rem; }
+
+  .stats-row { display: flex; gap: 1rem; }
+  .stat { flex: 1; background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 8px; padding: 0.6rem 0.8rem; text-align: center; }
+  .stat-num { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.3rem; color: var(--accent); }
+  .stat-label { font-size: 0.7rem; color: var(--muted); }
+
+  .sidebar-body { flex: 1; overflow-y: auto; padding: 1rem; }
+
+  .section-label { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.6rem; margin-top: 1rem; }
+  .section-label:first-child { margin-top: 0; }
+
+  .city-item, .route-item { display: flex; align-items: center; gap: 0.7rem; padding: 0.55rem 0.7rem; border-radius: 8px; cursor: pointer; transition: background 0.15s; font-size: 0.88rem; margin-bottom: 0.3rem; }
+  .city-item:hover, .route-item:hover { background: rgba(255,255,255,0.05); }
+  .city-item:hover .city-name { color: var(--accent); }
+
+  .city-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  .route-arrow { color: var(--accent); font-size: 0.8rem; }
+  .route-status { font-size: 0.65rem; color: var(--muted); margin-left: auto; }
+  .route-status.ok { color: #22c55e; }
+
+  .loading-bar {
+    position: fixed; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent), #fb923c);
+    z-index: 9999; transform-origin: left;
+    animation: loadpulse 1.5s ease-in-out infinite;
+    display: none;
+  }
+  .loading-bar.active { display: block; }
+  @keyframes loadpulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+
+  .offline-btn { margin: 1rem; padding: 0.7rem; background: rgba(249,115,22,0.15); border: 1px solid rgba(249,115,22,0.3); border-radius: 8px; color: var(--accent); font-family: 'DM Sans', sans-serif; font-size: 0.85rem; cursor: pointer; text-align: center; transition: background 0.2s; flex-shrink: 0; }
+  .offline-btn:hover { background: rgba(249,115,22,0.25); }
+
+  #map { flex: 1; }
+
+  .leaflet-popup-content-wrapper { background: #1a2236 !important; border: 1px solid rgba(249,115,22,0.3) !important; border-radius: 10px !important; color: #f1f5f9 !important; box-shadow: 0 8px 30px rgba(0,0,0,0.5) !important; }
+  .leaflet-popup-tip { background: #1a2236 !important; }
+  .leaflet-popup-content { margin: 12px 16px !important; font-family: 'DM Sans', sans-serif; min-width: 180px; }
+  .popup-city { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; color: #f97316; margin-bottom: 4px; }
+  .popup-route { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+  .popup-row { font-size: 0.8rem; color: #94a3b8; margin-top: 3px; display: flex; align-items: center; gap: 5px; }
+  .popup-row strong { color: #f1f5f9; }
+
+  .track-panel { position: absolute; bottom: 24px; right: 24px; z-index: 999; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.2rem; min-width: 220px; display: none; }
+  .track-panel.active { display: block; }
+  .track-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; margin-bottom: 0.5rem; }
+  .track-bus { font-size: 0.8rem; color: var(--muted); }
+  .track-close { float: right; cursor: pointer; color: var(--muted); }
+
+  @media (max-width: 768px) { .sidebar { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="loading-bar" id="loadingBar"></div>
+
+<nav>
+  <a href="/" class="logo">Bus<span>Go</span></a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/map/" class="active">🗺 Map</a>
+  </div>
+</nav>
+
+<div class="map-wrapper">
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">🗺 Network Overview</div>
+      <div class="stats-row">
+        <div class="stat"><div class="stat-num">{{ total_cities }}</div><div class="stat-label">Cities</div></div>
+        <div class="stat"><div class="stat-num">{{ total_routes }}</div><div class="stat-label">Routes</div></div>
+      </div>
+    </div>
+    <div class="sidebar-body" id="sidebarBody">
+      <div class="section-label">Cities</div>
+      <div id="cityList"></div>
+      <div class="section-label">Routes</div>
+      <div id="routeList"></div>
+    </div>
+    <button class="offline-btn" onclick="saveOffline()">💾 Save Map for Offline Use</button>
+  </div>
+
+  <div id="map"></div>
+
+  <div class="track-panel" id="trackPanel">
+    <span class="track-close" onclick="document.getElementById('trackPanel').classList.remove('active');clearInterval(window._trackInterval);">✕</span>
+    <div class="track-title">🚌 Live Tracking</div>
+    <div class="track-bus" id="trackInfo">Select a route to simulate</div>
+  </div>
+</div>
+
+<script>
+const cities = {{ cities_json|safe }};
+const routes = {{ routes_json|safe }};
+
+// ── Map init ──────────────────────────────────────────────
+const map = L.map('map', { zoomControl: true }).setView([39.5, -98.35], 4);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap contributors',
+  maxZoom: 19
+}).addTo(map);
+
+// ── City markers ──────────────────────────────────────────
+const cityMarkers = {};
+const cityList = document.getElementById('cityList');
+
+cities.forEach(city => {
+  const marker = L.circleMarker([city.lat, city.lng], {
+    radius: 9, fillColor: '#f97316', color: '#fff',
+    weight: 2, opacity: 1, fillOpacity: 0.9
+  }).addTo(map);
+
+  marker.bindPopup(`
+    <div class="popup-city">📍 ${city.name}</div>
+    <div style="font-size:0.78rem;color:#94a3b8">${city.lat.toFixed(4)}, ${city.lng.toFixed(4)}</div>
+  `);
+
+  cityMarkers[city.name] = marker;
+
+  const item = document.createElement('div');
+  item.className = 'city-item';
+  item.innerHTML = `<div class="city-dot"></div><span class="city-name">${city.name}</span>`;
+  item.onclick = () => { map.setView([city.lat, city.lng], 8); marker.openPopup(); };
+  cityList.appendChild(item);
+});
+
+// ── Real road routing via OSRM (100% free, no API key) ───
+// OSRM uses OpenStreetMap data and routes along actual roads
+async function fetchOSRM(fromLat, fromLng, toLat, toLng) {
+  const url = `https://router.project-osrm.org/route/v1/driving/${fromLng},${fromLat};${toLng},${toLat}?overview=full&geometries=geojson`;
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), 12000);
+  try {
+    const res = await fetch(url, { signal: ctrl.signal });
+    clearTimeout(t);
+    if (!res.ok) return null;
+    const data = await res.json();
+    if (data.code === 'Ok' && data.routes && data.routes[0]) {
+      return data.routes[0].geometry.coordinates.map(([lng, lat]) => [lat, lng]);
+    }
+  } catch(e) {
+    clearTimeout(t);
+    console.warn('OSRM failed:', e.message);
+  }
+  return null;
+}
+
+// Fallback: curved inland line (avoids drawing over ocean)
+function buildCurvedLine(lat1, lng1, lat2, lng2) {
+  const steps = 40;
+  const pts = [];
+  // Midpoint pushed inland (away from coast)
+  const midLat = (lat1 + lat2) / 2;
+  // For east-coast routes, nudge midpoint west to avoid ocean
+  const nudge = (lng1 > -85 && lng2 > -85) ? -1.5 : 0;
+  const midLng = (lng1 + lng2) / 2 + nudge;
+  for (let i = 0; i <= steps; i++) {
+    const t = i / steps;
+    const lat = (1-t)*(1-t)*lat1 + 2*(1-t)*t*midLat + t*t*lat2;
+    const lng = (1-t)*(1-t)*lng1 + 2*(1-t)*t*midLng + t*t*lng2;
+    pts.push([lat, lng]);
+  }
+  return pts;
+}
+
+// ── Draw all routes ───────────────────────────────────────
+const routeList = document.getElementById('routeList');
+const drawnRoutes = [];
+const loadingBar = document.getElementById('loadingBar');
+
+// Rate-limit OSRM calls — 1 per second to be respectful
+async function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+async function drawAllRoutes() {
+  loadingBar.classList.add('active');
+  let done = 0;
+
+  for (const route of routes) {
+    const statusId = `rs-${done}`;
+    const item = document.createElement('div');
+    item.className = 'route-item';
+    item.innerHTML = `
+      <span>${route.from}</span>
+      <span class="route-arrow">→</span>
+      <span>${route.to}</span>
+      <span class="route-status" id="${statusId}">⏳</span>
+    `;
+    routeList.appendChild(item);
+
+    // Fetch real road route from OSRM
+    const roadPoints = await fetchOSRM(
+      route.from_lat, route.from_lng,
+      route.to_lat, route.to_lng
+    );
+
+    const pts = roadPoints || buildCurvedLine(
+      route.from_lat, route.from_lng,
+      route.to_lat, route.to_lng
+    );
+
+    const statusEl = document.getElementById(statusId);
+    if (statusEl) {
+      statusEl.textContent = roadPoints ? '🛣' : '〰';
+      if (roadPoints) statusEl.classList.add('ok');
+    }
+
+    const line = L.polyline(pts, {
+      color: '#f97316', weight: 3, opacity: 0.75, dashArray: '10, 6'
+    }).addTo(map);
+
+    // Popup
+    let html = `<div class="popup-route">${route.from} → ${route.to}</div>`;
+    html += `<div class="popup-row">🚌 <strong>${route.trips}</strong> trip${route.trips !== 1 ? 's' : ''} available</div>`;
+    if (route.dep_time) html += `<div class="popup-row">🕐 Departs: <strong>${route.dep_time}</strong></div>`;
+    if (route.arr_time) html += `<div class="popup-row">🏁 Arrives: <strong>${route.arr_time}</strong></div>`;
+    if (route.bus_name) html += `<div class="popup-row">🚍 <strong>${route.bus_name}</strong></div>`;
+    if (route.price)    html += `<div class="popup-row">💵 From <strong>$${route.price}</strong></div>`;
+    if (route.distance_km) html += `<div class="popup-row">📏 <strong>${route.distance_km} km</strong></div>`;
+    line.bindPopup(html);
+
+    line.on('mouseover', () => line.setStyle({ color: '#fb923c', weight: 5, opacity: 1 }));
+    line.on('mouseout',  () => line.setStyle({ color: '#f97316', weight: 3, opacity: 0.75 }));
+
+    drawnRoutes.push({ line, route, pts });
+
+    item.onclick = () => {
+      map.fitBounds(line.getBounds(), { padding: [60, 60] });
+      line.openPopup();
+      simulateTracking(route, pts);
+    };
+
+    done++;
+    // 800ms gap between OSRM calls to avoid rate limiting
+    await sleep(800);
+  }
+
+  loadingBar.classList.remove('active');
+}
+
+drawAllRoutes();
+
+// ── Live bus tracking ────────────────────────────────────
+function simulateTracking(route, pts) {
+  if (window._trackingBus) map.removeLayer(window._trackingBus);
+  clearInterval(window._trackInterval);
+
+  window._trackingBus = L.marker(pts[0], {
+    icon: L.divIcon({
+      html: '<div style="font-size:1.5rem;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.6))">🚌</div>',
+      iconSize: [28, 28], iconAnchor: [14, 14], className: ''
+    })
+  }).addTo(map);
+
+  const panel = document.getElementById('trackPanel');
+  const info  = document.getElementById('trackInfo');
+  panel.classList.add('active');
+  info.textContent = `${route.from} → ${route.to}${route.dep_time ? ' • Departs ' + route.dep_time : ''}`;
+
+  let seg = 0, prog = 0;
+  window._trackInterval = setInterval(() => {
+    prog += 0.03;
+    if (prog >= 1) { prog = 0; seg++; }
+    if (seg >= pts.length - 1) { seg = 0; }
+    const a = pts[seg], b = pts[Math.min(seg + 1, pts.length - 1)];
+    window._trackingBus.setLatLng([
+      a[0] + (b[0] - a[0]) * prog,
+      a[1] + (b[1] - a[1]) * prog
+    ]);
+  }, 80);
+}
+
+// ── Offline hint ─────────────────────────────────────────
+function saveOffline() {
+  alert('Pan and zoom around the map areas you want offline — your browser caches the tiles automatically. They will load without internet next time.');
+}
+
+// ── Fit to all cities ─────────────────────────────────────
+if (cities.length > 0) {
+  const group = L.featureGroup(Object.values(cityMarkers));
+  map.fitBounds(group.getBounds(), { padding: [40, 40] });
+}
+</script>
+</body>
+</html>

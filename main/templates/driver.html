@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Driver — {{ trip.bus_name }}</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#0a0f1e; --card:#1a2236; --accent:#f97316; --text:#f1f5f9; --muted:#94a3b8; --green:#22c55e; --red:#ef4444; --border:rgba(255,255,255,0.08); }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1.5rem; }
+
+  .card { background:var(--card); border:1px solid var(--border); border-radius:20px; padding:2rem; width:100%; max-width:380px; text-align:center; }
+
+  .bus-icon { font-size:3.5rem; margin-bottom:0.5rem; }
+  .bus-name { font-family:'Syne',sans-serif; font-weight:800; font-size:1.5rem; margin-bottom:0.3rem; }
+  .route-text { color:var(--muted); font-size:0.9rem; margin-bottom:2rem; }
+
+  .status-ring {
+    width:120px; height:120px;
+    border-radius:50%;
+    border:4px solid var(--border);
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    margin:0 auto 1.5rem;
+    transition:border-color 0.3s, box-shadow 0.3s;
+  }
+  .status-ring.active { border-color:var(--green); box-shadow:0 0 30px rgba(34,197,94,0.3); }
+  .status-ring.inactive { border-color:var(--red); }
+  .status-dot { width:16px; height:16px; border-radius:50%; background:var(--muted); margin-bottom:6px; transition:background 0.3s; }
+  .status-dot.active { background:var(--green); animation:pulse 2s infinite; }
+  .status-dot.inactive { background:var(--red); }
+  .status-text { font-family:'Syne',sans-serif; font-weight:700; font-size:0.85rem; }
+
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.6;transform:scale(1.2)} }
+
+  .info-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; margin-bottom:1.5rem; }
+  .info-box { background:rgba(255,255,255,0.04); border:1px solid var(--border); border-radius:10px; padding:0.8rem; }
+  .info-label { font-size:0.7rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.3rem; }
+  .info-value { font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; }
+  .info-value.green { color:var(--green); }
+  .info-value.orange { color:var(--accent); }
+
+  .toggle-btn {
+    width:100%; padding:1rem; border-radius:12px; border:none;
+    font-family:'Syne',sans-serif; font-weight:700; font-size:1.1rem;
+    cursor:pointer; transition:background 0.2s, transform 0.15s;
+    margin-bottom:0.8rem;
+  }
+  .toggle-btn.start { background:var(--green); color:white; }
+  .toggle-btn.stop  { background:var(--red); color:white; }
+  .toggle-btn:hover { transform:translateY(-2px); }
+  .toggle-btn:disabled { opacity:0.5; cursor:not-allowed; transform:none; }
+
+  .log { background:rgba(0,0,0,0.3); border-radius:10px; padding:1rem; text-align:left; max-height:150px; overflow-y:auto; }
+  .log-entry { font-size:0.78rem; color:var(--muted); padding:0.2rem 0; border-bottom:1px solid rgba(255,255,255,0.04); }
+  .log-entry.ok { color:var(--green); }
+  .log-entry.err { color:var(--red); }
+
+  .permission-msg { background:rgba(249,115,22,0.1); border:1px solid rgba(249,115,22,0.3); border-radius:10px; padding:1rem; font-size:0.85rem; color:var(--accent); margin-bottom:1rem; display:none; }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="bus-icon">🚌</div>
+  <div class="bus-name">{{ trip.bus_name }}</div>
+  <div class="route-text">{{ trip.route.from_city }} → {{ trip.route.to_city }} &nbsp;|&nbsp; {{ trip.departure_time|time:"H:i" }} – {{ trip.arrival_time|time:"H:i" }}</div>
+
+  <div class="status-ring inactive" id="statusRing">
+    <div class="status-dot inactive" id="statusDot"></div>
+    <div class="status-text" id="statusText">OFFLINE</div>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-box">
+      <div class="info-label">Latitude</div>
+      <div class="info-value orange" id="latVal">—</div>
+    </div>
+    <div class="info-box">
+      <div class="info-label">Longitude</div>
+      <div class="info-value orange" id="lngVal">—</div>
+    </div>
+    <div class="info-box">
+      <div class="info-label">Speed</div>
+      <div class="info-value green" id="speedVal">0 km/h</div>
+    </div>
+    <div class="info-box">
+      <div class="info-label">Last Sent</div>
+      <div class="info-value" id="lastSent">—</div>
+    </div>
+  </div>
+
+  <div class="permission-msg" id="permMsg">
+    ⚠️ Please allow location permission when prompted. This is required for tracking.
+  </div>
+
+  <button class="toggle-btn start" id="toggleBtn" onclick="toggleTracking()">
+    ▶ Start Tracking
+  </button>
+
+  <div class="log" id="log">
+    <div class="log-entry">Driver app ready. Press Start to begin sharing location.</div>
+  </div>
+</div>
+
+<script>
+const TOKEN = '{{ token }}';
+const API_URL = `/api/update-location/${TOKEN}/`;
+
+let tracking = false;
+let watchId = null;
+let intervalId = null;
+let currentPos = null;
+
+function addLog(msg, type='') {
+  const log = document.getElementById('log');
+  const entry = document.createElement('div');
+  entry.className = `log-entry ${type}`;
+  entry.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+  log.prepend(entry);
+  // Keep max 20 entries
+  while (log.children.length > 20) log.removeChild(log.lastChild);
+}
+
+function setStatus(active) {
+  const ring = document.getElementById('statusRing');
+  const dot  = document.getElementById('statusDot');
+  const text = document.getElementById('statusText');
+  const btn  = document.getElementById('toggleBtn');
+
+  if (active) {
+    ring.className = 'status-ring active';
+    dot.className  = 'status-dot active';
+    text.textContent = 'LIVE';
+    btn.className  = 'toggle-btn stop';
+    btn.textContent = '⏹ Stop Tracking';
+  } else {
+    ring.className = 'status-ring inactive';
+    dot.className  = 'status-dot inactive';
+    text.textContent = 'OFFLINE';
+    btn.className  = 'toggle-btn start';
+    btn.textContent = '▶ Start Tracking';
+  }
+}
+
+async function sendLocation() {
+  if (!currentPos) return;
+  const { latitude, longitude, speed } = currentPos.coords;
+  const speedKmh = speed ? (speed * 3.6).toFixed(1) : 0;
+
+  document.getElementById('latVal').textContent = latitude.toFixed(5);
+  document.getElementById('lngVal').textContent = longitude.toFixed(5);
+  document.getElementById('speedVal').textContent = `${speedKmh} km/h`;
+
+  try {
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ lat: latitude, lng: longitude, speed: speedKmh })
+    });
+    const data = await res.json();
+    if (res.ok) {
+      document.getElementById('lastSent').textContent = new Date().toLocaleTimeString();
+      addLog(`Location sent — ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`, 'ok');
+    } else {
+      addLog(`Server error: ${data.error}`, 'err');
+    }
+  } catch(e) {
+    addLog(`Network error: ${e.message}`, 'err');
+  }
+}
+
+function toggleTracking() {
+  if (!tracking) {
+    // Start
+    document.getElementById('permMsg').style.display = 'block';
+    if (!navigator.geolocation) {
+      addLog('GPS not supported on this device.', 'err');
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        document.getElementById('permMsg').style.display = 'none';
+        currentPos = pos;
+        tracking = true;
+        setStatus(true);
+        addLog('GPS permission granted. Tracking started.', 'ok');
+
+        // Watch position continuously
+        watchId = navigator.geolocation.watchPosition(
+          (p) => { currentPos = p; },
+          (e) => { addLog(`GPS error: ${e.message}`, 'err'); },
+          { enableHighAccuracy: true, maximumAge: 3000, timeout: 10000 }
+        );
+
+        // Send to server every 5 seconds
+        sendLocation();
+        intervalId = setInterval(sendLocation, 5000);
+      },
+      (err) => {
+        document.getElementById('permMsg').style.display = 'none';
+        addLog(`Permission denied: ${err.message}`, 'err');
+      },
+      { enableHighAccuracy: true }
+    );
+  } else {
+    // Stop
+    tracking = false;
+    if (watchId !== null) navigator.geolocation.clearWatch(watchId);
+    if (intervalId !== null) clearInterval(intervalId);
+    watchId = null; intervalId = null;
+    setStatus(false);
+    addLog('Tracking stopped.', 'err');
+  }
+}
+</script>
+</body>
+</html>

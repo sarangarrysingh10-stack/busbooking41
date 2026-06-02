@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Route Not Found — BusGo</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0f1e;
+    --surface: #111827;
+    --card: #1a2236;
+    --accent: #f97316;
+    --accent2: #fb923c;
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+    --border: rgba(255,255,255,0.08);
+    --glow: rgba(249,115,22,0.2);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  nav {
+    padding: 1.2rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    background: rgba(10,15,30,0.9);
+    position: sticky; top: 0; z-index: 100;
+  }
+
+  .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.5rem; color: var(--text); text-decoration: none; }
+  .logo span { color: var(--accent); }
+
+  .main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .left-col { animation: fadeUp 0.5s ease both; }
+  .right-col { animation: fadeUp 0.5s 0.1s ease both; }
+
+  .status-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 0.7rem;
+  }
+
+  .route-highlight {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(249,115,22,0.1);
+    border: 1px solid rgba(249,115,22,0.25);
+    padding: 0.4rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: var(--accent2);
+    margin: 1rem 0;
+  }
+
+  .description {
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .contact-buttons {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.3rem;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: transform 0.15s, opacity 0.2s;
+  }
+
+  .btn:hover { transform: translateY(-2px); opacity: 0.9; }
+  .btn-call { background: #16a34a; color: white; }
+  .btn-back { background: var(--card); color: var(--text); border: 1px solid var(--border); }
+
+  /* Suggestions */
+  .suggestions-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 0.8rem;
+  }
+
+  .suggestion-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    transition: border-color 0.2s;
+  }
+
+  .suggestion-item:hover { border-color: rgba(249,115,22,0.3); }
+  .suggestion-arrow { color: var(--accent); }
+
+  /* Inquiry Form */
+  .form-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+  }
+
+  .form-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .form-subtitle {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--muted);
+    margin-bottom: 0.35rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--glow);
+  }
+
+  .form-group textarea { resize: vertical; min-height: 90px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .submit-btn {
+    width: 100%;
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 0.85rem;
+    border-radius: 8px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 4px 20px var(--glow);
+    margin-top: 0.5rem;
+  }
+
+  .submit-btn:hover { background: var(--accent2); transform: translateY(-1px); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 640px) {
+    .main { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+.float-cta{position:fixed;bottom:2rem;right:2rem;z-index:999;display:flex;flex-direction:column;gap:.8rem;align-items:flex-end}.float-btn{display:flex;align-items:center;gap:.6rem;padding:.75rem 1.2rem;border-radius:50px;font-family:"DM Sans",sans-serif;font-size:.9rem;font-weight:600;text-decoration:none;box-shadow:0 4px 20px rgba(0,0,0,.4);transition:transform .2s,box-shadow .2s;white-space:nowrap}.float-btn:hover{transform:translateY(-3px) scale(1.03)}.float-whatsapp{background:#25d366;color:white}.float-phone{background:#f97316;color:white}.float-email{background:#4f46e5;color:white}@media(max-width:500px){.float-label{display:none}.float-btn{padding:.85rem;border-radius:50%}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">Bus<span>Go</span></a>
+  <a href="/" style="color:var(--muted);text-decoration:none;font-size:0.9rem">← New Search</a>
+</nav>
+
+<div class="main">
+
+  <div class="left-col">
+    <div class="status-icon">😔</div>
+    <h1>No Routes Found</h1>
+
+    {% if from_city and to_city %}
+    <div class="route-highlight">
+      {{ from_city }} → {{ to_city }}
+    </div>
+    {% endif %}
+
+    <p class="description">
+      We don't currently serve this route directly, but our team is actively expanding.
+      Fill in the inquiry form and we'll reach out as soon as this route becomes available,
+      or help arrange an alternative.
+    </p>
+
+    <div class="contact-buttons">
+      <a href="tel:{{ support_phone }}" class="btn btn-call">📞 Call Now</a>
+      <a href="/" class="btn btn-back">← Try Again</a>
+    </div>
+
+    {% if suggestions %}
+    <div class="suggestions-title">Available from {{ from_city }}</div>
+    {% for route in suggestions %}
+    <div class="suggestion-item">
+      <span>{{ route.from_city }} <span class="suggestion-arrow">→</span> {{ route.to_city }}</span>
+      <a href="/search/?from={{ route.from_city }}&to={{ route.to_city }}" style="color:var(--accent);text-decoration:none;font-size:0.8rem;">View →</a>
+    </div>
+    {% endfor %}
+    {% endif %}
+  </div>
+
+  <div class="right-col">
+    <div class="form-card">
+      <div class="form-title">Request This Route</div>
+      <div class="form-subtitle">We'll contact you when it's available or arrange an alternative.</div>
+
+      <!-- FIX: CSRF token included, redirect after POST in view -->
+      <form method="POST" action="/inquiry/">
+        {% csrf_token %}
+        <!-- FIX: Hidden fields carry route context automatically -->
+        <input type="hidden" name="from_city" value="{{ from_city }}">
+        <input type="hidden" name="to_city" value="{{ to_city }}">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Name *</label>
+            <input type="text" name="name" placeholder="Rahul Sharma" required>
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="tel" name="phone" placeholder="+91 98765 43210">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Email Address *</label>
+          <input type="email" name="email" placeholder="rahul@example.com" required>
+        </div>
+
+        <div class="form-group">
+          <label>Message *</label>
+          <textarea name="message" placeholder="Tell us your travel dates, number of passengers, or any other details..." required></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">Send Inquiry →</button>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+<div class="float-cta">
+  <a href="https://wa.me/?text=Hi!%20I%20need%20help%20booking%20a%20bus." class="float-btn float-whatsapp" target="_blank">💬 <span class="float-label">WhatsApp</span></a>
+  <a href="tel:{{ support_phone }}" class="float-btn float-phone">📞 <span class="float-label">Call Us</span></a>
+  <a href="mailto:{{ support_email }}" class="float-btn float-email">✉ <span class="float-label">Email</span></a>
+</div>
+</body>
+</html>

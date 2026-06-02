@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Results — {{ from_city }} to {{ to_city }}</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0f1e;
+    --surface: #111827;
+    --card: #1a2236;
+    --accent: #f97316;
+    --accent2: #fb923c;
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+    --border: rgba(255,255,255,0.08);
+    --glow: rgba(249,115,22,0.25);
+    --green: #22c55e;
+    --red: #ef4444;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  nav {
+    padding: 1.2rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(20px);
+    background: rgba(10,15,30,0.9);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .logo span { color: var(--accent); }
+
+  .main { max-width: 860px; margin: 0 auto; padding: 3rem 1.5rem; }
+
+  .route-header {
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .route-header .breadcrumb {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 0.7rem;
+  }
+
+  .route-header .breadcrumb a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .route-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .route-arrow { color: var(--accent); font-size: 1.5rem; }
+
+  .results-count {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-top: 0.4rem;
+  }
+
+  .trip-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1rem;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 1rem;
+    align-items: center;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    animation: fadeUp 0.4s ease both;
+  }
+
+  .trip-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(249,115,22,0.3);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  }
+
+  .trip-info { flex: 1; }
+
+  .bus-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .bus-meta {
+    display: flex;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.8rem;
+  }
+
+  .badge {
+    font-size: 0.72rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    font-weight: 500;
+  }
+
+  .badge-type { background: rgba(99,102,241,0.2); color: #a5b4fc; }
+  .badge-seats-ok { background: rgba(34,197,94,0.15); color: #86efac; }
+  .badge-seats-low { background: rgba(249,115,22,0.15); color: #fdba74; }
+  .badge-full { background: rgba(239,68,68,0.15); color: #fca5a5; }
+
+  .timing {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .time-block { text-align: center; }
+  .time-big { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 700; }
+  .time-label { font-size: 0.72rem; color: var(--muted); }
+
+  .duration-line {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .duration-text { font-size: 0.75rem; color: var(--muted); }
+  .duration-bar {
+    width: 60px;
+    height: 1px;
+    background: var(--border);
+    position: relative;
+  }
+  .duration-bar::before {
+    content: '';
+    position: absolute;
+    left: 0; top: -2px;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--muted);
+  }
+  .duration-bar::after {
+    content: '';
+    position: absolute;
+    right: 0; top: -2px;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .amenities {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 0.5rem;
+  }
+
+  .trip-price {
+    text-align: right;
+    padding: 0 1rem;
+  }
+
+  .price-amount {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--accent);
+  }
+
+  .price-label { font-size: 0.75rem; color: var(--muted); }
+
+  .trip-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 130px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.65rem 1rem;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.15s, opacity 0.2s;
+  }
+
+  .btn:hover { transform: translateY(-1px); opacity: 0.9; }
+
+  .btn-call { background: #16a34a; color: white; }
+  .btn-email { background: #1d4ed8; color: white; }
+
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--muted);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 640px) {
+    .trip-card { grid-template-columns: 1fr; }
+    .trip-price { text-align: left; padding: 0; }
+    .trip-actions { flex-direction: row; }
+  }
+.float-cta{position:fixed;bottom:2rem;right:2rem;z-index:999;display:flex;flex-direction:column;gap:.8rem;align-items:flex-end}.float-btn{display:flex;align-items:center;gap:.6rem;padding:.75rem 1.2rem;border-radius:50px;font-family:"DM Sans",sans-serif;font-size:.9rem;font-weight:600;text-decoration:none;box-shadow:0 4px 20px rgba(0,0,0,.4);transition:transform .2s,box-shadow .2s;white-space:nowrap}.float-btn:hover{transform:translateY(-3px) scale(1.03)}.float-whatsapp{background:#25d366;color:white}.float-phone{background:#f97316;color:white}.float-email{background:#4f46e5;color:white}@media(max-width:500px){.float-label{display:none}.float-btn{padding:.85rem;border-radius:50%}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">Bus<span>Go</span></a>
+  <a href="/" style="color: var(--muted); text-decoration:none; font-size:0.9rem;">← New Search</a>
+</nav>
+
+<div class="main">
+
+  <div class="route-header">
+    <div class="breadcrumb"><a href="/">Home</a> / Search Results</div>
+    <div class="route-title">
+      {{ from_city }}
+      <span class="route-arrow">→</span>
+      {{ to_city }}
+    </div>
+    <div class="results-count">{{ trips|length }} trip{{ trips|length|pluralize }} found</div>
+  </div>
+
+  {% if trips %}
+    {% for trip in trips %}
+    <div class="trip-card" style="animation-delay: {{ forloop.counter0 }}00ms">
+      <div class="trip-info">
+        <div class="bus-name">{{ trip.bus_name }}</div>
+        <div class="bus-meta">
+          <span class="badge badge-type">{{ trip.get_bus_type_display }}</span>
+          {% if trip.available_seats > 10 %}
+            <span class="badge badge-seats-ok">✓ {{ trip.available_seats }} seats left</span>
+          {% elif trip.available_seats > 0 %}
+            <span class="badge badge-seats-low">⚡ Only {{ trip.available_seats }} left!</span>
+          {% else %}
+            <span class="badge badge-full">✗ Fully Booked</span>
+          {% endif %}
+        </div>
+        <div class="timing">
+          <div class="time-block">
+            <div class="time-big">{{ trip.departure_time|time:"H:i" }}</div>
+            <div class="time-label">Departs</div>
+          </div>
+          <div class="duration-line">
+            <div class="duration-text">{{ trip.duration_display }}</div>
+            <div class="duration-bar"></div>
+          </div>
+          <div class="time-block">
+            <div class="time-big">{{ trip.arrival_time|time:"H:i" }}</div>
+            <div class="time-label">Arrives</div>
+          </div>
+        </div>
+        {% if trip.amenities %}
+        <div class="amenities">🎒 {{ trip.amenities }}</div>
+        {% endif %}
+      </div>
+
+      <div class="trip-price">
+        <div class="price-amount">${{ trip.price }}</div>
+        <div class="price-label">per person</div>
+      </div>
+
+      <div class="trip-actions">
+        <a href="tel:{{ support_phone }}" class="btn btn-call">📞 Call to Book</a>
+        <a href="mailto:{{ support_email }}?subject=Booking: {{ from_city }} to {{ to_city }} - {{ trip.bus_name }}" class="btn btn-email">✉ Email Us</a>
+      </div>
+    </div>
+    {% endfor %}
+
+  {% else %}
+    <div class="empty-state">
+      <div style="font-size:3rem; margin-bottom:1rem">🚌</div>
+      <h3 style="font-family:'Syne',sans-serif; margin-bottom:0.5rem">No trips found</h3>
+      <p>Try different cities or contact us directly.</p>
+    </div>
+  {% endif %}
+
+</div>
+
+<!-- Floating CTA -->
+<div class="float-cta">
+  <a href="https://wa.me/?text=Hi!%20I%20need%20help%20booking%20a%20bus." class="float-btn float-whatsapp" target="_blank">💬 <span class="float-label">WhatsApp</span></a>
+  <a href="tel:{{ support_phone }}" class="float-btn float-phone">📞 <span class="float-label">Call Us</span></a>
+  <a href="mailto:{{ support_email }}" class="float-btn float-email">✉ <span class="float-label">Email</span></a>
+</div>
+</body>
+</html>

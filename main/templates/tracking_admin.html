@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BusGo — Live Tracking Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  :root { --bg:#0a0f1e; --card:#1a2236; --surface:#111827; --accent:#f97316; --text:#f1f5f9; --muted:#94a3b8; --border:rgba(255,255,255,0.08); --green:#22c55e; --red:#ef4444; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text); height:100vh; display:flex; flex-direction:column; overflow:hidden; }
+
+  nav { padding:1rem 2rem; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--border); background:rgba(10,15,30,0.95); z-index:1000; flex-shrink:0; }
+  .logo { font-family:'Syne',sans-serif; font-weight:800; font-size:1.4rem; color:var(--text); text-decoration:none; }
+  .logo span { color:var(--accent); }
+  .live-badge { display:flex; align-items:center; gap:0.5rem; background:rgba(34,197,94,0.12); border:1px solid rgba(34,197,94,0.3); color:var(--green); padding:0.35rem 0.9rem; border-radius:20px; font-size:0.8rem; font-weight:600; }
+  .live-dot { width:8px; height:8px; border-radius:50%; background:var(--green); animation:pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  .main { display:flex; flex:1; overflow:hidden; }
+
+  /* Sidebar */
+  .sidebar { width:320px; background:var(--card); border-right:1px solid var(--border); display:flex; flex-direction:column; flex-shrink:0; overflow:hidden; }
+  .sidebar-header { padding:1.2rem 1.5rem; border-bottom:1px solid var(--border); }
+  .sidebar-title { font-family:'Syne',sans-serif; font-weight:700; font-size:0.95rem; margin-bottom:1rem; }
+
+  .stats-row { display:flex; gap:0.8rem; }
+  .stat { flex:1; background:rgba(249,115,22,0.08); border:1px solid rgba(249,115,22,0.2); border-radius:8px; padding:0.6rem; text-align:center; }
+  .stat-num { font-family:'Syne',sans-serif; font-weight:700; font-size:1.4rem; color:var(--accent); }
+  .stat-label { font-size:0.68rem; color:var(--muted); }
+
+  .bus-list { flex:1; overflow-y:auto; padding:1rem; }
+  .section-label { font-size:0.7rem; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); margin-bottom:0.6rem; }
+
+  .bus-card { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:1rem; margin-bottom:0.7rem; cursor:pointer; transition:border-color 0.2s, transform 0.15s; }
+  .bus-card:hover { border-color:rgba(249,115,22,0.4); transform:translateX(3px); }
+  .bus-card.active-bus { border-color:var(--green); }
+  .bus-card-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:0.4rem; }
+  .bus-card-name { font-family:'Syne',sans-serif; font-weight:700; font-size:0.9rem; }
+  .bus-status { font-size:0.7rem; padding:0.2rem 0.5rem; border-radius:6px; font-weight:600; }
+  .bus-status.live { background:rgba(34,197,94,0.15); color:var(--green); }
+  .bus-status.offline { background:rgba(239,68,68,0.15); color:var(--red); }
+  .bus-route { font-size:0.8rem; color:var(--muted); margin-bottom:0.5rem; }
+  .bus-coords { font-size:0.75rem; color:var(--accent); font-family:monospace; }
+  .bus-speed { font-size:0.75rem; color:var(--muted); margin-top:0.2rem; }
+  .bus-updated { font-size:0.7rem; color:var(--muted); margin-top:0.2rem; }
+
+  .driver-link { display:inline-flex; align-items:center; gap:0.3rem; margin-top:0.5rem; font-size:0.75rem; color:var(--accent); text-decoration:none; background:rgba(249,115,22,0.1); padding:0.25rem 0.6rem; border-radius:6px; }
+
+  #map { flex:1; }
+
+  .leaflet-popup-content-wrapper { background:#1a2236 !important; border:1px solid rgba(249,115,22,0.3) !important; border-radius:10px !important; color:#f1f5f9 !important; box-shadow:0 8px 30px rgba(0,0,0,0.5) !important; }
+  .leaflet-popup-tip { background:#1a2236 !important; }
+  .leaflet-popup-content { margin:12px 16px !important; font-family:'DM Sans',sans-serif; }
+  .popup-name { font-family:'Syne',sans-serif; font-weight:700; color:#f97316; font-size:1rem; margin-bottom:4px; }
+  .popup-row { font-size:0.8rem; color:#94a3b8; margin-top:3px; }
+  .popup-row strong { color:#f1f5f9; }
+
+  .update-ticker { padding:0.6rem 1.5rem; font-size:0.75rem; color:var(--muted); border-top:1px solid var(--border); flex-shrink:0; }
+
+  @media (max-width:768px) { .sidebar { display:none; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">Bus<span>Go</span> <span style="font-size:0.85rem;color:var(--muted);font-weight:400">Admin Tracking</span></a>
+  <div style="display:flex;gap:1rem;align-items:center">
+    <div class="live-badge"><div class="live-dot"></div> LIVE</div>
+    <a href="/admin/" style="color:var(--muted);text-decoration:none;font-size:0.85rem">← Admin</a>
+  </div>
+</nav>
+
+<div class="main">
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">🚌 All Bus Trips</div>
+      <div class="stats-row">
+        <div class="stat"><div class="stat-num" id="totalLive">0</div><div class="stat-label">Live Now</div></div>
+        <div class="stat"><div class="stat-num" id="totalBuses">{{ trips|length }}</div><div class="stat-label">Total Trips</div></div>
+      </div>
+    </div>
+    <div class="bus-list">
+      <div class="section-label">All Trips</div>
+      {% for trip in trips %}
+      <div class="bus-card" id="card-{{ trip.id }}" onclick="focusBus({{ trip.id }})">
+        <div class="bus-card-top">
+          <div class="bus-card-name">{{ trip.bus_name }}</div>
+          <div class="bus-status offline" id="status-{{ trip.id }}">Offline</div>
+        </div>
+        <div class="bus-route">{{ trip.route.from_city }} → {{ trip.route.to_city }}</div>
+        <div class="bus-coords" id="coords-{{ trip.id }}">No GPS data yet</div>
+        <div class="bus-speed" id="speed-{{ trip.id }}"></div>
+        <div class="bus-updated" id="updated-{{ trip.id }}"></div>
+        <a href="/driver/{{ trip.driver_token }}/" class="driver-link" target="_blank">📱 Driver Link</a>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="update-ticker" id="ticker">Waiting for bus data...</div>
+  </div>
+
+  <div id="map"></div>
+</div>
+
+<script>
+const map = L.map('map').setView([39.5, -98.35], 4);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution:'© OpenStreetMap', maxZoom:19
+}).addTo(map);
+
+const busMarkers = {};
+const busTails = {}; // trail lines
+
+function getBusIcon(busName) {
+  return L.divIcon({
+    html: `<div style="background:#f97316;color:white;border-radius:50px;padding:4px 8px;font-size:11px;font-weight:700;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.5);border:2px solid white">🚌 ${busName}</div>`,
+    iconAnchor: [40, 16],
+    className: ''
+  });
+}
+
+function focusBus(tripId) {
+  if (busMarkers[tripId]) {
+    map.setView(busMarkers[tripId].getLatLng(), 12);
+    busMarkers[tripId].openPopup();
+  }
+}
+
+async function fetchLocations() {
+  try {
+    const res = await fetch('/api/locations/');
+    const data = await res.json();
+    const buses = data.buses;
+
+    document.getElementById('totalLive').textContent = buses.length;
+    document.getElementById('ticker').textContent = `Last updated: ${new Date().toLocaleTimeString()} — ${buses.length} bus(es) live`;
+
+    buses.forEach(bus => {
+      const id = bus.trip_id;
+      const latlng = [bus.lat, bus.lng];
+
+      // Update sidebar card
+      const statusEl = document.getElementById(`status-${id}`);
+      const coordsEl = document.getElementById(`coords-${id}`);
+      const speedEl  = document.getElementById(`speed-${id}`);
+      const updatedEl= document.getElementById(`updated-${id}`);
+      const cardEl   = document.getElementById(`card-${id}`);
+
+      if (statusEl) { statusEl.textContent = 'Live'; statusEl.className = 'bus-status live'; }
+      if (coordsEl) coordsEl.textContent = `${bus.lat.toFixed(5)}, ${bus.lng.toFixed(5)}`;
+      if (speedEl)  speedEl.textContent = `Speed: ${bus.speed_kmh} km/h`;
+      if (updatedEl)updatedEl.textContent = `Updated: ${bus.last_updated}`;
+      if (cardEl)   cardEl.classList.add('active-bus');
+
+      // Update or create map marker
+      if (busMarkers[id]) {
+        // Add trail point
+        const prev = busMarkers[id].getLatLng();
+        if (!busTails[id]) busTails[id] = [];
+        busTails[id].push([prev.lat, prev.lng]);
+        if (busTails[id].length > 30) busTails[id].shift();
+
+        // Redraw trail
+        if (busMarkers[id]._tail) map.removeLayer(busMarkers[id]._tail);
+        const tail = L.polyline(busTails[id], { color:'#f97316', weight:2, opacity:0.5 }).addTo(map);
+        busMarkers[id]._tail = tail;
+
+        busMarkers[id].setLatLng(latlng);
+        busMarkers[id].setIcon(getBusIcon(bus.bus_name));
+      } else {
+        const marker = L.marker(latlng, { icon: getBusIcon(bus.bus_name) }).addTo(map);
+        marker.bindPopup(`
+          <div class="popup-name">🚌 ${bus.bus_name}</div>
+          <div class="popup-row">📍 ${bus.from} → ${bus.to}</div>
+          <div class="popup-row">🚀 Speed: <strong>${bus.speed_kmh} km/h</strong></div>
+          <div class="popup-row">🕐 Updated: <strong>${bus.last_updated}</strong></div>
+        `);
+        busMarkers[id] = marker;
+        busTails[id] = [latlng];
+      }
+    });
+
+  } catch(e) {
+    document.getElementById('ticker').textContent = `Connection error: ${e.message}`;
+  }
+}
+
+// Poll every 5 seconds
+fetchLocations();
+setInterval(fetchLocations, 5000);
+</script>
+</body>
+</html>
