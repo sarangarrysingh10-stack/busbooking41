@@ -1,0 +1,536 @@
+Route_ID,From_City,From_State,To_City,To_State,Bus_Operator,Bus_Type,Distance_Miles,Distance_KM,Primary_Highway,Departure_Time,Arrival_Time,Duration_Hours,Ticket_Price_USD,Seats_Available,Total_Seats,Amenities,Booking_Type
+1,New York,New York,Philadelphia,Pennsylvania,Trailways Afternoon,Sleeper,95,152,I-10,12:00,13:00,1.7,15,32,45,"WiFi, AC, Charging",Online/Station
+2,New York,New York,Philadelphia,Pennsylvania,FlixBus Evening,Seater,95,152,I-35,17:00,18:00,1.7,12,29,40,"WiFi, AC, Restroom, Charging",Online/Station
+3,New York,New York,Boston,Massachusetts,Peter Pan Afternoon,Luxury,232,373,US-66,14:00,18:00,4.2,38,45,50,"AC, Restroom",Station
+4,New York,New York,Boston,Massachusetts,BoltBus Morning,Seater,232,373,I-90,08:00,12:00,4.2,36,29,45,"AC, Charging",Online/Station
+5,New York,New York,Boston,Massachusetts,FlixBus Night,Seater,232,373,I-10,22:00,02:00,4.2,41,24,50,"WiFi, AC, Snacks",Station
+6,New York,New York,Washington DC,DC,Megabus Morning,Seater,243,390,I-35,10:00,14:00,4.4,59,48,50,AC,Station
+7,New York,New York,Washington DC,DC,FlixBus Afternoon,AC,243,390,I-75,12:00,16:00,4.4,58,18,40,"AC, Restroom",Online/Station
+8,New York,New York,Washington DC,DC,Peter Pan Morning,Luxury,243,390,I-95,08:00,12:00,4.4,38,51,55,AC,Online
+9,New York,New York,Newark,New Jersey,Peter Pan Afternoon,Sleeper,11,17,US-1,16:00,16:00,0.2,10,15,50,"WiFi, Charging",Online/Station
+10,New York,New York,Newark,New Jersey,Megabus Evening,Seater,11,17,I-75,19:00,19:00,0.2,10,49,50,"WiFi, AC, Charging",Online
+11,New York,New York,Albany,New York,Greyhound Afternoon,Seater,134,215,I-10,13:00,15:00,2.4,19,6,50,"WiFi, AC, Charging",Online
+12,New York,New York,Albany,New York,FlixBus Afternoon,AC,134,215,I-40,14:00,16:00,2.4,14,50,50,"WiFi, AC, Snacks",Online
+13,New York,New York,Albany,New York,Southeastern Stages Morning,Luxury,134,215,I-25,09:00,11:00,2.4,12,16,40,"WiFi, AC",Online
+14,New York,New York,Albany,New York,Southeastern Stages Night,Seater,134,215,I-80,20:00,22:00,2.4,29,8,45,"WiFi, AC, Restroom, Charging",Online
+15,New York,New York,Buffalo,New York,Jefferson Lines Morning,Seater,368,592,I-25,10:00,16:00,6.7,78,24,45,"AC, Restroom",Online/Station
+16,New York,New York,Buffalo,New York,Jefferson Lines Evening,Luxury,368,592,I-70,18:00,00:00,6.7,85,20,45,"AC, Restroom",Online/Station
+17,New York,New York,Buffalo,New York,Megabus Night,Sleeper,368,592,I-5,22:00,04:00,6.7,34,32,45,"AC, Restroom",Online/Station
+18,Boston,Massachusetts,Providence,Rhode Island,FlixBus Afternoon,Sleeper,44,70,US-66,15:00,15:00,0.8,10,40,50,"WiFi, AC",Online/Station
+19,Boston,Massachusetts,Providence,Rhode Island,OurBus Morning,Luxury,44,70,US-66,07:00,07:00,0.8,10,22,55,"WiFi, Charging",Online
+20,Boston,Massachusetts,Hartford,Connecticut,Megabus Afternoon,AC,119,191,I-80,16:00,18:00,2.2,27,41,50,"AC, Restroom",Online/Station
+21,Boston,Massachusetts,Hartford,Connecticut,Peter Pan Morning,Luxury,119,191,I-95,09:00,11:00,2.2,21,17,50,AC,Station
+22,Boston,Massachusetts,Albany,New York,Greyhound Morning,AC,187,300,US-66,11:00,14:00,3.4,24,29,50,"WiFi, AC",Online
+23,Boston,Massachusetts,Albany,New York,RedCoach Afternoon,Seater,187,300,I-10,12:00,15:00,3.4,20,1,40,"AC, Charging",Online
+24,Boston,Massachusetts,Albany,New York,OurBus Morning,Luxury,187,300,I-35,06:00,09:00,3.4,15,29,40,AC,Online
+25,Boston,Massachusetts,Washington DC,DC,Peter Pan Night,Luxury,476,765,I-90,22:00,06:00,8.7,98,2,50,"WiFi, Charging",Station
+26,Boston,Massachusetts,Washington DC,DC,Jefferson Lines Evening,AC,476,765,I-40,18:00,02:00,8.7,86,14,45,"WiFi, AC, Snacks",Online
+27,Boston,Massachusetts,Washington DC,DC,Trailways Afternoon,Seater,476,765,I-35,16:00,00:00,8.7,41,5,40,"WiFi, AC",Online/Station
+28,Philadelphia,Pennsylvania,Baltimore,Maryland,RedCoach Afternoon,Seater,109,175,I-95,14:00,16:00,2.0,25,35,55,"WiFi, Charging",Online
+29,Philadelphia,Pennsylvania,Baltimore,Maryland,RedCoach Morning,Sleeper,109,175,I-35,08:00,10:00,2.0,17,44,55,"WiFi, AC, Charging",Online
+30,Philadelphia,Pennsylvania,Washington DC,DC,Southeastern Stages Evening,Seater,147,236,I-35,17:00,19:00,2.7,14,40,55,"WiFi, AC, Snacks",Online
+31,Philadelphia,Pennsylvania,Washington DC,DC,Peter Pan Morning,AC,147,236,US-1,06:00,08:00,2.7,12,41,45,"WiFi, AC",Online/Station
+32,Philadelphia,Pennsylvania,Washington DC,DC,OurBus Afternoon,Sleeper,147,236,US-1,12:00,14:00,2.7,33,52,55,"WiFi, AC, Snacks",Online/Station
+33,Philadelphia,Pennsylvania,Newark,New Jersey,RedCoach Afternoon,Seater,87,139,I-40,13:00,14:00,1.6,10,36,45,"AC, Restroom",Station
+34,Philadelphia,Pennsylvania,Newark,New Jersey,Trailways Evening,AC,87,139,US-1,18:00,19:00,1.6,10,42,50,"AC, Restroom",Station
+35,Philadelphia,Pennsylvania,Pittsburgh,Pennsylvania,Southeastern Stages Afternoon,AC,335,539,I-25,16:00,22:00,6.1,63,21,45,"AC, Restroom",Online
+36,Philadelphia,Pennsylvania,Pittsburgh,Pennsylvania,OurBus Morning,Luxury,335,539,I-5,09:00,15:00,6.1,33,19,55,"WiFi, AC",Online/Station
+37,Philadelphia,Pennsylvania,Pittsburgh,Pennsylvania,BoltBus Afternoon,Luxury,335,539,I-75,12:00,18:00,6.1,27,12,55,"WiFi, AC, Charging",Online/Station
+38,Washington DC,DC,Baltimore,Maryland,RedCoach Morning,Seater,39,62,I-40,07:00,07:00,0.7,10,3,45,"WiFi, AC, Charging",Online/Station
+39,Washington DC,DC,Baltimore,Maryland,Peter Pan Morning,Luxury,39,62,I-75,11:00,11:00,0.7,10,38,55,"WiFi, AC, Restroom, Charging",Station
+40,Washington DC,DC,Richmond,Virginia,Greyhound Morning,Luxury,98,157,I-70,08:00,09:00,1.8,19,6,40,"WiFi, Charging",Online
+41,Washington DC,DC,Richmond,Virginia,Jefferson Lines Morning,Seater,98,157,I-80,07:00,08:00,1.8,14,6,40,"AC, Restroom",Online/Station
+42,Washington DC,DC,Charlotte,North Carolina,Greyhound Morning,Sleeper,365,587,I-10,06:00,12:00,6.6,59,7,50,"AC, Charging",Station
+43,Washington DC,DC,Charlotte,North Carolina,Southeastern Stages Evening,Seater,365,587,I-95,17:00,23:00,6.6,85,4,45,"WiFi, AC",Online
+44,Washington DC,DC,Charlotte,North Carolina,OurBus Afternoon,Luxury,365,587,US-1,15:00,21:00,6.6,34,28,55,"WiFi, AC, Restroom, Charging",Online/Station
+45,Miami,Florida,Orlando,Florida,BoltBus Afternoon,AC,208,334,I-40,14:00,17:00,3.8,28,12,50,"WiFi, AC, Charging",Station
+46,Miami,Florida,Orlando,Florida,Southeastern Stages Morning,Seater,208,334,I-75,10:00,13:00,3.8,35,31,45,"WiFi, AC, Snacks",Station
+47,Miami,Florida,Tampa,Florida,FlixBus Evening,Sleeper,217,349,I-40,18:00,21:00,3.9,46,6,40,"AC, Restroom",Station
+48,Miami,Florida,Tampa,Florida,Trailways Morning,AC,217,349,I-35,09:00,12:00,3.9,25,21,45,"WiFi, AC, Restroom, Charging",Online
+49,Miami,Florida,Tampa,Florida,Jefferson Lines Morning,Luxury,217,349,I-35,11:00,14:00,3.9,49,35,40,"WiFi, AC, Charging",Station
+50,Miami,Florida,Jacksonville,Florida,OurBus Morning,AC,331,532,I-25,07:00,13:00,6.0,31,3,50,"AC, Charging",Online/Station
+51,Miami,Florida,Jacksonville,Florida,Trailways Night,Luxury,331,532,I-90,20:00,02:00,6.0,51,25,45,"WiFi, AC, Restroom, Charging",Online/Station
+52,Miami,Florida,Jacksonville,Florida,Peter Pan Night,AC,331,532,I-80,22:00,04:00,6.0,26,3,55,"AC, Restroom",Station
+53,Orlando,Florida,Tampa,Florida,OurBus Morning,AC,84,135,US-1,07:00,08:00,1.5,10,11,40,"AC, Charging",Station
+54,Orlando,Florida,Tampa,Florida,Southeastern Stages Afternoon,AC,84,135,I-25,16:00,17:00,1.5,13,5,55,"WiFi, AC, Snacks",Online
+55,Orlando,Florida,Jacksonville,Florida,FlixBus Morning,Seater,125,201,I-35,11:00,13:00,2.3,27,25,50,"WiFi, AC, Restroom, Charging",Online/Station
+56,Orlando,Florida,Jacksonville,Florida,Peter Pan Morning,Luxury,125,201,I-70,07:00,09:00,2.3,13,24,40,"WiFi, AC",Online
+57,Tampa,Florida,Jacksonville,Florida,RedCoach Afternoon,Sleeper,173,278,US-66,13:00,16:00,3.1,38,22,40,"WiFi, AC, Snacks",Online/Station
+58,Tampa,Florida,Jacksonville,Florida,Trailways Night,AC,173,278,US-1,22:00,01:00,3.1,19,22,55,AC,Online
+59,Atlanta,Georgia,Charlotte,North Carolina,Southeastern Stages Morning,Sleeper,265,426,I-25,11:00,15:00,4.8,28,43,50,"AC, Charging",Online/Station
+60,Atlanta,Georgia,Charlotte,North Carolina,OurBus Night,AC,265,426,I-75,20:00,00:00,4.8,56,3,55,AC,Station
+61,Atlanta,Georgia,Charlotte,North Carolina,Jefferson Lines Morning,Sleeper,265,426,I-95,06:00,10:00,4.8,51,36,45,"AC, Charging",Station
+62,Atlanta,Georgia,Nashville,Tennessee,OurBus Night,Seater,234,376,I-80,22:00,02:00,4.3,45,16,40,"WiFi, AC, Charging",Online/Station
+63,Atlanta,Georgia,Nashville,Tennessee,Megabus Afternoon,Sleeper,234,376,I-40,14:00,18:00,4.3,57,11,50,"AC, Charging",Station
+64,Atlanta,Georgia,Nashville,Tennessee,BoltBus Afternoon,Sleeper,234,376,I-35,16:00,20:00,4.3,49,16,40,"WiFi, AC",Online
+65,Atlanta,Georgia,Nashville,Tennessee,Southeastern Stages Afternoon,Seater,234,376,I-35,15:00,19:00,4.3,51,43,55,AC,Station
+66,Atlanta,Georgia,Savannah,Georgia,RedCoach Afternoon,Luxury,254,408,US-1,16:00,20:00,4.6,27,6,45,AC,Station
+67,Atlanta,Georgia,Savannah,Georgia,Trailways Morning,Sleeper,254,408,I-25,09:00,13:00,4.6,53,19,50,"WiFi, AC",Online
+68,Atlanta,Georgia,Savannah,Georgia,BoltBus Morning,Seater,254,408,I-40,09:00,13:00,4.6,54,50,55,AC,Online
+69,Atlanta,Georgia,Savannah,Georgia,Jefferson Lines Morning,Seater,254,408,I-95,07:00,11:00,4.6,26,13,40,"AC, Restroom",Online
+70,Atlanta,Georgia,Birmingham,Alabama,Trailways Morning,Sleeper,167,268,I-75,07:00,10:00,3.0,37,6,50,"AC, Charging",Online/Station
+71,Atlanta,Georgia,Birmingham,Alabama,RedCoach Afternoon,Luxury,167,268,I-5,14:00,17:00,3.0,33,35,50,"WiFi, AC, Charging",Online
+72,Atlanta,Georgia,Birmingham,Alabama,Megabus Night,AC,167,268,I-75,22:00,01:00,3.0,23,35,45,AC,Online
+73,Atlanta,Georgia,Jacksonville,Florida,FlixBus Night,Seater,301,484,I-40,20:00,01:00,5.5,59,19,40,"WiFi, AC, Charging",Online/Station
+74,Atlanta,Georgia,Jacksonville,Florida,BoltBus Afternoon,Seater,301,484,US-66,12:00,17:00,5.5,74,30,45,"WiFi, Charging",Station
+75,Atlanta,Georgia,Jacksonville,Florida,FlixBus Afternoon,AC,301,484,I-90,13:00,18:00,5.5,34,17,50,"AC, Charging",Station
+76,Chicago,Illinois,Indianapolis,Indiana,Peter Pan Morning,Luxury,177,284,I-90,11:00,14:00,3.2,32,2,45,AC,Station
+77,Chicago,Illinois,Indianapolis,Indiana,OurBus Afternoon,Seater,177,284,I-90,15:00,18:00,3.2,16,44,50,"WiFi, AC, Restroom, Charging",Station
+78,Chicago,Illinois,Detroit,Michigan,Megabus Evening,Sleeper,317,510,I-90,17:00,22:00,5.8,39,47,50,"AC, Charging",Online/Station
+79,Chicago,Illinois,Detroit,Michigan,Greyhound Afternoon,Sleeper,317,510,I-25,15:00,20:00,5.8,73,39,40,"AC, Restroom",Online
+80,Chicago,Illinois,Milwaukee,Wisconsin,Peter Pan Morning,Luxury,82,131,I-80,10:00,11:00,1.5,12,3,40,"WiFi, AC, Snacks",Online
+81,Chicago,Illinois,Milwaukee,Wisconsin,OurBus Morning,Luxury,82,131,I-25,07:00,08:00,1.5,20,30,50,"AC, Restroom",Online/Station
+82,Chicago,Illinois,Saint Louis,Missouri,Peter Pan Afternoon,AC,285,458,I-40,12:00,17:00,5.2,49,15,40,"AC, Charging",Online
+83,Chicago,Illinois,Saint Louis,Missouri,Jefferson Lines Morning,Seater,285,458,I-70,08:00,13:00,5.2,41,43,45,"AC, Charging",Online/Station
+84,Chicago,Illinois,Minneapolis,Minnesota,OurBus Morning,AC,443,712,I-80,10:00,18:00,8.1,86,0,45,AC,Online/Station
+85,Chicago,Illinois,Minneapolis,Minnesota,Trailways Afternoon,Sleeper,443,712,I-40,16:00,00:00,8.1,53,45,55,"WiFi, AC, Charging",Online/Station
+86,Chicago,Illinois,Minneapolis,Minnesota,RedCoach Morning,AC,443,712,I-90,07:00,15:00,8.1,73,37,50,"AC, Restroom",Station
+87,Chicago,Illinois,Kansas City,Missouri,Greyhound Afternoon,Seater,516,830,I-95,15:00,00:00,9.4,85,6,40,"WiFi, AC, Charging",Station
+88,Chicago,Illinois,Kansas City,Missouri,RedCoach Morning,AC,516,830,I-75,11:00,20:00,9.4,80,24,50,"WiFi, AC, Snacks",Online/Station
+89,Chicago,Illinois,Kansas City,Missouri,Megabus Afternoon,Seater,516,830,I-80,12:00,21:00,9.4,98,9,45,"WiFi, AC, Snacks",Online
+90,Los Angeles,California,San Diego,California,Southeastern Stages Evening,AC,118,189,US-66,19:00,21:00,2.1,15,10,40,"WiFi, AC, Restroom, Charging",Online/Station
+91,Los Angeles,California,San Diego,California,Trailways Evening,Seater,118,189,I-10,19:00,21:00,2.1,28,49,50,"AC, Charging",Station
+92,Los Angeles,California,San Diego,California,OurBus Morning,Sleeper,118,189,I-95,07:00,09:00,2.1,29,39,40,"AC, Charging",Online/Station
+93,Los Angeles,California,Las Vegas,Nevada,RedCoach Afternoon,Luxury,259,416,US-1,14:00,18:00,4.7,58,12,50,"WiFi, Charging",Station
+94,Los Angeles,California,Las Vegas,Nevada,Peter Pan Morning,Seater,259,416,I-25,06:00,10:00,4.7,45,0,50,"AC, Charging",Station
+95,Los Angeles,California,Las Vegas,Nevada,OurBus Morning,AC,259,416,I-10,10:00,14:00,4.7,22,19,40,"WiFi, AC, Charging",Online/Station
+96,Los Angeles,California,San Francisco,California,FlixBus Morning,Seater,385,619,I-80,10:00,17:00,7.0,52,2,40,"WiFi, AC, Restroom, Charging",Station
+97,Los Angeles,California,San Francisco,California,RedCoach Evening,Seater,385,619,I-90,17:00,00:00,7.0,68,15,45,"WiFi, Charging",Online
+98,Los Angeles,California,San Francisco,California,Southeastern Stages Afternoon,Luxury,385,619,I-80,13:00,20:00,7.0,67,42,55,"AC, Charging",Online
+99,Los Angeles,California,San Francisco,California,RedCoach Evening,Sleeper,385,619,I-5,19:00,02:00,7.0,36,14,40,AC,Online
+100,Los Angeles,California,Phoenix,Arizona,OurBus Morning,Luxury,427,687,I-35,06:00,13:00,7.8,53,37,40,"AC, Restroom",Online/Station
+101,Los Angeles,California,Phoenix,Arizona,Southeastern Stages Evening,Seater,427,687,I-5,18:00,01:00,7.8,105,24,55,"AC, Charging",Online
+102,Los Angeles,California,Phoenix,Arizona,Jefferson Lines Afternoon,Seater,427,687,I-75,13:00,20:00,7.8,98,45,45,"WiFi, AC, Snacks",Online/Station
+103,Los Angeles,California,Phoenix,Arizona,Jefferson Lines Night,Sleeper,427,687,I-95,22:00,05:00,7.8,58,36,50,"AC, Restroom",Station
+104,Los Angeles,California,Sacramento,California,Trailways Afternoon,Sleeper,384,617,US-66,16:00,23:00,7.0,91,21,45,"AC, Restroom",Online/Station
+105,Los Angeles,California,Sacramento,California,RedCoach Night,Sleeper,384,617,I-90,20:00,03:00,7.0,32,17,45,"AC, Restroom",Station
+106,San Francisco,California,Sacramento,California,Jefferson Lines Morning,Seater,84,135,I-5,06:00,07:00,1.5,16,6,40,AC,Online
+107,San Francisco,California,Sacramento,California,FlixBus Afternoon,AC,84,135,I-75,14:00,15:00,1.5,18,0,55,"WiFi, AC, Restroom, Charging",Online
+108,San Francisco,California,Sacramento,California,Megabus Morning,Sleeper,84,135,I-95,11:00,12:00,1.5,14,29,40,"WiFi, AC, Charging",Station
+109,San Francisco,California,Las Vegas,Nevada,Megabus Morning,Sleeper,514,827,I-40,07:00,16:00,9.3,84,22,55,"WiFi, Charging",Online/Station
+110,San Francisco,California,Las Vegas,Nevada,RedCoach Morning,Seater,514,827,I-25,09:00,18:00,9.3,117,50,55,"WiFi, AC, Snacks",Online
+111,San Francisco,California,Las Vegas,Nevada,Greyhound Morning,Sleeper,514,827,US-1,06:00,15:00,9.3,82,12,50,"WiFi, AC, Restroom, Charging",Station
+112,San Francisco,California,Portland,Oregon,BoltBus Night,Luxury,533,857,I-75,20:00,05:00,9.7,129,23,55,"WiFi, Charging",Online/Station
+113,San Francisco,California,Portland,Oregon,Greyhound Morning,Luxury,533,857,US-1,11:00,20:00,9.7,80,23,55,"AC, Charging",Station
+114,San Francisco,California,Portland,Oregon,RedCoach Morning,AC,533,857,I-40,08:00,17:00,9.7,48,15,55,"WiFi, AC",Station
+115,San Francisco,California,Portland,Oregon,Greyhound Morning,AC,533,857,I-80,08:00,17:00,9.7,66,32,50,"WiFi, AC, Restroom, Charging",Station
+116,San Francisco,California,Seattle,Washington,BoltBus Morning,Luxury,678,1090,I-40,09:00,21:00,12.3,115,13,45,"WiFi, AC, Snacks",Online
+117,San Francisco,California,Seattle,Washington,FlixBus Evening,Luxury,678,1090,I-75,17:00,05:00,12.3,157,38,40,"WiFi, AC",Online
+118,San Francisco,California,Seattle,Washington,Jefferson Lines Afternoon,Luxury,678,1090,I-25,12:00,00:00,12.3,122,6,50,"WiFi, Charging",Online/Station
+119,Seattle,Washington,Portland,Oregon,Greyhound Morning,AC,146,234,I-95,06:00,08:00,2.7,29,28,40,"AC, Charging",Online
+120,Seattle,Washington,Portland,Oregon,Trailways Afternoon,Seater,146,234,I-25,14:00,16:00,2.7,30,3,45,AC,Online/Station
+121,Seattle,Washington,Portland,Oregon,BoltBus Morning,Sleeper,146,234,I-5,11:00,13:00,2.7,12,7,45,AC,Online/Station
+122,Seattle,Washington,Portland,Oregon,Trailways Afternoon,Seater,146,234,I-80,14:00,16:00,2.7,22,36,40,"WiFi, AC, Restroom, Charging",Online
+123,Seattle,Washington,Spokane,Washington,Greyhound Morning,Sleeper,338,543,I-75,07:00,13:00,6.1,60,25,45,AC,Station
+124,Seattle,Washington,Spokane,Washington,Megabus Afternoon,AC,338,543,I-25,13:00,19:00,6.1,70,35,40,"WiFi, AC, Charging",Online/Station
+125,Seattle,Washington,Spokane,Washington,Peter Pan Afternoon,Sleeper,338,543,I-80,15:00,21:00,6.1,55,18,55,AC,Station
+126,Seattle,Washington,Spokane,Washington,Megabus Afternoon,Sleeper,338,543,US-66,12:00,18:00,6.1,56,1,40,"AC, Restroom",Online
+127,Seattle,Washington,Denver,Colorado,Southeastern Stages Afternoon,AC,1313,2112,I-95,12:00,11:00,23.9,223,50,55,"WiFi, AC, Snacks",Station
+128,Seattle,Washington,Denver,Colorado,Southeastern Stages Morning,Luxury,1313,2112,I-35,07:00,06:00,23.9,213,44,45,"WiFi, AC, Charging",Online/Station
+129,Seattle,Washington,Tacoma,Washington,BoltBus Morning,Luxury,25,40,I-25,08:00,08:00,0.5,10,20,45,"AC, Restroom",Online/Station
+130,Seattle,Washington,Tacoma,Washington,RedCoach Afternoon,Sleeper,25,40,I-95,13:00,13:00,0.5,10,0,40,"AC, Restroom",Station
+131,Seattle,Washington,Tacoma,Washington,Greyhound Morning,Sleeper,25,40,I-35,11:00,11:00,0.5,10,35,50,AC,Online
+132,Seattle,Washington,Tacoma,Washington,Jefferson Lines Morning,AC,25,40,I-70,07:00,07:00,0.5,10,44,55,"WiFi, AC, Charging",Station
+133,Portland,Oregon,Salem,Oregon,Jefferson Lines Morning,Luxury,46,74,I-75,08:00,08:00,0.8,10,32,55,"WiFi, AC, Restroom, Charging",Online
+134,Portland,Oregon,Salem,Oregon,Peter Pan Evening,Seater,46,74,I-70,19:00,19:00,0.8,11,38,55,"WiFi, AC",Online/Station
+135,Portland,Oregon,Salem,Oregon,Greyhound Morning,Seater,46,74,I-80,06:00,06:00,0.8,10,14,50,"WiFi, AC",Online
+136,Portland,Oregon,Salem,Oregon,Greyhound Afternoon,Seater,46,74,I-80,14:00,14:00,0.8,10,26,45,"AC, Charging",Online
+137,Portland,Oregon,Eugene,Oregon,Megabus Evening,Seater,104,167,I-5,17:00,18:00,1.9,24,26,50,AC,Online/Station
+138,Portland,Oregon,Eugene,Oregon,Jefferson Lines Morning,AC,104,167,I-35,06:00,07:00,1.9,24,47,55,"WiFi, AC",Online/Station
+139,Portland,Oregon,Boise,Idaho,BoltBus Evening,Sleeper,465,748,I-95,17:00,01:00,8.5,115,28,50,"WiFi, AC, Restroom, Charging",Station
+140,Portland,Oregon,Boise,Idaho,BoltBus Morning,Seater,465,748,I-75,11:00,19:00,8.5,97,2,55,"WiFi, Charging",Online/Station
+141,Portland,Oregon,Boise,Idaho,Greyhound Afternoon,Seater,465,748,I-90,16:00,00:00,8.5,47,16,40,"WiFi, AC, Charging",Online/Station
+142,Denver,Colorado,Colorado Springs,Colorado,Peter Pan Morning,AC,63,101,I-40,06:00,07:00,1.1,10,11,50,"AC, Charging",Online
+143,Denver,Colorado,Colorado Springs,Colorado,BoltBus Afternoon,AC,63,101,I-70,13:00,14:00,1.1,11,47,50,AC,Station
+144,Denver,Colorado,Colorado Springs,Colorado,Greyhound Afternoon,AC,63,101,I-35,15:00,16:00,1.1,10,1,40,"WiFi, AC, Snacks",Station
+145,Denver,Colorado,Colorado Springs,Colorado,Jefferson Lines Evening,Luxury,63,101,I-70,19:00,20:00,1.1,10,32,55,"AC, Restroom",Online/Station
+146,Denver,Colorado,Salt Lake City,Utah,Southeastern Stages Evening,Luxury,481,773,I-70,19:00,03:00,8.7,86,0,55,"WiFi, Charging",Online
+147,Denver,Colorado,Salt Lake City,Utah,FlixBus Morning,Luxury,481,773,I-35,11:00,19:00,8.7,107,12,40,"WiFi, AC, Snacks",Station
+148,Denver,Colorado,Albuquerque,New Mexico,BoltBus Evening,AC,340,547,I-90,18:00,00:00,6.2,73,30,40,"AC, Restroom",Online
+149,Denver,Colorado,Albuquerque,New Mexico,BoltBus Morning,Seater,340,547,I-10,11:00,17:00,6.2,67,34,55,"WiFi, AC, Charging",Station
+150,Denver,Colorado,Albuquerque,New Mexico,Megabus Afternoon,Luxury,340,547,I-25,13:00,19:00,6.2,44,25,40,"AC, Charging",Station
+151,Denver,Colorado,Kansas City,Missouri,BoltBus Morning,AC,719,1156,I-35,11:00,00:00,13.1,60,36,55,"WiFi, AC, Restroom, Charging",Online
+152,Denver,Colorado,Kansas City,Missouri,Megabus Morning,AC,719,1156,I-75,08:00,21:00,13.1,179,19,55,"WiFi, Charging",Online/Station
+153,Denver,Colorado,Kansas City,Missouri,BoltBus Morning,AC,719,1156,US-1,11:00,00:00,13.1,69,7,40,"WiFi, AC, Charging",Station
+154,Denver,Colorado,Kansas City,Missouri,Peter Pan Evening,AC,719,1156,US-66,19:00,08:00,13.1,169,8,50,"WiFi, AC, Snacks",Station
+155,Denver,Colorado,Cheyenne,Wyoming,RedCoach Afternoon,Luxury,97,156,I-95,13:00,14:00,1.8,10,4,45,AC,Online/Station
+156,Denver,Colorado,Cheyenne,Wyoming,RedCoach Afternoon,Seater,97,156,I-35,16:00,17:00,1.8,13,40,45,"WiFi, AC, Restroom, Charging",Online
+157,Denver,Colorado,Cheyenne,Wyoming,FlixBus Evening,Luxury,97,156,I-25,19:00,20:00,1.8,14,29,50,"WiFi, AC",Online
+158,Las Vegas,Nevada,Phoenix,Arizona,OurBus Morning,AC,282,453,US-66,09:00,14:00,5.1,35,22,50,"AC, Charging",Online
+159,Las Vegas,Nevada,Phoenix,Arizona,RedCoach Afternoon,Seater,282,453,US-66,14:00,19:00,5.1,63,30,45,"WiFi, AC, Snacks",Station
+160,Las Vegas,Nevada,Phoenix,Arizona,Peter Pan Morning,Sleeper,282,453,I-5,08:00,13:00,5.1,27,1,40,"WiFi, AC, Restroom, Charging",Station
+161,Las Vegas,Nevada,Reno,Nevada,Jefferson Lines Morning,Seater,397,638,I-10,07:00,14:00,7.2,46,20,50,"WiFi, AC, Snacks",Online/Station
+162,Las Vegas,Nevada,Reno,Nevada,RedCoach Morning,Luxury,397,638,I-25,11:00,18:00,7.2,86,29,45,"WiFi, Charging",Online/Station
+163,Las Vegas,Nevada,Reno,Nevada,Jefferson Lines Morning,AC,397,638,I-90,09:00,16:00,7.2,61,41,55,"AC, Charging",Station
+164,Las Vegas,Nevada,Reno,Nevada,Megabus Evening,Seater,397,638,I-5,17:00,00:00,7.2,81,42,45,"WiFi, Charging",Online
+165,Las Vegas,Nevada,Salt Lake City,Utah,FlixBus Afternoon,Luxury,388,624,I-35,15:00,22:00,7.1,71,18,45,"AC, Charging",Station
+166,Las Vegas,Nevada,Salt Lake City,Utah,Trailways Morning,Sleeper,388,624,US-1,09:00,16:00,7.1,63,28,55,"AC, Charging",Online/Station
+167,Phoenix,Arizona,Tucson,Arizona,Jefferson Lines Evening,Seater,113,181,I-25,17:00,19:00,2.1,22,0,45,"WiFi, AC, Charging",Online/Station
+168,Phoenix,Arizona,Tucson,Arizona,Megabus Evening,Luxury,113,181,I-40,19:00,21:00,2.1,18,10,40,"WiFi, AC, Restroom, Charging",Station
+169,Phoenix,Arizona,Tucson,Arizona,Southeastern Stages Morning,AC,113,181,I-40,06:00,08:00,2.1,10,9,40,"AC, Charging",Online
+170,Phoenix,Arizona,Tucson,Arizona,RedCoach Afternoon,Sleeper,113,181,I-40,14:00,16:00,2.1,14,1,55,"AC, Charging",Online
+171,Phoenix,Arizona,Albuquerque,New Mexico,Jefferson Lines Afternoon,Sleeper,390,627,I-5,14:00,21:00,7.1,82,36,40,"WiFi, AC",Online/Station
+172,Phoenix,Arizona,Albuquerque,New Mexico,RedCoach Evening,AC,390,627,I-70,18:00,01:00,7.1,77,0,50,"WiFi, AC, Charging",Online
+173,Phoenix,Arizona,Albuquerque,New Mexico,OurBus Afternoon,Seater,390,627,I-80,12:00,19:00,7.1,62,10,40,"WiFi, AC, Restroom, Charging",Station
+174,Phoenix,Arizona,El Paso,Texas,Peter Pan Afternoon,Seater,402,646,I-90,15:00,22:00,7.3,75,27,40,"WiFi, AC, Charging",Online/Station
+175,Phoenix,Arizona,El Paso,Texas,Jefferson Lines Afternoon,Seater,402,646,I-10,14:00,21:00,7.3,53,8,55,"WiFi, AC, Snacks",Online
+176,Phoenix,Arizona,El Paso,Texas,Megabus Afternoon,Sleeper,402,646,I-90,12:00,19:00,7.3,61,49,55,AC,Online/Station
+177,Dallas,Texas,Houston,Texas,FlixBus Morning,Seater,230,370,I-10,06:00,10:00,4.2,39,32,50,"WiFi, AC, Restroom, Charging",Station
+178,Dallas,Texas,Houston,Texas,Southeastern Stages Afternoon,Luxury,230,370,I-80,12:00,16:00,4.2,25,1,45,"WiFi, Charging",Station
+179,Dallas,Texas,Houston,Texas,FlixBus Afternoon,AC,230,370,I-95,12:00,16:00,4.2,29,12,45,"WiFi, AC, Restroom, Charging",Station
+180,Dallas,Texas,Austin,Texas,Trailways Morning,Seater,185,297,I-35,07:00,10:00,3.4,35,0,55,"AC, Charging",Online
+181,Dallas,Texas,Austin,Texas,Megabus Morning,Luxury,185,297,I-70,09:00,12:00,3.4,34,45,45,"AC, Restroom",Online
+182,Dallas,Texas,Austin,Texas,Southeastern Stages Evening,Sleeper,185,297,I-95,17:00,20:00,3.4,22,24,45,"WiFi, AC",Station
+183,Dallas,Texas,San Antonio,Texas,FlixBus Morning,Seater,259,416,US-1,10:00,14:00,4.7,30,10,45,AC,Online
+184,Dallas,Texas,San Antonio,Texas,Megabus Morning,Luxury,259,416,I-90,10:00,14:00,4.7,43,1,50,"AC, Charging",Online/Station
+185,Dallas,Texas,Oklahoma City,Oklahoma,FlixBus Morning,Sleeper,192,308,US-1,10:00,13:00,3.5,31,2,45,"AC, Restroom",Station
+186,Dallas,Texas,Oklahoma City,Oklahoma,Greyhound Afternoon,Seater,192,308,I-95,12:00,15:00,3.5,26,23,45,"WiFi, AC, Restroom, Charging",Online/Station
+187,Dallas,Texas,Oklahoma City,Oklahoma,BoltBus Night,Seater,192,308,I-35,20:00,23:00,3.5,28,10,50,"WiFi, AC, Charging",Online/Station
+188,Dallas,Texas,El Paso,Texas,BoltBus Morning,Luxury,672,1081,I-95,11:00,23:00,12.2,148,4,45,"AC, Charging",Online/Station
+189,Dallas,Texas,El Paso,Texas,Greyhound Afternoon,Seater,672,1081,I-10,15:00,03:00,12.2,165,9,40,"WiFi, AC",Online
+190,Dallas,Texas,El Paso,Texas,Greyhound Night,Luxury,672,1081,I-75,20:00,08:00,12.2,92,48,50,AC,Online
+191,Houston,Texas,San Antonio,Texas,FlixBus Evening,Luxury,216,347,I-40,17:00,20:00,3.9,38,38,40,"AC, Restroom",Online
+192,Houston,Texas,San Antonio,Texas,Southeastern Stages Evening,Sleeper,216,347,I-80,18:00,21:00,3.9,27,17,45,"WiFi, Charging",Online
+193,Houston,Texas,San Antonio,Texas,Megabus Evening,Seater,216,347,I-70,17:00,20:00,3.9,25,34,40,"AC, Restroom",Online/Station
+194,Houston,Texas,Austin,Texas,OurBus Morning,Luxury,167,268,I-75,08:00,11:00,3.0,17,14,40,"WiFi, AC, Restroom, Charging",Online/Station
+195,Houston,Texas,Austin,Texas,Peter Pan Morning,Seater,167,268,I-75,06:00,09:00,3.0,41,41,45,"WiFi, AC, Restroom, Charging",Online
+196,Houston,Texas,Austin,Texas,RedCoach Afternoon,Sleeper,167,268,I-75,14:00,17:00,3.0,30,49,50,"WiFi, AC",Online/Station
+197,Houston,Texas,Austin,Texas,OurBus Afternoon,Seater,167,268,I-90,12:00,15:00,3.0,39,40,55,"WiFi, AC, Charging",Online/Station
+198,Houston,Texas,New Orleans,Louisiana,Megabus Night,Luxury,365,587,I-40,20:00,02:00,6.6,72,12,50,"WiFi, AC, Charging",Online/Station
+199,Houston,Texas,New Orleans,Louisiana,BoltBus Morning,AC,365,587,I-75,11:00,17:00,6.6,57,3,45,"WiFi, Charging",Station
+200,Houston,Texas,New Orleans,Louisiana,Megabus Evening,Luxury,365,587,I-40,17:00,23:00,6.6,85,33,55,"WiFi, AC, Restroom, Charging",Station
+201,Houston,Texas,New Orleans,Louisiana,Trailways Morning,Seater,365,587,I-40,06:00,12:00,6.6,74,40,40,"WiFi, AC, Restroom, Charging",Station
+202,Houston,Texas,Baton Rouge,Louisiana,Southeastern Stages Evening,Sleeper,292,469,I-95,19:00,00:00,5.3,45,50,50,"WiFi, AC, Charging",Station
+203,Houston,Texas,Baton Rouge,Louisiana,RedCoach Morning,Seater,292,469,I-5,06:00,11:00,5.3,72,13,45,"WiFi, AC, Snacks",Online
+204,Houston,Texas,Baton Rouge,Louisiana,Jefferson Lines Afternoon,AC,292,469,I-40,16:00,21:00,5.3,30,52,55,AC,Online/Station
+205,Houston,Texas,Baton Rouge,Louisiana,Peter Pan Evening,Sleeper,292,469,US-66,19:00,00:00,5.3,26,49,50,"WiFi, AC",Online
+206,New Orleans,Louisiana,Baton Rouge,Louisiana,FlixBus Morning,Sleeper,84,135,I-35,10:00,11:00,1.5,13,19,40,"WiFi, AC, Charging",Station
+207,New Orleans,Louisiana,Baton Rouge,Louisiana,OurBus Evening,AC,84,135,I-40,19:00,20:00,1.5,10,25,50,"AC, Restroom",Online/Station
+208,New Orleans,Louisiana,Baton Rouge,Louisiana,RedCoach Afternoon,AC,84,135,US-1,16:00,17:00,1.5,13,9,45,"WiFi, AC, Restroom, Charging",Online/Station
+209,New Orleans,Louisiana,Baton Rouge,Louisiana,Southeastern Stages Afternoon,AC,84,135,I-95,12:00,13:00,1.5,15,6,40,"WiFi, AC, Charging",Online/Station
+210,New Orleans,Louisiana,Jackson,Mississippi,Megabus Morning,Seater,162,260,I-25,08:00,10:00,2.9,22,9,45,"WiFi, Charging",Online/Station
+211,New Orleans,Louisiana,Jackson,Mississippi,RedCoach Morning,Sleeper,162,260,I-95,08:00,10:00,2.9,15,44,55,"AC, Restroom",Online/Station
+212,Nashville,Tennessee,Memphis,Tennessee,Trailways Morning,Luxury,236,379,I-40,11:00,15:00,4.3,54,5,40,AC,Online/Station
+213,Nashville,Tennessee,Memphis,Tennessee,Greyhound Afternoon,Luxury,236,379,US-1,16:00,20:00,4.3,19,30,50,"WiFi, AC",Online
+214,Nashville,Tennessee,Memphis,Tennessee,Trailways Evening,AC,236,379,US-66,17:00,21:00,4.3,51,36,45,"WiFi, AC, Snacks",Online
+215,Nashville,Tennessee,Memphis,Tennessee,Greyhound Afternoon,Sleeper,236,379,I-75,16:00,20:00,4.3,54,4,50,"WiFi, AC",Online/Station
+216,Nashville,Tennessee,Knoxville,Tennessee,FlixBus Afternoon,Seater,197,316,I-40,15:00,18:00,3.6,33,14,40,"AC, Restroom",Station
+217,Nashville,Tennessee,Knoxville,Tennessee,OurBus Afternoon,Seater,197,316,US-66,15:00,18:00,3.6,19,15,55,"WiFi, AC, Restroom, Charging",Online/Station
+218,Nashville,Tennessee,Louisville,Kentucky,Megabus Afternoon,AC,160,257,US-1,16:00,18:00,2.9,37,19,40,"WiFi, Charging",Online/Station
+219,Nashville,Tennessee,Louisville,Kentucky,Greyhound Morning,Seater,160,257,US-1,08:00,10:00,2.9,38,12,40,"WiFi, Charging",Station
+220,Nashville,Tennessee,Louisville,Kentucky,Megabus Morning,Seater,160,257,I-5,06:00,08:00,2.9,36,33,45,"AC, Charging",Online
+221,Nashville,Tennessee,Louisville,Kentucky,RedCoach Night,Seater,160,257,I-75,22:00,00:00,2.9,31,34,55,"AC, Charging",Station
+222,Nashville,Tennessee,Birmingham,Alabama,Greyhound Afternoon,Luxury,182,292,US-66,14:00,17:00,3.3,45,23,40,"AC, Restroom",Online/Station
+223,Nashville,Tennessee,Birmingham,Alabama,BoltBus Afternoon,Seater,182,292,I-5,14:00,17:00,3.3,24,29,50,"AC, Restroom",Online/Station
+224,Charlotte,North Carolina,Raleigh,North Carolina,Peter Pan Morning,Luxury,156,251,US-1,11:00,13:00,2.8,36,33,50,"WiFi, AC, Charging",Online
+225,Charlotte,North Carolina,Raleigh,North Carolina,Greyhound Afternoon,AC,156,251,I-35,16:00,18:00,2.8,23,14,40,"WiFi, Charging",Online
+226,Charlotte,North Carolina,Raleigh,North Carolina,Southeastern Stages Night,Sleeper,156,251,I-70,20:00,22:00,2.8,26,17,40,"AC, Charging",Online/Station
+227,Charlotte,North Carolina,Greensboro,North Carolina,OurBus Evening,Luxury,93,149,I-25,17:00,18:00,1.7,10,48,50,AC,Online
+228,Charlotte,North Carolina,Greensboro,North Carolina,FlixBus Morning,AC,93,149,I-10,11:00,12:00,1.7,10,40,50,"WiFi, AC, Charging",Online
+229,Charlotte,North Carolina,Greensboro,North Carolina,RedCoach Morning,Sleeper,93,149,I-10,09:00,10:00,1.7,15,36,55,"WiFi, AC, Charging",Online/Station
+230,Charlotte,North Carolina,Virginia Beach,Virginia,Megabus Evening,Sleeper,353,567,I-5,17:00,23:00,6.4,69,44,50,"AC, Restroom",Online/Station
+231,Charlotte,North Carolina,Virginia Beach,Virginia,FlixBus Morning,Sleeper,353,567,I-70,10:00,16:00,6.4,65,38,50,AC,Online
+232,Charlotte,North Carolina,Virginia Beach,Virginia,Trailways Afternoon,Seater,353,567,I-25,16:00,22:00,6.4,33,48,50,AC,Station
+233,Charlotte,North Carolina,Virginia Beach,Virginia,FlixBus Morning,Sleeper,353,567,I-25,08:00,14:00,6.4,46,7,40,"AC, Charging",Station
+234,Detroit,Michigan,Cleveland,Ohio,OurBus Morning,Luxury,109,175,I-90,07:00,09:00,2.0,10,5,45,"WiFi, AC, Charging",Station
+235,Detroit,Michigan,Cleveland,Ohio,Greyhound Evening,Sleeper,109,175,I-35,17:00,19:00,2.0,16,25,40,"WiFi, AC",Online
+236,Detroit,Michigan,Cleveland,Ohio,Greyhound Morning,Luxury,109,175,I-80,06:00,08:00,2.0,11,9,45,"AC, Charging",Station
+237,Detroit,Michigan,Cleveland,Ohio,Southeastern Stages Morning,Seater,109,175,I-70,10:00,12:00,2.0,18,14,50,"WiFi, AC, Charging",Online
+238,Detroit,Michigan,Grand Rapids,Michigan,BoltBus Morning,Seater,186,299,I-95,07:00,10:00,3.4,18,35,50,"WiFi, AC, Charging",Station
+239,Detroit,Michigan,Grand Rapids,Michigan,Greyhound Evening,Seater,186,299,I-80,18:00,21:00,3.4,24,7,40,"WiFi, AC",Online
+240,Detroit,Michigan,Grand Rapids,Michigan,BoltBus Afternoon,Sleeper,186,299,I-75,14:00,17:00,3.4,22,33,50,AC,Online
+241,Detroit,Michigan,Grand Rapids,Michigan,RedCoach Afternoon,Sleeper,186,299,US-1,12:00,15:00,3.4,40,49,55,"WiFi, Charging",Station
+242,Detroit,Michigan,Lansing,Michigan,Jefferson Lines Evening,Sleeper,107,172,I-80,19:00,20:00,1.9,19,38,40,"WiFi, AC, Charging",Online/Station
+243,Detroit,Michigan,Lansing,Michigan,RedCoach Morning,Sleeper,107,172,I-25,08:00,09:00,1.9,20,2,50,"WiFi, AC, Charging",Online
+244,Detroit,Michigan,Lansing,Michigan,Jefferson Lines Evening,Sleeper,107,172,US-66,19:00,20:00,1.9,26,17,55,"WiFi, AC, Snacks",Station
+245,Cleveland,Ohio,Pittsburgh,Pennsylvania,Trailways Morning,Sleeper,138,222,I-95,11:00,13:00,2.5,21,6,45,"WiFi, AC, Restroom, Charging",Station
+246,Cleveland,Ohio,Pittsburgh,Pennsylvania,OurBus Morning,AC,138,222,I-75,06:00,08:00,2.5,15,30,45,AC,Online/Station
+247,Cleveland,Ohio,Columbus,Ohio,Greyhound Morning,Seater,139,223,I-40,08:00,10:00,2.5,31,2,50,"AC, Restroom",Online/Station
+248,Cleveland,Ohio,Columbus,Ohio,Southeastern Stages Morning,Luxury,139,223,I-10,10:00,12:00,2.5,21,3,40,AC,Online/Station
+249,Cleveland,Ohio,Columbus,Ohio,Trailways Afternoon,Sleeper,139,223,I-10,16:00,18:00,2.5,17,11,55,"WiFi, AC, Snacks",Online
+250,Cleveland,Ohio,Cincinnati,Ohio,Megabus Morning,Seater,255,410,I-5,09:00,13:00,4.6,54,25,45,"WiFi, AC, Charging",Online
+251,Cleveland,Ohio,Cincinnati,Ohio,Jefferson Lines Morning,AC,255,410,I-90,06:00,10:00,4.6,50,7,45,"WiFi, AC, Charging",Station
+252,Cleveland,Ohio,Cincinnati,Ohio,RedCoach Morning,Luxury,255,410,I-80,10:00,14:00,4.6,49,24,50,"WiFi, AC, Restroom, Charging",Online
+253,Cleveland,Ohio,Cincinnati,Ohio,Southeastern Stages Afternoon,Sleeper,255,410,I-70,14:00,18:00,4.6,39,52,55,"WiFi, AC, Charging",Online
+254,Columbus,Ohio,Cincinnati,Ohio,OurBus Morning,AC,120,193,I-40,09:00,11:00,2.2,25,7,40,AC,Station
+255,Columbus,Ohio,Cincinnati,Ohio,OurBus Afternoon,Sleeper,120,193,I-95,13:00,15:00,2.2,21,48,55,AC,Station
+256,Columbus,Ohio,Pittsburgh,Pennsylvania,Megabus Evening,Seater,209,336,I-40,17:00,20:00,3.8,34,14,45,"AC, Charging",Online/Station
+257,Columbus,Ohio,Pittsburgh,Pennsylvania,Jefferson Lines Afternoon,AC,209,336,I-5,16:00,19:00,3.8,32,39,50,"WiFi, Charging",Station
+258,Columbus,Ohio,Pittsburgh,Pennsylvania,FlixBus Evening,Seater,209,336,US-1,19:00,22:00,3.8,35,20,45,"WiFi, AC, Charging",Online
+259,Minneapolis,Minnesota,Saint Paul,Minnesota,Southeastern Stages Morning,Seater,12,19,I-75,10:00,10:00,0.2,10,7,55,"AC, Restroom",Online/Station
+260,Minneapolis,Minnesota,Saint Paul,Minnesota,BoltBus Morning,Sleeper,12,19,I-35,06:00,06:00,0.2,10,15,50,"WiFi, AC, Restroom, Charging",Online/Station
+261,Minneapolis,Minnesota,Milwaukee,Wisconsin,FlixBus Afternoon,Seater,393,632,I-5,12:00,19:00,7.1,55,9,55,"WiFi, AC, Charging",Online
+262,Minneapolis,Minnesota,Milwaukee,Wisconsin,Trailways Morning,AC,393,632,I-75,09:00,16:00,7.1,66,23,45,"AC, Restroom",Station
+263,Minneapolis,Minnesota,Milwaukee,Wisconsin,Southeastern Stages Morning,Seater,393,632,I-75,11:00,18:00,7.1,91,23,40,AC,Online/Station
+264,Minneapolis,Minnesota,Des Moines,Iowa,RedCoach Afternoon,Luxury,235,378,I-10,15:00,19:00,4.3,49,15,50,AC,Station
+265,Minneapolis,Minnesota,Des Moines,Iowa,Megabus Afternoon,Seater,235,378,I-75,15:00,19:00,4.3,21,28,40,"WiFi, AC",Station
+266,Minneapolis,Minnesota,Des Moines,Iowa,RedCoach Afternoon,AC,235,378,I-35,12:00,16:00,4.3,57,6,45,"WiFi, AC, Charging",Online/Station
+267,Minneapolis,Minnesota,Duluth,Minnesota,OurBus Evening,AC,148,238,US-66,17:00,19:00,2.7,22,17,50,"AC, Charging",Online/Station
+268,Minneapolis,Minnesota,Duluth,Minnesota,Jefferson Lines Night,Sleeper,148,238,US-1,20:00,22:00,2.7,22,0,40,"WiFi, Charging",Online
+269,Minneapolis,Minnesota,Duluth,Minnesota,Peter Pan Morning,Sleeper,148,238,US-66,07:00,09:00,2.7,31,40,40,"WiFi, AC, Snacks",Online
+270,Minneapolis,Minnesota,Duluth,Minnesota,RedCoach Afternoon,Luxury,148,238,I-70,12:00,14:00,2.7,23,34,50,"AC, Charging",Online/Station
+271,Kansas City,Missouri,Saint Louis,Missouri,RedCoach Afternoon,Luxury,303,487,I-5,14:00,19:00,5.5,51,22,40,"WiFi, AC, Charging",Station
+272,Kansas City,Missouri,Saint Louis,Missouri,Trailways Morning,Sleeper,303,487,I-40,07:00,12:00,5.5,64,35,45,AC,Station
+273,Kansas City,Missouri,Wichita,Kansas,BoltBus Evening,Sleeper,213,342,I-90,17:00,20:00,3.9,45,20,40,"WiFi, AC, Snacks",Station
+274,Kansas City,Missouri,Wichita,Kansas,Southeastern Stages Afternoon,Seater,213,342,I-90,15:00,18:00,3.9,40,8,40,"WiFi, AC, Snacks",Online
+275,Kansas City,Missouri,Wichita,Kansas,Greyhound Afternoon,Luxury,213,342,I-40,16:00,19:00,3.9,35,40,50,AC,Station
+276,Kansas City,Missouri,Wichita,Kansas,OurBus Morning,Seater,213,342,I-75,07:00,10:00,3.9,50,15,50,"AC, Charging",Station
+277,Kansas City,Missouri,Omaha,Nebraska,Jefferson Lines Morning,AC,175,281,I-80,07:00,10:00,3.2,29,30,50,"AC, Charging",Online/Station
+278,Kansas City,Missouri,Omaha,Nebraska,Jefferson Lines Night,AC,175,281,I-70,20:00,23:00,3.2,36,2,45,"AC, Restroom",Online/Station
+279,Kansas City,Missouri,Omaha,Nebraska,Peter Pan Morning,AC,175,281,I-95,11:00,14:00,3.2,42,44,50,"AC, Restroom",Station
+280,Salt Lake City,Utah,Provo,Utah,Trailways Night,Sleeper,39,62,I-35,20:00,20:00,0.7,10,35,55,"AC, Restroom",Online
+281,Salt Lake City,Utah,Provo,Utah,BoltBus Morning,Sleeper,39,62,I-25,11:00,11:00,0.7,10,21,55,"AC, Charging",Station
+282,Salt Lake City,Utah,Provo,Utah,Jefferson Lines Evening,AC,39,62,I-90,17:00,17:00,0.7,10,11,55,"WiFi, AC, Charging",Station
+283,Salt Lake City,Utah,Boise,Idaho,RedCoach Afternoon,AC,356,572,I-35,16:00,22:00,6.5,54,23,40,"AC, Restroom",Station
+284,Salt Lake City,Utah,Boise,Idaho,OurBus Afternoon,Sleeper,356,572,I-80,14:00,20:00,6.5,73,27,40,"WiFi, AC",Online/Station
+285,Albuquerque,New Mexico,Santa Fe,New Mexico,Southeastern Stages Afternoon,Sleeper,64,102,I-90,16:00,17:00,1.2,14,41,55,"WiFi, Charging",Station
+286,Albuquerque,New Mexico,Santa Fe,New Mexico,Southeastern Stages Morning,Seater,64,102,I-35,11:00,12:00,1.2,13,1,40,"WiFi, AC, Snacks",Online
+287,Albuquerque,New Mexico,El Paso,Texas,Jefferson Lines Morning,AC,229,368,I-75,08:00,12:00,4.2,42,11,45,AC,Station
+288,Albuquerque,New Mexico,El Paso,Texas,BoltBus Night,Sleeper,229,368,I-95,20:00,00:00,4.2,42,0,45,"WiFi, AC, Restroom, Charging",Online/Station
+289,Albuquerque,New Mexico,Tucson,Arizona,OurBus Morning,Seater,357,574,I-80,08:00,14:00,6.5,68,37,45,"AC, Charging",Online/Station
+290,Albuquerque,New Mexico,Tucson,Arizona,Greyhound Morning,Seater,357,574,I-95,09:00,15:00,6.5,41,27,55,AC,Online
+291,Albuquerque,New Mexico,Tucson,Arizona,RedCoach Morning,AC,357,574,I-40,07:00,13:00,6.5,78,28,40,"WiFi, AC, Charging",Online
+292,Richmond,Virginia,Norfolk,Virginia,Megabus Morning,Sleeper,92,148,I-40,10:00,11:00,1.7,16,34,40,"WiFi, AC, Charging",Online
+293,Richmond,Virginia,Norfolk,Virginia,Greyhound Afternoon,AC,92,148,I-35,12:00,13:00,1.7,16,10,50,"WiFi, AC, Snacks",Online
+294,Richmond,Virginia,Norfolk,Virginia,Jefferson Lines Afternoon,Sleeper,92,148,I-10,12:00,13:00,1.7,22,4,50,"WiFi, AC, Charging",Online/Station
+295,Richmond,Virginia,Virginia Beach,Virginia,OurBus Afternoon,Sleeper,111,178,I-25,13:00,15:00,2.0,26,48,55,AC,Online
+296,Richmond,Virginia,Virginia Beach,Virginia,Trailways Evening,Sleeper,111,178,I-80,19:00,21:00,2.0,27,32,40,"WiFi, AC",Online/Station
+297,Richmond,Virginia,Virginia Beach,Virginia,OurBus Morning,AC,111,178,I-90,06:00,08:00,2.0,20,1,45,"WiFi, AC, Snacks",Station
+298,Norfolk,Virginia,Virginia Beach,Virginia,Peter Pan Evening,Sleeper,21,33,I-75,17:00,17:00,0.4,10,46,55,"WiFi, Charging",Online/Station
+299,Norfolk,Virginia,Virginia Beach,Virginia,Trailways Afternoon,Seater,21,33,US-1,15:00,15:00,0.4,10,3,55,"AC, Charging",Online/Station
+300,Norfolk,Virginia,Virginia Beach,Virginia,Peter Pan Afternoon,Seater,21,33,US-66,12:00,12:00,0.4,10,5,40,"WiFi, AC",Online/Station
+301,Norfolk,Virginia,Virginia Beach,Virginia,Greyhound Morning,Luxury,21,33,I-35,09:00,09:00,0.4,10,42,45,"WiFi, AC",Station
+302,Louisville,Kentucky,Indianapolis,Indiana,Megabus Night,AC,108,173,I-70,22:00,00:00,2.0,24,27,45,"WiFi, Charging",Station
+303,Louisville,Kentucky,Indianapolis,Indiana,Peter Pan Morning,AC,108,173,I-25,08:00,10:00,2.0,10,35,45,AC,Online/Station
+304,Louisville,Kentucky,Indianapolis,Indiana,Peter Pan Evening,AC,108,173,I-70,17:00,19:00,2.0,18,47,55,"WiFi, AC, Restroom, Charging",Online/Station
+305,Louisville,Kentucky,Cincinnati,Ohio,Southeastern Stages Morning,Sleeper,104,167,I-80,10:00,11:00,1.9,18,22,40,"AC, Charging",Online/Station
+306,Louisville,Kentucky,Cincinnati,Ohio,BoltBus Afternoon,AC,104,167,I-70,12:00,13:00,1.9,25,6,40,"WiFi, AC, Charging",Online/Station
+307,Louisville,Kentucky,Cincinnati,Ohio,RedCoach Morning,AC,104,167,I-25,10:00,11:00,1.9,11,39,45,"AC, Restroom",Online
+308,Louisville,Kentucky,Nashville,Tennessee,Southeastern Stages Afternoon,Seater,160,257,I-10,14:00,16:00,2.9,39,16,45,AC,Online/Station
+309,Louisville,Kentucky,Nashville,Tennessee,OurBus Afternoon,Sleeper,160,257,I-75,14:00,16:00,2.9,15,9,55,"WiFi, AC",Online
+310,Memphis,Tennessee,Jackson,Mississippi,Southeastern Stages Afternoon,Seater,196,315,I-95,14:00,17:00,3.6,44,18,55,"WiFi, AC",Station
+311,Memphis,Tennessee,Jackson,Mississippi,RedCoach Afternoon,Sleeper,196,315,I-5,13:00,16:00,3.6,43,16,40,"WiFi, AC, Charging",Online
+312,Memphis,Tennessee,Jackson,Mississippi,RedCoach Morning,Seater,196,315,I-25,06:00,09:00,3.6,28,23,45,AC,Station
+313,Memphis,Tennessee,Jackson,Mississippi,Greyhound Morning,Seater,196,315,I-25,07:00,10:00,3.6,18,42,50,"WiFi, Charging",Online
+314,Memphis,Tennessee,Birmingham,Alabama,Southeastern Stages Afternoon,Seater,250,402,I-90,14:00,18:00,4.5,35,9,50,"AC, Restroom",Online
+315,Memphis,Tennessee,Birmingham,Alabama,BoltBus Night,AC,250,402,I-75,20:00,00:00,4.5,31,25,40,"WiFi, AC, Charging",Online
+316,Memphis,Tennessee,Birmingham,Alabama,Megabus Afternoon,Sleeper,250,402,US-66,13:00,17:00,4.5,43,20,55,"AC, Restroom",Station
+317,Memphis,Tennessee,Little Rock,Arkansas,RedCoach Morning,Seater,157,252,I-80,11:00,13:00,2.9,13,22,55,"WiFi, AC, Snacks",Station
+318,Memphis,Tennessee,Little Rock,Arkansas,FlixBus Morning,Seater,157,252,I-95,09:00,11:00,2.9,13,50,50,"AC, Charging",Online
+319,Memphis,Tennessee,Little Rock,Arkansas,Peter Pan Afternoon,Sleeper,157,252,I-70,12:00,14:00,2.9,20,51,55,"WiFi, Charging",Online
+320,Memphis,Tennessee,Little Rock,Arkansas,Megabus Afternoon,AC,157,252,I-10,14:00,16:00,2.9,25,44,55,AC,Online/Station
+321,Birmingham,Alabama,Montgomery,Alabama,Southeastern Stages Morning,Luxury,86,138,I-5,11:00,12:00,1.6,10,5,55,"WiFi, AC, Snacks",Online
+322,Birmingham,Alabama,Montgomery,Alabama,Southeastern Stages Morning,Seater,86,138,I-40,06:00,07:00,1.6,20,21,50,"WiFi, AC, Charging",Online/Station
+323,Birmingham,Alabama,Montgomery,Alabama,Megabus Morning,Luxury,86,138,I-35,10:00,11:00,1.6,10,17,40,"AC, Charging",Station
+324,Birmingham,Alabama,Nashville,Tennessee,Trailways Morning,AC,182,292,I-95,10:00,13:00,3.3,41,33,45,"WiFi, AC, Charging",Online/Station
+325,Birmingham,Alabama,Nashville,Tennessee,Trailways Evening,AC,182,292,US-66,19:00,22:00,3.3,28,28,45,"WiFi, AC, Restroom, Charging",Online
+326,Birmingham,Alabama,Nashville,Tennessee,Trailways Afternoon,Luxury,182,292,I-40,13:00,16:00,3.3,25,49,50,AC,Online/Station
+327,Birmingham,Alabama,Atlanta,Georgia,FlixBus Afternoon,Seater,167,268,I-40,15:00,18:00,3.0,15,40,40,AC,Online
+328,Birmingham,Alabama,Atlanta,Georgia,RedCoach Morning,Sleeper,167,268,I-40,06:00,09:00,3.0,32,55,55,"WiFi, AC, Charging",Online/Station
+329,Baltimore,Maryland,Washington DC,DC,Peter Pan Night,Seater,39,62,I-10,20:00,20:00,0.7,10,35,45,"WiFi, AC, Charging",Online
+330,Baltimore,Maryland,Washington DC,DC,Jefferson Lines Evening,Sleeper,39,62,I-95,18:00,18:00,0.7,10,19,40,"AC, Restroom",Station
+331,Baltimore,Maryland,Philadelphia,Pennsylvania,OurBus Evening,Seater,109,175,I-95,17:00,19:00,2.0,19,8,45,"WiFi, AC, Restroom, Charging",Online/Station
+332,Baltimore,Maryland,Philadelphia,Pennsylvania,Trailways Evening,AC,109,175,I-10,19:00,21:00,2.0,11,7,45,"WiFi, AC, Snacks",Online/Station
+333,Baltimore,Maryland,Philadelphia,Pennsylvania,Megabus Morning,Sleeper,109,175,I-75,10:00,12:00,2.0,12,46,50,"AC, Restroom",Station
+334,Baltimore,Maryland,Philadelphia,Pennsylvania,Peter Pan Afternoon,Sleeper,109,175,I-10,13:00,15:00,2.0,11,12,55,"WiFi, Charging",Online/Station
+335,Buffalo,New York,Albany,New York,Megabus Afternoon,Seater,353,567,I-70,15:00,21:00,6.4,29,15,40,"WiFi, AC",Station
+336,Buffalo,New York,Albany,New York,Trailways Morning,AC,353,567,I-10,07:00,13:00,6.4,84,25,40,"WiFi, AC, Restroom, Charging",Online/Station
+337,Buffalo,New York,Cleveland,Ohio,Megabus Afternoon,Luxury,216,347,US-66,12:00,15:00,3.9,45,35,50,"WiFi, Charging",Online
+338,Buffalo,New York,Cleveland,Ohio,Peter Pan Morning,AC,216,347,I-90,11:00,14:00,3.9,34,39,50,"WiFi, AC, Snacks",Online
+339,Pittsburgh,Pennsylvania,Philadelphia,Pennsylvania,Trailways Morning,Seater,335,539,I-25,07:00,13:00,6.1,57,34,55,"AC, Charging",Online
+340,Pittsburgh,Pennsylvania,Philadelphia,Pennsylvania,FlixBus Night,Sleeper,335,539,I-75,20:00,02:00,6.1,80,7,45,"WiFi, AC, Snacks",Online/Station
+341,Oklahoma City,Oklahoma,Tulsa,Oklahoma,Southeastern Stages Morning,AC,115,185,I-75,11:00,13:00,2.1,12,33,40,AC,Station
+342,Oklahoma City,Oklahoma,Tulsa,Oklahoma,OurBus Night,Sleeper,115,185,I-35,20:00,22:00,2.1,10,10,50,"WiFi, Charging",Online/Station
+343,Oklahoma City,Oklahoma,Wichita,Kansas,Trailways Evening,Sleeper,153,246,I-90,19:00,21:00,2.8,23,0,40,"WiFi, Charging",Station
+344,Oklahoma City,Oklahoma,Wichita,Kansas,OurBus Morning,Sleeper,153,246,I-25,11:00,13:00,2.8,26,23,45,"WiFi, AC",Online/Station
+345,Oklahoma City,Oklahoma,Wichita,Kansas,FlixBus Evening,AC,153,246,I-75,17:00,19:00,2.8,37,2,55,"WiFi, AC, Charging",Station
+346,Boise,Idaho,Salt Lake City,Utah,Peter Pan Evening,Sleeper,356,572,I-95,19:00,01:00,6.5,59,5,50,"WiFi, Charging",Online/Station
+347,Boise,Idaho,Salt Lake City,Utah,Jefferson Lines Afternoon,AC,356,572,I-70,16:00,22:00,6.5,85,15,45,"WiFi, AC, Snacks",Station
+348,Boise,Idaho,Salt Lake City,Utah,FlixBus Morning,Sleeper,356,572,I-75,06:00,12:00,6.5,81,7,55,"WiFi, Charging",Online/Station
+349,Boise,Idaho,Pocatello,Idaho,OurBus Afternoon,AC,264,424,US-66,12:00,16:00,4.8,44,41,45,"WiFi, AC, Restroom, Charging",Online
+350,Boise,Idaho,Pocatello,Idaho,Southeastern Stages Morning,Seater,264,424,US-1,11:00,15:00,4.8,60,27,50,"WiFi, AC, Restroom, Charging",Online
+351,Boise,Idaho,Pocatello,Idaho,RedCoach Afternoon,Sleeper,264,424,I-75,14:00,18:00,4.8,64,39,50,"AC, Charging",Station
+352,Boise,Idaho,Pocatello,Idaho,OurBus Morning,AC,264,424,I-95,07:00,11:00,4.8,36,18,50,"WiFi, AC, Snacks",Station
+353,Sacramento,California,Fresno,California,Jefferson Lines Afternoon,Luxury,173,278,I-95,13:00,16:00,3.1,42,8,40,"AC, Charging",Station
+354,Sacramento,California,Fresno,California,Southeastern Stages Morning,Sleeper,173,278,I-70,06:00,09:00,3.1,14,13,50,"AC, Charging",Online
+355,Fresno,California,Los Angeles,California,RedCoach Morning,AC,213,342,I-10,08:00,11:00,3.9,48,6,50,"AC, Charging",Online/Station
+356,Fresno,California,Los Angeles,California,Peter Pan Evening,Sleeper,213,342,US-1,18:00,21:00,3.9,47,29,45,"WiFi, Charging",Online/Station
+357,Fresno,California,Los Angeles,California,Southeastern Stages Night,Luxury,213,342,I-70,20:00,23:00,3.9,40,41,55,"WiFi, AC, Snacks",Online/Station
+358,Omaha,Nebraska,Lincoln,Nebraska,FlixBus Afternoon,Seater,61,98,US-66,14:00,15:00,1.1,10,7,50,"WiFi, AC",Online
+359,Omaha,Nebraska,Lincoln,Nebraska,Jefferson Lines Afternoon,Luxury,61,98,I-10,12:00,13:00,1.1,10,13,55,"AC, Charging",Station
+360,Omaha,Nebraska,Lincoln,Nebraska,FlixBus Evening,AC,61,98,US-1,17:00,18:00,1.1,10,30,55,"WiFi, AC",Station
+361,Omaha,Nebraska,Des Moines,Iowa,Greyhound Morning,AC,160,257,I-75,08:00,10:00,2.9,31,8,55,"WiFi, Charging",Online/Station
+362,Omaha,Nebraska,Des Moines,Iowa,Megabus Afternoon,AC,160,257,I-40,15:00,17:00,2.9,36,26,50,"WiFi, AC, Restroom, Charging",Online/Station
+363,Wichita,Kansas,Tulsa,Oklahoma,Jefferson Lines Morning,AC,140,225,I-25,11:00,13:00,2.5,32,23,50,"WiFi, AC, Charging",Online
+364,Wichita,Kansas,Tulsa,Oklahoma,RedCoach Evening,Luxury,140,225,I-80,17:00,19:00,2.5,26,8,50,"AC, Charging",Online/Station
+365,Wichita,Kansas,Tulsa,Oklahoma,Greyhound Evening,Luxury,140,225,US-1,17:00,19:00,2.5,23,0,45,"WiFi, Charging",Online
+366,Sioux Falls,South Dakota,Minneapolis,Minnesota,BoltBus Night,Sleeper,258,415,I-90,22:00,02:00,4.7,35,12,50,"WiFi, AC",Station
+367,Sioux Falls,South Dakota,Minneapolis,Minnesota,OurBus Morning,AC,258,415,I-40,07:00,11:00,4.7,27,33,50,"WiFi, Charging",Station
+368,Sioux Falls,South Dakota,Minneapolis,Minnesota,RedCoach Afternoon,Sleeper,258,415,US-1,12:00,16:00,4.7,57,35,55,"AC, Restroom",Station
+369,Fargo,North Dakota,Minneapolis,Minnesota,Trailways Morning,Sleeper,276,444,I-40,08:00,13:00,5.0,40,18,40,"AC, Restroom",Online/Station
+370,Fargo,North Dakota,Minneapolis,Minnesota,Southeastern Stages Afternoon,Seater,276,444,I-70,14:00,19:00,5.0,52,36,55,"AC, Restroom",Station
+371,Fargo,North Dakota,Minneapolis,Minnesota,Jefferson Lines Morning,Seater,276,444,I-35,09:00,14:00,5.0,35,31,55,"WiFi, AC",Online/Station
+372,Fargo,North Dakota,Minneapolis,Minnesota,Greyhound Morning,Seater,276,444,I-75,06:00,11:00,5.0,47,1,40,"AC, Charging",Online
+373,Bismarck,North Dakota,Fargo,North Dakota,FlixBus Afternoon,Sleeper,275,442,I-40,15:00,20:00,5.0,65,41,55,"WiFi, AC, Snacks",Online/Station
+374,Bismarck,North Dakota,Fargo,North Dakota,Peter Pan Evening,Luxury,275,442,I-25,18:00,23:00,5.0,58,1,55,"AC, Charging",Online/Station
+375,Little Rock,Arkansas,Memphis,Tennessee,Greyhound Afternoon,Luxury,157,252,I-40,16:00,18:00,2.9,37,25,45,"WiFi, AC, Snacks",Online/Station
+376,Little Rock,Arkansas,Memphis,Tennessee,Peter Pan Morning,Luxury,157,252,I-35,09:00,11:00,2.9,14,12,55,"WiFi, AC, Snacks",Online/Station
+377,Fort Smith,Arkansas,Little Rock,Arkansas,FlixBus Night,AC,152,244,I-90,22:00,00:00,2.8,19,25,50,"AC, Charging",Online
+378,Fort Smith,Arkansas,Little Rock,Arkansas,Trailways Evening,Seater,152,244,I-35,19:00,21:00,2.8,31,15,40,"WiFi, AC, Snacks",Station
+379,Fort Smith,Arkansas,Little Rock,Arkansas,Megabus Afternoon,Seater,152,244,I-5,13:00,15:00,2.8,12,21,50,"WiFi, AC, Restroom, Charging",Online
+380,Billings,Montana,Cheyenne,Wyoming,FlixBus Night,Sleeper,408,656,US-66,20:00,03:00,7.4,77,40,45,"WiFi, AC, Charging",Online/Station
+381,Billings,Montana,Cheyenne,Wyoming,OurBus Afternoon,Luxury,408,656,I-25,13:00,20:00,7.4,66,13,40,"AC, Charging",Station
+382,Billings,Montana,Cheyenne,Wyoming,Jefferson Lines Morning,Sleeper,408,656,US-1,09:00,16:00,7.4,87,53,55,"AC, Restroom",Station
+383,Billings,Montana,Cheyenne,Wyoming,Southeastern Stages Afternoon,AC,408,656,I-80,16:00,23:00,7.4,97,6,50,"AC, Restroom",Online/Station
+384,Missoula,Montana,Boise,Idaho,Southeastern Stages Evening,Sleeper,271,436,I-95,19:00,23:00,4.9,33,37,40,"AC, Restroom",Online
+385,Missoula,Montana,Boise,Idaho,Southeastern Stages Night,Seater,271,436,I-35,22:00,02:00,4.9,29,35,55,AC,Online/Station
+386,Missoula,Montana,Boise,Idaho,BoltBus Afternoon,Luxury,271,436,I-90,13:00,17:00,4.9,54,25,40,"WiFi, AC, Charging",Station
+387,Missoula,Montana,Boise,Idaho,Trailways Morning,AC,271,436,I-95,07:00,11:00,4.9,33,41,55,"AC, Restroom",Online/Station
+388,Casper,Wyoming,Cheyenne,Wyoming,Trailways Morning,Seater,157,252,US-66,06:00,08:00,2.9,21,37,40,"WiFi, AC, Snacks",Online/Station
+389,Casper,Wyoming,Cheyenne,Wyoming,Southeastern Stages Afternoon,AC,157,252,I-80,12:00,14:00,2.9,27,49,50,"WiFi, AC, Charging",Online
+390,Casper,Wyoming,Cheyenne,Wyoming,RedCoach Morning,Seater,157,252,I-80,11:00,13:00,2.9,31,38,40,"AC, Charging",Online/Station
+391,Casper,Wyoming,Cheyenne,Wyoming,Peter Pan Afternoon,Sleeper,157,252,US-66,13:00,15:00,2.9,29,6,40,"AC, Restroom",Station
+392,El Paso,Texas,San Antonio,Texas,Trailways Evening,AC,574,923,I-40,18:00,04:00,10.4,78,45,55,"WiFi, Charging",Online/Station
+393,El Paso,Texas,San Antonio,Texas,Megabus Morning,AC,574,923,I-70,06:00,16:00,10.4,83,36,40,"WiFi, AC, Restroom, Charging",Station
+394,Lexington,Kentucky,Louisville,Kentucky,RedCoach Evening,Seater,87,139,I-10,19:00,20:00,1.6,10,0,45,"WiFi, AC",Station
+395,Lexington,Kentucky,Louisville,Kentucky,RedCoach Morning,AC,87,139,I-40,07:00,08:00,1.6,10,28,45,"AC, Restroom",Online
+396,Lexington,Kentucky,Louisville,Kentucky,FlixBus Evening,Luxury,87,139,US-1,18:00,19:00,1.6,15,2,55,AC,Station
+397,Lexington,Kentucky,Cincinnati,Ohio,RedCoach Morning,Sleeper,73,117,I-10,11:00,12:00,1.3,10,15,55,"AC, Charging",Station
+398,Lexington,Kentucky,Cincinnati,Ohio,FlixBus Afternoon,AC,73,117,I-90,16:00,17:00,1.3,14,41,55,"WiFi, AC, Snacks",Online/Station
+399,Lexington,Kentucky,Cincinnati,Ohio,BoltBus Night,Sleeper,73,117,I-40,20:00,21:00,1.3,11,22,50,"WiFi, AC",Online/Station
+400,Savannah,Georgia,Jacksonville,Florida,Megabus Morning,Luxury,126,202,US-66,06:00,08:00,2.3,28,20,55,"WiFi, Charging",Online
+401,Savannah,Georgia,Jacksonville,Florida,Jefferson Lines Afternoon,Seater,126,202,I-10,12:00,14:00,2.3,31,13,50,"AC, Charging",Station
+402,Savannah,Georgia,Columbia,South Carolina,Southeastern Stages Night,AC,132,212,I-70,20:00,22:00,2.4,26,15,40,"WiFi, AC, Restroom, Charging",Online
+403,Savannah,Georgia,Columbia,South Carolina,FlixBus Morning,Seater,132,212,I-25,09:00,11:00,2.4,26,24,40,"WiFi, Charging",Station
+404,Savannah,Georgia,Columbia,South Carolina,Trailways Morning,Sleeper,132,212,US-66,11:00,13:00,2.4,20,23,55,"WiFi, AC, Snacks",Online
+405,Savannah,Georgia,Columbia,South Carolina,Jefferson Lines Afternoon,AC,132,212,I-40,15:00,17:00,2.4,28,34,40,"AC, Charging",Online
+406,Columbia,South Carolina,Charlotte,North Carolina,BoltBus Night,AC,85,136,I-25,22:00,23:00,1.5,12,50,55,"AC, Restroom",Station
+407,Columbia,South Carolina,Charlotte,North Carolina,Peter Pan Morning,Luxury,85,136,US-66,11:00,12:00,1.5,13,17,50,"AC, Charging",Station
+408,Columbia,South Carolina,Charleston,West Virginia,OurBus Evening,Sleeper,302,485,I-10,18:00,23:00,5.5,42,6,50,AC,Online/Station
+409,Columbia,South Carolina,Charleston,West Virginia,Trailways Afternoon,Seater,302,485,I-25,14:00,19:00,5.5,55,42,50,"AC, Charging",Online/Station
+410,Columbia,South Carolina,Charleston,West Virginia,Trailways Morning,Sleeper,302,485,US-66,06:00,11:00,5.5,66,12,40,"WiFi, AC, Restroom, Charging",Online
+411,Columbia,South Carolina,Charleston,West Virginia,FlixBus Morning,Sleeper,302,485,I-75,06:00,11:00,5.5,65,29,40,"WiFi, AC, Snacks",Online/Station
+412,Charleston,West Virginia,Savannah,Georgia,FlixBus Afternoon,Seater,434,698,I-70,12:00,19:00,7.9,102,41,45,"WiFi, AC, Charging",Online
+413,Charleston,West Virginia,Savannah,Georgia,Megabus Morning,Seater,434,698,I-70,08:00,15:00,7.9,89,7,50,AC,Online
+414,Charleston,West Virginia,Savannah,Georgia,FlixBus Afternoon,Sleeper,434,698,I-70,16:00,23:00,7.9,82,10,55,AC,Station
+415,Raleigh,North Carolina,Greensboro,North Carolina,Greyhound Afternoon,AC,82,131,I-70,14:00,15:00,1.5,10,19,45,"AC, Restroom",Online/Station
+416,Raleigh,North Carolina,Greensboro,North Carolina,Peter Pan Morning,Luxury,82,131,I-25,11:00,12:00,1.5,10,17,45,"WiFi, AC, Charging",Station
+417,Raleigh,North Carolina,Greensboro,North Carolina,Peter Pan Night,Sleeper,82,131,I-75,20:00,21:00,1.5,20,27,45,"AC, Charging",Online
+418,Raleigh,North Carolina,Greensboro,North Carolina,Megabus Evening,AC,82,131,I-75,17:00,18:00,1.5,10,34,45,AC,Station
+419,Greensboro,North Carolina,Charlotte,North Carolina,BoltBus Afternoon,Sleeper,93,149,I-80,16:00,17:00,1.7,11,12,50,"WiFi, AC, Restroom, Charging",Station
+420,Greensboro,North Carolina,Charlotte,North Carolina,Megabus Morning,AC,93,149,I-10,07:00,08:00,1.7,10,7,40,"WiFi, AC",Station
+421,Greensboro,North Carolina,Charlotte,North Carolina,Greyhound Morning,Sleeper,93,149,I-25,11:00,12:00,1.7,10,14,45,AC,Online/Station
+422,Greensboro,North Carolina,Charlotte,North Carolina,Southeastern Stages Morning,AC,93,149,I-40,10:00,11:00,1.7,16,3,45,"WiFi, AC, Charging",Station
+423,Knoxville,Tennessee,Nashville,Tennessee,OurBus Morning,Seater,197,316,I-5,09:00,12:00,3.6,21,13,40,"AC, Charging",Station
+424,Knoxville,Tennessee,Nashville,Tennessee,Megabus Morning,AC,197,316,I-25,08:00,11:00,3.6,21,12,45,AC,Online
+425,Knoxville,Tennessee,Charlotte,North Carolina,FlixBus Evening,Sleeper,218,350,I-40,18:00,22:00,4.0,51,38,40,"WiFi, Charging",Online
+426,Knoxville,Tennessee,Charlotte,North Carolina,Jefferson Lines Night,Luxury,218,350,I-35,20:00,00:00,4.0,24,8,50,"WiFi, Charging",Online
+427,Knoxville,Tennessee,Charlotte,North Carolina,Jefferson Lines Morning,Seater,218,350,US-1,11:00,15:00,4.0,30,6,50,"WiFi, AC, Snacks",Station
+428,Montgomery,Alabama,Birmingham,Alabama,Southeastern Stages Morning,Luxury,86,138,US-66,07:00,08:00,1.6,19,32,55,"AC, Charging",Online/Station
+429,Montgomery,Alabama,Birmingham,Alabama,Trailways Afternoon,Luxury,86,138,I-70,16:00,17:00,1.6,15,28,55,"WiFi, AC, Restroom, Charging",Online
+430,Biloxi,Mississippi,New Orleans,Louisiana,RedCoach Morning,AC,87,139,US-66,11:00,12:00,1.6,13,18,50,"AC, Charging",Station
+431,Biloxi,Mississippi,New Orleans,Louisiana,FlixBus Evening,Luxury,87,139,I-10,18:00,19:00,1.6,14,12,45,"AC, Restroom",Online/Station
+432,Biloxi,Mississippi,New Orleans,Louisiana,Jefferson Lines Afternoon,AC,87,139,I-75,12:00,13:00,1.6,10,38,55,"WiFi, AC, Restroom, Charging",Station
+433,Biloxi,Mississippi,New Orleans,Louisiana,RedCoach Afternoon,Seater,87,139,I-5,14:00,15:00,1.6,21,37,45,"WiFi, AC, Restroom, Charging",Station
+434,Shreveport,Louisiana,Little Rock,Arkansas,BoltBus Morning,AC,183,294,I-75,06:00,09:00,3.3,33,5,50,"WiFi, Charging",Online/Station
+435,Shreveport,Louisiana,Little Rock,Arkansas,RedCoach Morning,AC,183,294,I-40,09:00,12:00,3.3,43,25,45,"WiFi, Charging",Station
+436,Shreveport,Louisiana,Little Rock,Arkansas,FlixBus Afternoon,Luxury,183,294,I-10,15:00,18:00,3.3,30,0,45,"AC, Restroom",Online
+437,Shreveport,Louisiana,Little Rock,Arkansas,RedCoach Evening,Luxury,183,294,I-95,18:00,21:00,3.3,28,5,40,"AC, Restroom",Station
+438,Shreveport,Louisiana,Dallas,Texas,Trailways Evening,Luxury,210,337,I-80,19:00,22:00,3.8,29,38,50,AC,Station
+439,Shreveport,Louisiana,Dallas,Texas,Southeastern Stages Morning,Seater,210,337,I-75,08:00,11:00,3.8,22,24,50,"WiFi, AC",Station
+440,Shreveport,Louisiana,Dallas,Texas,FlixBus Morning,Sleeper,210,337,US-66,10:00,13:00,3.8,36,24,50,"AC, Charging",Online
+441,Shreveport,Louisiana,Dallas,Texas,Trailways Evening,Luxury,210,337,I-70,18:00,21:00,3.8,35,4,45,"WiFi, Charging",Online/Station
+442,Baton Rouge,Louisiana,New Orleans,Louisiana,Peter Pan Afternoon,Luxury,84,135,I-35,14:00,15:00,1.5,15,9,55,AC,Online/Station
+443,Baton Rouge,Louisiana,New Orleans,Louisiana,OurBus Afternoon,Seater,84,135,I-40,14:00,15:00,1.5,19,38,45,"AC, Charging",Online/Station
+444,Baton Rouge,Louisiana,New Orleans,Louisiana,Trailways Morning,Luxury,84,135,US-1,11:00,12:00,1.5,15,26,55,"WiFi, AC, Charging",Online
+445,Baton Rouge,Louisiana,New Orleans,Louisiana,Southeastern Stages Morning,Sleeper,84,135,I-40,08:00,09:00,1.5,11,41,50,AC,Online/Station
+446,Bangor,Maine,Portland,Oregon,FlixBus Afternoon,Sleeper,3719,5983,I-95,14:00,09:00,67.6,679,18,50,"AC, Restroom",Online
+447,Bangor,Maine,Portland,Oregon,Megabus Afternoon,AC,3719,5983,I-90,15:00,10:00,67.6,764,12,40,"WiFi, AC, Restroom, Charging",Station
+448,Manchester,New Hampshire,Boston,Massachusetts,Peter Pan Afternoon,Seater,51,82,I-95,16:00,16:00,0.9,10,20,50,"WiFi, AC, Restroom, Charging",Online
+449,Manchester,New Hampshire,Boston,Massachusetts,Peter Pan Afternoon,Seater,51,82,US-1,14:00,14:00,0.9,10,44,45,AC,Online
+450,Manchester,New Hampshire,Boston,Massachusetts,Trailways Morning,Sleeper,51,82,I-70,08:00,08:00,0.9,10,14,55,AC,Online/Station
+451,Providence,Rhode Island,Hartford,Connecticut,Jefferson Lines Afternoon,Seater,87,139,I-35,13:00,14:00,1.6,12,31,40,AC,Station
+452,Providence,Rhode Island,Hartford,Connecticut,Trailways Morning,Luxury,87,139,I-80,10:00,11:00,1.6,13,6,50,"WiFi, Charging",Station
+453,Providence,Rhode Island,Hartford,Connecticut,FlixBus Afternoon,Sleeper,87,139,I-35,14:00,15:00,1.6,11,32,45,"AC, Restroom",Station
+454,Newark,New Jersey,New York,New York,Jefferson Lines Evening,Sleeper,11,17,I-70,19:00,19:00,0.2,10,44,55,AC,Station
+455,Newark,New Jersey,New York,New York,Jefferson Lines Night,Luxury,11,17,I-35,20:00,20:00,0.2,10,22,55,"WiFi, AC, Restroom, Charging",Online
+456,Newark,New Jersey,New York,New York,BoltBus Afternoon,AC,11,17,I-5,13:00,13:00,0.2,10,26,40,"WiFi, Charging",Online
+457,Newark,New Jersey,New York,New York,Peter Pan Evening,Sleeper,11,17,I-10,19:00,19:00,0.2,10,11,40,"WiFi, AC, Snacks",Online
+458,Atlantic City,New Jersey,Philadelphia,Pennsylvania,OurBus Afternoon,AC,65,104,I-25,16:00,17:00,1.2,10,27,45,"WiFi, AC, Charging",Station
+459,Atlantic City,New Jersey,Philadelphia,Pennsylvania,Peter Pan Afternoon,Sleeper,65,104,I-95,12:00,13:00,1.2,13,15,40,"WiFi, AC, Restroom, Charging",Online/Station
+460,Atlantic City,New Jersey,Philadelphia,Pennsylvania,FlixBus Morning,Sleeper,65,104,I-90,07:00,08:00,1.2,10,31,55,"AC, Restroom",Online
+461,Concord,New Hampshire,Manchester,New Hampshire,Peter Pan Evening,AC,15,24,I-25,18:00,18:00,0.3,10,32,55,"AC, Restroom",Online/Station
+462,Concord,New Hampshire,Manchester,New Hampshire,Peter Pan Evening,AC,15,24,I-95,17:00,17:00,0.3,10,18,50,"WiFi, AC, Snacks",Station
+463,Concord,New Hampshire,Manchester,New Hampshire,Trailways Afternoon,Luxury,15,24,I-25,13:00,13:00,0.3,10,5,40,"AC, Charging",Station
+464,Concord,New Hampshire,Manchester,New Hampshire,Trailways Afternoon,Seater,15,24,I-25,15:00,15:00,0.3,10,4,40,"WiFi, AC, Snacks",Online
+465,Burlington,Vermont,Albany,New York,Trailways Morning,Luxury,131,210,I-90,10:00,12:00,2.4,31,20,50,"AC, Restroom",Online
+466,Burlington,Vermont,Albany,New York,BoltBus Evening,Seater,131,210,I-35,17:00,19:00,2.4,19,31,40,"WiFi, AC, Restroom, Charging",Online
+467,Rapid City,South Dakota,Sioux Falls,South Dakota,Trailways Afternoon,Sleeper,450,724,I-70,12:00,20:00,8.2,45,18,45,"WiFi, AC, Snacks",Station
+468,Rapid City,South Dakota,Sioux Falls,South Dakota,OurBus Night,Seater,450,724,I-40,22:00,06:00,8.2,55,16,40,"WiFi, AC",Online
+469,Spokane,Washington,Seattle,Washington,FlixBus Morning,Luxury,338,543,I-90,07:00,13:00,6.1,35,9,45,"WiFi, Charging",Online/Station
+470,Spokane,Washington,Seattle,Washington,Greyhound Morning,Sleeper,338,543,I-75,10:00,16:00,6.1,35,22,50,"WiFi, AC, Charging",Online
+471,Spokane,Washington,Seattle,Washington,Trailways Afternoon,Seater,338,543,I-35,15:00,21:00,6.1,56,11,50,"WiFi, AC",Online
+472,Tacoma,Washington,Seattle,Washington,Greyhound Afternoon,Sleeper,25,40,I-10,15:00,15:00,0.5,10,43,50,"WiFi, AC",Online
+473,Tacoma,Washington,Seattle,Washington,Southeastern Stages Afternoon,Sleeper,25,40,I-90,16:00,16:00,0.5,10,0,40,"AC, Restroom",Online/Station
+474,Tacoma,Washington,Seattle,Washington,FlixBus Afternoon,AC,25,40,US-66,15:00,15:00,0.5,10,7,50,"WiFi, AC, Snacks",Online
+475,Tacoma,Washington,Seattle,Washington,OurBus Morning,Sleeper,25,40,I-10,07:00,07:00,0.5,10,8,55,"WiFi, AC, Charging",Online/Station
+476,Eugene,Oregon,Portland,Oregon,Megabus Morning,AC,104,167,US-66,07:00,08:00,1.9,18,3,40,"WiFi, AC, Charging",Online
+477,Eugene,Oregon,Portland,Oregon,FlixBus Night,Seater,104,167,US-1,20:00,21:00,1.9,19,11,40,"WiFi, AC, Charging",Online/Station
+478,Eugene,Oregon,Portland,Oregon,OurBus Evening,Sleeper,104,167,I-10,17:00,18:00,1.9,15,37,40,"WiFi, AC, Charging",Station
+479,Eugene,Oregon,Portland,Oregon,RedCoach Afternoon,Luxury,104,167,I-25,13:00,14:00,1.9,15,10,45,"WiFi, AC, Snacks",Online
+480,Salem,Oregon,Portland,Oregon,FlixBus Afternoon,Luxury,46,74,I-70,16:00,16:00,0.8,10,5,40,"AC, Charging",Online
+481,Salem,Oregon,Portland,Oregon,Jefferson Lines Night,Seater,46,74,I-95,20:00,20:00,0.8,10,34,40,AC,Station
+482,Salem,Oregon,Portland,Oregon,Jefferson Lines Evening,Luxury,46,74,I-80,18:00,18:00,0.8,10,50,55,"WiFi, AC, Charging",Station
+483,Salem,Oregon,Portland,Oregon,FlixBus Morning,Seater,46,74,I-35,07:00,07:00,0.8,11,3,45,AC,Online
+484,Grand Rapids,Michigan,Detroit,Michigan,RedCoach Evening,Sleeper,186,299,I-5,19:00,22:00,3.4,42,22,45,"WiFi, AC, Restroom, Charging",Online
+485,Grand Rapids,Michigan,Detroit,Michigan,Trailways Morning,Seater,186,299,I-25,07:00,10:00,3.4,26,37,50,"AC, Charging",Online
+486,Lansing,Michigan,Detroit,Michigan,Trailways Afternoon,AC,107,172,I-95,16:00,17:00,1.9,13,15,45,"WiFi, AC, Snacks",Station
+487,Lansing,Michigan,Detroit,Michigan,Trailways Afternoon,Luxury,107,172,I-10,15:00,16:00,1.9,14,17,45,"AC, Restroom",Station
+488,Madison,Wisconsin,Milwaukee,Wisconsin,FlixBus Afternoon,Seater,103,165,I-70,12:00,13:00,1.9,10,15,55,"WiFi, AC, Charging",Station
+489,Madison,Wisconsin,Milwaukee,Wisconsin,Greyhound Evening,AC,103,165,I-10,17:00,18:00,1.9,21,46,55,"WiFi, AC, Charging",Online
+490,Madison,Wisconsin,Chicago,Illinois,RedCoach Morning,AC,147,236,I-5,08:00,10:00,2.7,15,44,45,"WiFi, Charging",Online/Station
+491,Madison,Wisconsin,Chicago,Illinois,FlixBus Morning,AC,147,236,I-25,07:00,09:00,2.7,23,27,40,"WiFi, AC, Snacks",Station
+492,Allentown,Pennsylvania,Philadelphia,Pennsylvania,Greyhound Evening,Seater,49,78,I-25,17:00,17:00,0.9,10,37,55,AC,Online/Station
+493,Allentown,Pennsylvania,Philadelphia,Pennsylvania,Southeastern Stages Evening,Luxury,49,78,I-25,17:00,17:00,0.9,10,30,45,"WiFi, AC",Station
+494,Rochester,New York,Buffalo,New York,Trailways Morning,Seater,89,143,I-25,10:00,11:00,1.6,14,10,45,"AC, Charging",Online
+495,Rochester,New York,Buffalo,New York,Jefferson Lines Evening,Seater,89,143,I-35,18:00,19:00,1.6,18,10,50,"AC, Restroom",Station
+496,Provo,Utah,Salt Lake City,Utah,Peter Pan Evening,Sleeper,39,62,I-25,17:00,17:00,0.7,10,38,45,AC,Online/Station
+497,Provo,Utah,Salt Lake City,Utah,BoltBus Morning,AC,39,62,I-5,08:00,08:00,0.7,10,10,45,"WiFi, AC, Restroom, Charging",Station
+498,Provo,Utah,Salt Lake City,Utah,Jefferson Lines Afternoon,Sleeper,39,62,I-70,13:00,13:00,0.7,10,37,40,"WiFi, AC, Charging",Online/Station
+499,Provo,Utah,Salt Lake City,Utah,Megabus Evening,Sleeper,39,62,US-66,17:00,17:00,0.7,10,32,50,AC,Station
+500,Newport,Rhode Island,Providence,Rhode Island,OurBus Morning,Luxury,24,38,US-1,11:00,11:00,0.4,10,25,55,"WiFi, AC",Online
+501,Newport,Rhode Island,Providence,Rhode Island,Greyhound Afternoon,Seater,24,38,I-70,14:00,14:00,0.4,10,33,45,"WiFi, AC, Charging",Online/Station
+502,Newport,Rhode Island,Providence,Rhode Island,Jefferson Lines Morning,Seater,24,38,I-35,07:00,07:00,0.4,10,4,40,"AC, Charging",Station
+503,Montpelier,Vermont,Burlington,Vermont,BoltBus Morning,Seater,46,74,I-40,06:00,06:00,0.8,10,34,45,"WiFi, AC",Online
+504,Montpelier,Vermont,Burlington,Vermont,FlixBus Morning,Sleeper,46,74,US-1,07:00,07:00,0.8,10,13,40,"AC, Charging",Station
+505,Huntington,West Virginia,Charleston,West Virginia,Southeastern Stages Night,Seater,56,90,I-80,22:00,23:00,1.0,10,5,50,"AC, Charging",Online/Station
+506,Huntington,West Virginia,Charleston,West Virginia,Jefferson Lines Morning,Seater,56,90,I-5,06:00,07:00,1.0,10,25,50,"AC, Charging",Online
+507,Annapolis,Maryland,Baltimore,Maryland,OurBus Evening,Sleeper,23,37,I-40,17:00,17:00,0.4,10,6,45,"WiFi, AC",Station
+508,Annapolis,Maryland,Baltimore,Maryland,Megabus Evening,AC,23,37,I-10,19:00,19:00,0.4,10,11,45,"WiFi, Charging",Station
+509,Annapolis,Maryland,Baltimore,Maryland,Trailways Afternoon,Luxury,23,37,I-70,14:00,14:00,0.4,10,24,50,"WiFi, AC, Charging",Online
+510,Annapolis,Maryland,Baltimore,Maryland,OurBus Evening,Sleeper,23,37,I-10,19:00,19:00,0.4,10,14,45,"WiFi, AC",Online/Station
+511,Wilmington,Delaware,Philadelphia,Pennsylvania,FlixBus Afternoon,AC,30,48,I-80,14:00,14:00,0.5,10,54,55,"WiFi, Charging",Online/Station
+512,Wilmington,Delaware,Philadelphia,Pennsylvania,RedCoach Morning,Seater,30,48,I-70,10:00,10:00,0.5,10,38,40,"WiFi, AC, Restroom, Charging",Online
+513,Wilmington,Delaware,Philadelphia,Pennsylvania,Greyhound Morning,Luxury,30,48,I-10,06:00,06:00,0.5,10,15,40,"WiFi, AC",Online
+514,Wilmington,Delaware,Philadelphia,Pennsylvania,Southeastern Stages Afternoon,AC,30,48,I-95,16:00,16:00,0.5,10,2,40,"AC, Restroom",Station
+515,Honolulu,Hawaii,Hilo,Hawaii,Peter Pan Night,Sleeper,219,352,I-35,20:00,00:00,4.0,51,38,50,AC,Online
+516,Honolulu,Hawaii,Hilo,Hawaii,OurBus Morning,Luxury,219,352,I-10,08:00,12:00,4.0,19,40,45,"WiFi, AC, Restroom, Charging",Online/Station
+517,Honolulu,Hawaii,Hilo,Hawaii,Greyhound Night,AC,219,352,I-10,22:00,02:00,4.0,30,27,40,"AC, Restroom",Online/Station
+518,Honolulu,Hawaii,Hilo,Hawaii,FlixBus Night,Sleeper,219,352,I-10,22:00,02:00,4.0,31,0,45,"WiFi, AC",Online/Station
+519,Anchorage,Alaska,Fairbanks,Alaska,BoltBus Night,Seater,291,468,I-70,22:00,03:00,5.3,70,26,55,"WiFi, AC, Charging",Online/Station
+520,Anchorage,Alaska,Fairbanks,Alaska,Greyhound Evening,Luxury,291,468,US-1,18:00,23:00,5.3,29,11,40,"AC, Restroom",Station
+521,Anchorage,Alaska,Fairbanks,Alaska,BoltBus Evening,Sleeper,291,468,I-80,19:00,00:00,5.3,23,21,50,"AC, Charging",Online/Station
+522,Pocatello,Idaho,Boise,Idaho,Megabus Afternoon,Seater,264,424,I-90,15:00,19:00,4.8,53,27,40,"WiFi, AC",Station
+523,Pocatello,Idaho,Boise,Idaho,Greyhound Afternoon,Luxury,264,424,US-1,15:00,19:00,4.8,64,20,55,"WiFi, AC, Restroom, Charging",Online
+524,Pocatello,Idaho,Boise,Idaho,Southeastern Stages Morning,Sleeper,264,424,I-80,08:00,12:00,4.8,36,12,40,AC,Station
+525,Pocatello,Idaho,Boise,Idaho,Megabus Afternoon,Seater,264,424,I-10,12:00,16:00,4.8,38,2,50,"AC, Restroom",Online/Station
+526,Fort Wayne,Indiana,Indianapolis,Indiana,Southeastern Stages Morning,Sleeper,117,188,US-66,10:00,12:00,2.1,19,25,40,"WiFi, AC, Charging",Online/Station
+527,Fort Wayne,Indiana,Indianapolis,Indiana,Jefferson Lines Night,AC,117,188,I-95,20:00,22:00,2.1,18,7,55,AC,Online/Station
+528,Cedar Rapids,Iowa,Des Moines,Iowa,Peter Pan Evening,Sleeper,137,220,I-95,18:00,20:00,2.5,28,11,50,AC,Station
+529,Cedar Rapids,Iowa,Des Moines,Iowa,Megabus Afternoon,AC,137,220,US-66,16:00,18:00,2.5,31,37,40,"WiFi, AC, Restroom, Charging",Station
+530,Cedar Rapids,Iowa,Des Moines,Iowa,RedCoach Night,AC,137,220,I-75,20:00,22:00,2.5,29,6,50,"WiFi, Charging",Online
+531,Cedar Rapids,Iowa,Des Moines,Iowa,Southeastern Stages Morning,Sleeper,137,220,I-40,09:00,11:00,2.5,25,0,55,"WiFi, AC, Restroom, Charging",Online/Station
+532,Duluth,Minnesota,Minneapolis,Minnesota,BoltBus Morning,Luxury,148,238,I-25,10:00,12:00,2.7,24,0,55,"WiFi, AC, Snacks",Online/Station
+533,Duluth,Minnesota,Minneapolis,Minnesota,Greyhound Night,Sleeper,148,238,I-25,20:00,22:00,2.7,22,36,40,"AC, Charging",Online/Station
+534,Duluth,Minnesota,Minneapolis,Minnesota,FlixBus Morning,Seater,148,238,US-66,09:00,11:00,2.7,31,23,55,"WiFi, Charging",Online
+535,Duluth,Minnesota,Minneapolis,Minnesota,Jefferson Lines Evening,Seater,148,238,I-95,17:00,19:00,2.7,28,40,55,AC,Online

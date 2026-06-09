@@ -4,383 +4,721 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BusGo — Book Your Journey</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0f1e;
-    --surface: #111827;
-    --card: #1a2236;
-    --accent: #f97316;
-    --accent2: #fb923c;
-    --text: #f1f5f9;
-    --muted: #94a3b8;
-    --border: rgba(255,255,255,0.08);
-    --glow: rgba(249,115,22,0.3);
-    --green: #25d366;
+    --teal:    #0d6e6e;
+    --teal2:   #0a5555;
+    --sky:     #e8f4f4;
+    --sand:    #f7f3ee;
+    --white:   #ffffff;
+    --ink:     #1a2e2e;
+    --muted:   #5a7070;
+    --border:  #d4e3e3;
+    --accent:  #e05c2a;
+    --gold:    #c8922a;
+    --shadow:  rgba(13,110,110,0.12);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    background: var(--white);
+    color: var(--ink);
     min-height: 100vh;
     overflow-x: hidden;
   }
 
-  body::before {
-    content: '';
-    position: fixed;
-    top: -50%; left: -50%;
-    width: 200%; height: 200%;
-    background: radial-gradient(ellipse at 20% 20%, rgba(249,115,22,0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 80%, rgba(99,102,241,0.06) 0%, transparent 50%);
-    animation: bgPulse 8s ease-in-out infinite alternate;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  @keyframes bgPulse {
-    from { transform: scale(1) rotate(0deg); }
-    to   { transform: scale(1.1) rotate(3deg); }
-  }
-
+  /* ── NAV ── */
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 1.2rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    backdrop-filter: blur(20px);
-    background: rgba(10,15,30,0.8);
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1rem 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
   }
 
-  .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.5rem; color: var(--text); text-decoration: none; }
-  .logo span { color: var(--accent); }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; font-weight: 800;
+    color: var(--teal); text-decoration: none;
+    letter-spacing: -0.5px;
+  }
+  .logo em { font-style: normal; color: var(--accent); }
 
-  .nav-right { display: flex; gap: 1.2rem; align-items: center; }
-  .nav-right a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
-  .nav-right a:hover { color: var(--accent); }
-  .nav-call { background: rgba(249,115,22,0.12); border: 1px solid rgba(249,115,22,0.3); color: var(--accent) !important; padding: 0.4rem 1rem; border-radius: 20px; font-weight: 500; }
+  .nav-links { display: flex; gap: 2rem; align-items: center; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--teal); }
 
+  .nav-book {
+    background: var(--teal); color: var(--white) !important;
+    padding: 0.5rem 1.4rem; border-radius: 6px;
+    font-weight: 600 !important; transition: background 0.2s !important;
+  }
+  .nav-book:hover { background: var(--teal2) !important; color: var(--white) !important; }
+
+  /* ── HERO ── */
   .hero {
-    position: relative; z-index: 1;
     min-height: 100vh;
+    position: relative;
     display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    padding: 8rem 1.5rem 4rem;
+    justify-content: center; align-items: center;
+    overflow: hidden;
+    padding: 7rem 1.5rem 4rem;
   }
 
-  .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(249,115,22,0.12); border: 1px solid rgba(249,115,22,0.3); color: var(--accent2); padding: 0.4rem 1rem; border-radius: 100px; font-size: 0.8rem; font-weight: 500; margin-bottom: 1.5rem; animation: fadeUp 0.6s ease both; }
-
-  .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.5rem, 7vw, 5.5rem); font-weight: 800; text-align: center; line-height: 1.05; margin-bottom: 1rem; animation: fadeUp 0.6s 0.1s ease both; }
-  .hero h1 .highlight { color: var(--accent); position: relative; display: inline-block; }
-  .hero h1 .highlight::after { content: ''; position: absolute; bottom: 4px; left: 0; right: 0; height: 4px; background: var(--accent); border-radius: 2px; opacity: 0.4; }
-
-  .hero-sub { color: var(--muted); font-size: 1.1rem; text-align: center; margin-bottom: 3rem; animation: fadeUp 0.6s 0.2s ease both; }
-
-  .search-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 2rem; width: 100%; max-width: 780px; box-shadow: 0 0 60px rgba(249,115,22,0.1), 0 20px 60px rgba(0,0,0,0.4); animation: fadeUp 0.6s 0.3s ease both; }
-
-  .search-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 1rem; align-items: end; }
-
-  .field-group { display: flex; flex-direction: column; gap: 0.4rem; }
-  .field-group label { font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
-  .field-group select { background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 0.85rem 1rem; border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
-  .field-group select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--glow); }
-  .field-group select option { background: var(--surface); }
-
-  .search-btn { background: var(--accent); color: white; border: none; padding: 0.85rem 2rem; border-radius: 10px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; cursor: pointer; transition: transform 0.15s, box-shadow 0.2s; white-space: nowrap; box-shadow: 0 4px 20px var(--glow); }
-  .search-btn:hover { background: var(--accent2); transform: translateY(-2px); box-shadow: 0 8px 30px var(--glow); }
-
-  /* How it works */
-  .how-section { position: relative; z-index: 1; padding: 5rem 2rem; max-width: 900px; margin: 0 auto; text-align: center; }
-  .section-title { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; }
-  .section-sub { color: var(--muted); margin-bottom: 3rem; }
-
-  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
-  .step-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 2rem 1.5rem; text-align: center; position: relative; transition: transform 0.2s, border-color 0.2s; }
-  .step-card:hover { transform: translateY(-4px); border-color: rgba(249,115,22,0.3); }
-  .step-num { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--accent); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.85rem; }
-  .step-icon { font-size: 2.2rem; margin-bottom: 0.8rem; margin-top: 0.5rem; }
-  .step-title { font-family: 'Syne', sans-serif; font-weight: 700; margin-bottom: 0.4rem; }
-  .step-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
-
-  /* Contact section */
-  .contact-section { position: relative; z-index: 1; padding: 5rem 2rem; max-width: 900px; margin: 0 auto; }
-  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2.5rem; }
-
-  .contact-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1rem; transition: transform 0.2s, border-color 0.2s; }
-  .contact-card:hover { transform: translateY(-4px); }
-  .contact-card.whatsapp { border-color: rgba(37,211,102,0.2); }
-  .contact-card.whatsapp:hover { border-color: rgba(37,211,102,0.5); }
-  .contact-card.phone { border-color: rgba(249,115,22,0.2); }
-  .contact-card.phone:hover { border-color: rgba(249,115,22,0.5); }
-  .contact-card.email { border-color: rgba(99,102,241,0.2); }
-  .contact-card.email:hover { border-color: rgba(99,102,241,0.5); }
-  .contact-card.map-card { border-color: rgba(249,115,22,0.2); }
-  .contact-card.map-card:hover { border-color: rgba(249,115,22,0.5); }
-
-  .contact-icon { font-size: 2.5rem; }
-  .contact-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; }
-  .contact-desc { color: var(--muted); font-size: 0.85rem; line-height: 1.6; }
-  .contact-value { font-weight: 500; font-size: 0.95rem; }
-
-  .contact-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.5rem; border-radius: 10px; font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 0.9rem; text-decoration: none; transition: transform 0.15s, opacity 0.2s; margin-top: 0.3rem; }
-  .contact-btn:hover { transform: translateY(-2px); opacity: 0.9; }
-  .btn-whatsapp { background: #25d366; color: white; }
-  .btn-phone { background: var(--accent); color: white; }
-  .btn-email { background: #4f46e5; color: white; }
-  .btn-map { background: var(--card); color: var(--accent); border: 1px solid rgba(249,115,22,0.3); }
-
-  /* Features */
-  .features { position: relative; z-index: 1; padding: 2rem 2rem 5rem; max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
-  .feature-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem; text-align: center; transition: transform 0.2s, border-color 0.2s; }
-  .feature-card:hover { transform: translateY(-4px); border-color: rgba(249,115,22,0.3); }
-  .feature-icon { font-size: 2rem; margin-bottom: 0.7rem; }
-  .feature-title { font-family: 'Syne', sans-serif; font-weight: 700; margin-bottom: 0.3rem; }
-  .feature-desc { font-size: 0.85rem; color: var(--muted); }
-
-  /* Messages */
-  .messages { width: 100%; max-width: 780px; margin-bottom: 1rem; }
-  .msg { padding: 0.8rem 1.2rem; border-radius: 10px; font-size: 0.9rem; margin-bottom: 0.5rem; border-left: 3px solid; }
-  .msg.error { background: rgba(239,68,68,0.12); border-color: #ef4444; color: #fca5a5; }
-  .msg.success { background: rgba(34,197,94,0.12); border-color: #22c55e; color: #86efac; }
-
-  /* ── Floating CTA buttons ── */
-  .float-cta {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    z-index: 999;
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-    align-items: flex-end;
+  /* SVG road scene background */
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background: linear-gradient(180deg, #c9e8e8 0%, #a8d5d5 30%, #7ab8b8 55%, #5a9a9a 70%, #4a8080 80%, #e8dcc8 80%, #d4c4a0 88%, #c8b890 100%);
   }
 
-  .float-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0.75rem 1.2rem;
-    border-radius: 50px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-decoration: none;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  /* Sky clouds */
+  .hero-bg::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 55%;
+    background:
+      radial-gradient(ellipse 160px 60px at 15% 25%, rgba(255,255,255,0.85) 0%, transparent 70%),
+      radial-gradient(ellipse 120px 45px at 13% 28%, rgba(255,255,255,0.7) 0%, transparent 70%),
+      radial-gradient(ellipse 200px 70px at 65% 20%, rgba(255,255,255,0.8) 0%, transparent 70%),
+      radial-gradient(ellipse 140px 50px at 62% 24%, rgba(255,255,255,0.65) 0%, transparent 70%),
+      radial-gradient(ellipse 100px 40px at 85% 30%, rgba(255,255,255,0.75) 0%, transparent 70%),
+      radial-gradient(ellipse 80px 35px at 38% 15%, rgba(255,255,255,0.6) 0%, transparent 70%);
+  }
+
+  /* Road perspective */
+  .hero-road {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 35%;
+    z-index: 1;
+  }
+  .hero-road svg { width: 100%; height: 100%; }
+
+  /* Mountains */
+  .hero-mountains {
+    position: absolute; bottom: 33%; left: 0; right: 0; height: 28%; z-index: 1;
+  }
+  .hero-mountains svg { width: 100%; height: 100%; }
+
+  /* Bus illustration */
+  .hero-bus {
+    position: absolute; bottom: 32%; left: 50%; transform: translateX(-50%);
+    z-index: 3;
+    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.25));
+    animation: busRoll 0.6s ease-out both;
+  }
+  @keyframes busRoll { from { opacity:0; transform: translateX(calc(-50% + 60px)); } to { opacity:1; transform: translateX(-50%); } }
+
+  /* Hero content overlay */
+  .hero-content {
+    position: relative; z-index: 5;
+    text-align: center;
+    padding-bottom: 6rem;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+
+  .hero-eyebrow {
+    display: inline-block;
+    background: rgba(255,255,255,0.92);
+    color: var(--teal); font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0.35rem 1rem; border-radius: 100px;
+    margin-bottom: 1.2rem;
+    border: 1px solid rgba(13,110,110,0.2);
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 800; line-height: 1.1;
+    color: var(--white);
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    margin-bottom: 1rem;
+  }
+  .hero h1 span { color: #ffe566; }
+
+  .hero-sub {
+    color: rgba(255,255,255,0.9);
+    font-size: 1.05rem; font-weight: 300;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.2);
+    margin-bottom: 2.5rem;
+  }
+
+  /* ── SEARCH CARD ── */
+  .search-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 2rem 2.5rem;
+    max-width: 820px; width: 100%;
+    margin: 0 auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2), 0 4px 16px rgba(0,0,0,0.1);
+    animation: fadeUp 0.7s 0.35s ease both;
+  }
+
+  .search-tabs {
+    display: flex; gap: 0; margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--border);
+  }
+  .search-tab {
+    padding: 0.5rem 1.2rem; font-size: 0.85rem; font-weight: 600;
+    color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent;
+    margin-bottom: -2px; transition: color 0.2s, border-color 0.2s;
+  }
+  .search-tab.active { color: var(--teal); border-color: var(--teal); }
+
+  .search-row {
+    display: grid; grid-template-columns: 1fr auto 1fr auto;
+    gap: 1rem; align-items: end;
+  }
+
+  .field-wrap { display: flex; flex-direction: column; gap: 0.35rem; }
+  .field-label {
+    font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--muted);
+  }
+
+  .field-select {
+    background: var(--sand);
+    border: 1.5px solid var(--border);
+    color: var(--ink);
+    padding: 0.8rem 2.5rem 0.8rem 1rem;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif; font-size: 0.95rem;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235a7070' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 0.9rem center;
+    background-color: var(--sand);
+    width: 100%;
+  }
+  .field-select:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(13,110,110,0.12); }
+  .field-select option { background: white; }
+
+  .swap-btn {
+    background: var(--sky); border: 1.5px solid var(--border);
+    color: var(--teal); width: 40px; height: 42px;
+    border-radius: 8px; cursor: pointer; font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s; align-self: end;
+    flex-shrink: 0;
+  }
+  .swap-btn:hover { background: var(--border); }
+
+  .search-btn {
+    background: var(--teal); color: white;
+    border: none; padding: 0.82rem 2rem;
+    border-radius: 8px; font-family: 'Inter', sans-serif;
+    font-weight: 600; font-size: 1rem; cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap; align-self: end;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .search-btn:hover { background: var(--teal2); transform: translateY(-1px); }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    background: var(--teal);
+    padding: 1.2rem 3rem;
+    display: flex; justify-content: center; gap: 4rem;
+    flex-wrap: wrap;
+  }
+  .stat-item { text-align: center; color: white; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; line-height: 1; }
+  .stat-lbl { font-size: 0.75rem; opacity: 0.75; margin-top: 0.2rem; text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* ── SECTIONS ── */
+  .section { padding: 5rem 2rem; }
+  .section-inner { max-width: 1000px; margin: 0 auto; }
+  .section-eyebrow { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.5rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; color: var(--ink); line-height: 1.2; margin-bottom: 1rem; }
+  .section-sub { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 540px; }
+
+  /* ── HOW IT WORKS ── */
+  .how-section { background: var(--sand); }
+  .how-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+
+  .how-card {
+    background: var(--white); border-radius: 14px;
+    padding: 2rem 1.5rem; text-align: center;
+    border: 1.5px solid var(--border);
     transition: transform 0.2s, box-shadow 0.2s;
-    white-space: nowrap;
+    position: relative;
   }
+  .how-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px var(--shadow); }
 
-  .float-btn:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 30px rgba(0,0,0,0.5); }
-
-  .float-whatsapp { background: #25d366; color: white; }
-  .float-phone    { background: var(--accent); color: white; }
-  .float-email    { background: #4f46e5; color: white; }
-
-  /* Collapse labels on small screens */
-  @media (max-width: 500px) {
-    .float-label { display: none; }
-    .float-btn { padding: 0.85rem; border-radius: 50%; }
+  .how-num {
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    background: var(--teal); color: white;
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem; font-weight: 700;
   }
+  .how-icon { font-size: 2.5rem; margin: 0.5rem 0 0.8rem; }
+  .how-title { font-weight: 600; font-size: 1rem; margin-bottom: 0.4rem; color: var(--ink); }
+  .how-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
 
-  /* Footer */
-  footer { position: relative; z-index: 1; text-align: center; padding: 2rem; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
+  /* ── ROUTES HIGHLIGHT ── */
+  .routes-section { background: var(--white); }
+  .route-strip {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem; margin-top: 3rem;
   }
+  .route-card {
+    border: 1.5px solid var(--border); border-radius: 14px; padding: 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    cursor: pointer; text-decoration: none; color: inherit;
+  }
+  .route-card:hover { border-color: var(--teal); box-shadow: 0 8px 30px var(--shadow); transform: translateY(-2px); }
+  .route-icon { font-size: 1.8rem; flex-shrink: 0; }
+  .route-cities { flex: 1; }
+  .route-from-to { font-weight: 600; font-size: 0.95rem; color: var(--ink); }
+  .route-from-to span { color: var(--muted); font-weight: 400; margin: 0 0.3rem; }
+  .route-detail { font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem; }
+  .route-price { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--teal); flex-shrink: 0; }
 
-  @media (max-width: 640px) {
+  /* ── WHY BUSGO ── */
+  .why-section { background: var(--sky); }
+  .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .why-card {
+    background: var(--white); border-radius: 14px; padding: 1.8rem;
+    border: 1.5px solid var(--border);
+    transition: transform 0.2s;
+  }
+  .why-card:hover { transform: translateY(-3px); }
+  .why-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+  .why-title { font-weight: 600; font-size: 0.95rem; color: var(--ink); margin-bottom: 0.4rem; }
+  .why-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+  /* ── CONTACT ── */
+  .contact-section { background: var(--white); }
+  .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .contact-card {
+    border-radius: 14px; padding: 2rem; text-align: center;
+    border: 1.5px solid var(--border);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .contact-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px var(--shadow); }
+  .contact-card.wa { border-color: rgba(37,211,102,0.3); background: #f0fdf4; }
+  .contact-card.ph { border-color: rgba(13,110,110,0.3); background: var(--sky); }
+  .contact-card.em { border-color: rgba(200,146,42,0.3); background: #fefcf0; }
+  .contact-card.mp { border-color: rgba(224,92,42,0.3); background: #fff7f4; }
+  .contact-icon2 { font-size: 2.2rem; margin-bottom: 0.8rem; }
+  .contact-title2 { font-weight: 700; font-size: 1rem; margin-bottom: 0.4rem; color: var(--ink); }
+  .contact-desc2 { font-size: 0.82rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
+  .contact-link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.6rem 1.2rem; border-radius: 8px;
+    font-size: 0.88rem; font-weight: 600; text-decoration: none;
+    transition: opacity 0.2s, transform 0.15s;
+  }
+  .contact-link:hover { opacity: 0.88; transform: translateY(-1px); }
+  .link-wa { background: #25d366; color: white; }
+  .link-ph { background: var(--teal); color: white; }
+  .link-em { background: var(--gold); color: white; }
+  .link-mp { background: var(--accent); color: white; }
+
+  /* ── MESSAGES ── */
+  .messages-wrap { max-width: 820px; margin: 0 auto 1rem; width: 100%; }
+  .msg { padding: 0.8rem 1.2rem; border-radius: 8px; font-size: 0.9rem; margin-bottom: 0.5rem; }
+  .msg.error { background: #fef2f2; border-left: 3px solid #ef4444; color: #b91c1c; }
+  .msg.success { background: #f0fdf4; border-left: 3px solid #22c55e; color: #15803d; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink); color: rgba(255,255,255,0.5);
+    padding: 2rem 3rem; text-align: center; font-size: 0.85rem;
+  }
+  footer a { color: rgba(255,255,255,0.7); text-decoration: none; }
+  footer a:hover { color: white; }
+
+  /* ── FLOAT BTNS ── */
+  .float-cta { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999; display: flex; flex-direction: column; gap: 0.7rem; }
+  .float-btn {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.7rem 1.1rem; border-radius: 50px;
+    font-size: 0.88rem; font-weight: 600; text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .float-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
+  .fb-wa { background: #25d366; color: white; }
+  .fb-ph { background: var(--teal); color: white; }
+
+  @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+
+  @media (max-width: 700px) {
+    nav { padding: 1rem 1.2rem; }
+    .nav-links .nl-hide { display: none; }
     .search-row { grid-template-columns: 1fr; }
-    nav { padding: 1rem; }
-    .nav-right .nav-hide { display: none; }
-    .contact-grid { grid-template-columns: 1fr; }
+    .swap-btn { display: none; }
+    .stats-bar { gap: 2rem; padding: 1rem; }
+    .search-card { padding: 1.5rem; }
+    .float-label { display: none; }
+    .float-btn { padding: 0.8rem; border-radius: 50%; }
   }
 </style>
 </head>
 <body>
 
-<!-- Navbar -->
+<!-- NAV -->
 <nav>
-  <a href="/" class="logo">Bus<span>Go</span></a>
-  <div class="nav-right">
-    <a href="/map/" class="nav-hide">🗺 Map</a>
-    <a href="tel:{{ support_phone }}" class="nav-call">📞 {{ support_phone }}</a>
+  <a href="/" class="logo">Bus<em>Go</em></a>
+  <div class="nav-links">
+    <a href="/map/" class="nl-hide">🗺 Routes</a>
+    <a href="#contact" class="nl-hide">Contact</a>
+    <a href="tel:{{ support_phone }}" class="nav-book">📞 {{ support_phone }}</a>
   </div>
 </nav>
 
-<!-- Hero -->
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-badge">🚌 America's Trusted Bus Network</div>
-  <h1>Travel <span class="highlight">Smarter</span>,<br>Book Faster</h1>
-  <p class="hero-sub">Find the best bus routes across the US — instant results, no hidden fees.</p>
+  <div class="hero-bg"></div>
 
-  {% if messages %}
-  <div class="messages">
-    {% for message in messages %}
-    <div class="msg {{ message.tags }}">{{ message }}</div>
-    {% endfor %}
+  <!-- Mountains -->
+  <div class="hero-mountains">
+    <svg viewBox="0 0 1440 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="0,200 0,120 120,40 240,100 360,20 480,90 600,30 720,80 840,10 960,70 1080,25 1200,85 1320,35 1440,75 1440,200" fill="#3d7a7a" opacity="0.7"/>
+      <polygon points="0,200 0,150 180,80 300,130 420,60 540,110 660,50 780,100 900,45 1020,95 1140,55 1260,105 1380,65 1440,90 1440,200" fill="#4a8888" opacity="0.6"/>
+    </svg>
   </div>
-  {% endif %}
 
-  <div class="search-card">
-    <form action="/search/" method="GET">
-      <div class="search-row">
-        <div class="field-group">
-          <label>From</label>
-          <select name="from" required>
-            <option value="" disabled selected>Select departure city</option>
-            {% for city in cities %}
-            <option value="{{ city.name }}">{{ city.name }}</option>
-            {% endfor %}
-          </select>
-        </div>
-        <div class="field-group">
-          <label>To</label>
-          <select name="to" required>
-            <option value="" disabled selected>Select destination city</option>
-            {% for city in cities %}
-            <option value="{{ city.name }}">{{ city.name }}</option>
-            {% endfor %}
-          </select>
-        </div>
-        <button type="submit" class="search-btn">Search →</button>
+  <!-- Road -->
+  <div class="hero-road">
+    <svg viewBox="0 0 1440 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Road surface -->
+      <polygon points="480,0 960,0 1440,200 0,200" fill="#8a8a7a"/>
+      <!-- Road center lines -->
+      <line x1="720" y1="0" x2="720" y2="200" stroke="white" stroke-width="4" stroke-dasharray="20,15" opacity="0.7"/>
+      <!-- Road edges -->
+      <polygon points="480,0 510,0 1440,200 0,200 0,185" fill="#a0a090" opacity="0.4"/>
+      <!-- Grass sides -->
+      <rect x="0" y="0" width="480" height="200" fill="#7ab875" opacity="0.5"/>
+      <rect x="960" y="0" width="480" height="200" fill="#7ab875" opacity="0.5"/>
+    </svg>
+  </div>
+
+  <!-- Bus SVG -->
+  <div class="hero-bus">
+    <svg width="320" height="100" viewBox="0 0 320 100" xmlns="http://www.w3.org/2000/svg">
+      <!-- Bus body -->
+      <rect x="10" y="15" width="295" height="68" rx="8" fill="#0d6e6e"/>
+      <!-- White stripe -->
+      <rect x="10" y="40" width="295" height="18" fill="white" opacity="0.15"/>
+      <!-- Windows row -->
+      <rect x="30" y="22" width="36" height="22" rx="4" fill="#a8dfe0" opacity="0.9"/>
+      <rect x="76" y="22" width="36" height="22" rx="4" fill="#a8dfe0" opacity="0.9"/>
+      <rect x="122" y="22" width="36" height="22" rx="4" fill="#a8dfe0" opacity="0.9"/>
+      <rect x="168" y="22" width="36" height="22" rx="4" fill="#a8dfe0" opacity="0.9"/>
+      <rect x="214" y="22" width="36" height="22" rx="4" fill="#a8dfe0" opacity="0.9"/>
+      <!-- BusGo text on body -->
+      <text x="90" y="70" font-family="Arial" font-weight="bold" font-size="18" fill="white" opacity="0.9">BusGo</text>
+      <!-- Front windshield -->
+      <rect x="268" y="22" width="30" height="30" rx="4" fill="#c8eef0" opacity="0.9"/>
+      <!-- Headlights -->
+      <rect x="298" y="60" width="10" height="6" rx="2" fill="#ffe566"/>
+      <rect x="298" y="30" width="10" height="6" rx="2" fill="#ffe566" opacity="0.6"/>
+      <!-- Door -->
+      <rect x="14" y="50" width="18" height="28" rx="3" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+      <!-- Wheels -->
+      <circle cx="65" cy="85" r="14" fill="#2a2a2a"/>
+      <circle cx="65" cy="85" r="8" fill="#555"/>
+      <circle cx="65" cy="85" r="3" fill="#888"/>
+      <circle cx="245" cy="85" r="14" fill="#2a2a2a"/>
+      <circle cx="245" cy="85" r="8" fill="#555"/>
+      <circle cx="245" cy="85" r="3" fill="#888"/>
+      <!-- Undercarriage -->
+      <rect x="45" y="80" width="230" height="8" rx="2" fill="#0a5555"/>
+      <!-- Destination sign -->
+      <rect x="30" y="15" width="80" height="8" rx="2" fill="#e05c2a"/>
+      <text x="36" y="22" font-family="Arial" font-size="6" fill="white" font-weight="bold">NEW YORK → LA</text>
+    </svg>
+  </div>
+
+  <!-- Content -->
+  <div class="hero-content">
+    <div class="hero-eyebrow">🚌 America's Bus Network</div>
+    <h1>Travel the <span>Open Road</span><br>Without the Hassle</h1>
+    <p class="hero-sub">Comfortable bus routes connecting 114 cities across all 50 states</p>
+
+    {% if messages %}
+    <div class="messages-wrap">
+      {% for message in messages %}
+      <div class="msg {{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="search-card">
+      <div class="search-tabs">
+        <div class="search-tab active">One Way</div>
+        <div class="search-tab">Round Trip</div>
       </div>
-    </form>
-  </div>
-</section>
+      <form action="/search/" method="GET">
+        <div class="search-row">
+          <div class="field-wrap">
+            <label class="field-label">From</label>
+            <select name="from" class="field-select" required>
+              <option value="" disabled selected>Departure city</option>
+              {% for city in cities %}
+              <option value="{{ city.name }}">{{ city.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
 
-<!-- How it works -->
-<section class="how-section">
-  <h2 class="section-title">How It Works</h2>
-  <p class="section-sub">Book your bus in 3 simple steps</p>
-  <div class="steps">
-    <div class="step-card">
-      <div class="step-num">1</div>
-      <div class="step-icon">🏙️</div>
-      <div class="step-title">Pick Your Cities</div>
-      <div class="step-desc">Select where you're travelling from and to using the dropdowns above.</div>
-    </div>
-    <div class="step-card">
-      <div class="step-num">2</div>
-      <div class="step-icon">🔍</div>
-      <div class="step-title">Find Your Bus</div>
-      <div class="step-desc">Browse available buses with times, prices, seat availability and amenities.</div>
-    </div>
-    <div class="step-card">
-      <div class="step-num">3</div>
-      <div class="step-icon">📞</div>
-      <div class="step-title">Call or WhatsApp Us</div>
-      <div class="step-desc">Contact us directly to confirm your seat. We'll handle the rest for you!</div>
-    </div>
-    <div class="step-card">
-      <div class="step-num">4</div>
-      <div class="step-icon">🎟️</div>
-      <div class="step-title">Board & Travel</div>
-      <div class="step-desc">Receive your confirmation and enjoy a comfortable journey.</div>
+          <button type="button" class="swap-btn" title="Swap cities">⇄</button>
+
+          <div class="field-wrap">
+            <label class="field-label">To</label>
+            <select name="to" class="field-select" required>
+              <option value="" disabled selected>Destination city</option>
+              {% for city in cities %}
+              <option value="{{ city.name }}">{{ city.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <button type="submit" class="search-btn">
+            Search <span>→</span>
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </section>
 
-<!-- Features -->
-<div class="features">
-  <div class="feature-card">
-    <div class="feature-icon">⚡</div>
-    <div class="feature-title">Instant Results</div>
-    <div class="feature-desc">Real-time availability across hundreds of routes</div>
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num">535+</div>
+    <div class="stat-lbl">Bus Routes</div>
   </div>
-  <div class="feature-card">
-    <div class="feature-icon">💺</div>
-    <div class="feature-title">Seat Tracking</div>
-    <div class="feature-desc">See exactly how many seats are left before booking</div>
+  <div class="stat-item">
+    <div class="stat-num">114</div>
+    <div class="stat-lbl">Cities</div>
   </div>
-  <div class="feature-card">
-    <div class="feature-icon">🔒</div>
-    <div class="feature-title">Secure Booking</div>
-    <div class="feature-desc">Your data and payments are always protected</div>
+  <div class="stat-item">
+    <div class="stat-num">51</div>
+    <div class="stat-lbl">States</div>
   </div>
-  <div class="feature-card">
-    <div class="feature-icon">🛎</div>
-    <div class="feature-title">24/7 Support</div>
-    <div class="feature-desc">Our team is always ready to help you out</div>
+  <div class="stat-item">
+    <div class="stat-num">24/7</div>
+    <div class="stat-lbl">Support</div>
   </div>
 </div>
 
-<!-- Contact Section -->
-<section class="contact-section">
-  <div style="text-align:center">
-    <h2 class="section-title">Need Help? Contact Us</h2>
-    <p class="section-sub">Not sure how to book? Our team is ready to assist you directly.</p>
-  </div>
-  <div class="contact-grid">
-
-    <div class="contact-card whatsapp">
-      <div class="contact-icon">💬</div>
-      <div class="contact-title">WhatsApp Us</div>
-      <div class="contact-desc">Send us a message anytime. We reply fast and can help you find and book your route.</div>
-      <div class="contact-value">{{ support_phone }}</div>
-      <a href="https://wa.me/{{ support_phone|cut:'-'|cut:'+' }}?text=Hi!%20I%20need%20help%20booking%20a%20bus%20route." class="contact-btn btn-whatsapp" target="_blank">
-        💬 Chat on WhatsApp
-      </a>
+<!-- HOW IT WORKS -->
+<section class="section how-section">
+  <div class="section-inner">
+    <div style="text-align:center">
+      <div class="section-eyebrow">Simple Process</div>
+      <h2 class="section-title">Book in 4 Easy Steps</h2>
+      <p class="section-sub" style="margin:0 auto">From search to seat in minutes — no complicated forms, no hidden fees.</p>
     </div>
-
-    <div class="contact-card phone">
-      <div class="contact-icon">📞</div>
-      <div class="contact-title">Call Us</div>
-      <div class="contact-desc">Speak directly with our booking team. Available 7 days a week from 6 AM to 11 PM.</div>
-      <div class="contact-value">{{ support_phone }}</div>
-      <a href="tel:{{ support_phone }}" class="contact-btn btn-phone">
-        📞 Call Now
-      </a>
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-num">1</div>
+        <div class="how-icon">🏙️</div>
+        <div class="how-title">Pick Your Cities</div>
+        <div class="how-desc">Choose your departure and destination from 114 cities across the US.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">2</div>
+        <div class="how-icon">🔍</div>
+        <div class="how-title">Browse Routes</div>
+        <div class="how-desc">See times, prices, seat availability, and amenities for all matching buses.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">3</div>
+        <div class="how-icon">📞</div>
+        <div class="how-title">Book via WhatsApp</div>
+        <div class="how-desc">Contact us directly to confirm your seat — we handle the rest quickly.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">4</div>
+        <div class="how-icon">🎟️</div>
+        <div class="how-title">Board & Enjoy</div>
+        <div class="how-desc">Receive your confirmation and enjoy a smooth, comfortable journey.</div>
+      </div>
     </div>
-
-    <div class="contact-card email">
-      <div class="contact-icon">✉️</div>
-      <div class="contact-title">Email Us</div>
-      <div class="contact-desc">Send us your travel details and we'll get back to you within a few hours.</div>
-      <div class="contact-value">{{ support_email }}</div>
-      <a href="mailto:{{ support_email }}?subject=Bus Booking Inquiry" class="contact-btn btn-email">
-        ✉️ Send Email
-      </a>
-    </div>
-
-    <div class="contact-card map-card">
-      <div class="contact-icon">🗺️</div>
-      <div class="contact-title">View Route Map</div>
-      <div class="contact-desc">Not sure if we cover your route? Browse our interactive map to see all available routes.</div>
-      <div class="contact-value">All US Routes</div>
-      <a href="/map/" class="contact-btn btn-map">
-        🗺️ Open Map
-      </a>
-    </div>
-
   </div>
 </section>
 
-<!-- Footer -->
+<!-- POPULAR ROUTES -->
+<section class="section routes-section">
+  <div class="section-inner">
+    <div class="section-eyebrow">Most Traveled</div>
+    <h2 class="section-title">Popular Routes</h2>
+    <p class="section-sub">Thousands of travelers take these routes every week.</p>
+    <div class="route-strip">
+      <a href="/search/?from=New+York&to=Philadelphia" class="route-card">
+        <div class="route-icon">🗽</div>
+        <div class="route-cities">
+          <div class="route-from-to">New York <span>→</span> Philadelphia</div>
+          <div class="route-detail">~2.5 hrs · Multiple daily departures</div>
+        </div>
+        <div class="route-price">from $15</div>
+      </a>
+      <a href="/search/?from=Los+Angeles&to=Las+Vegas" class="route-card">
+        <div class="route-icon">🌴</div>
+        <div class="route-cities">
+          <div class="route-from-to">Los Angeles <span>→</span> Las Vegas</div>
+          <div class="route-detail">~4.5 hrs · Morning & afternoon</div>
+        </div>
+        <div class="route-price">from $20</div>
+      </a>
+      <a href="/search/?from=Miami&to=Orlando" class="route-card">
+        <div class="route-icon">🌊</div>
+        <div class="route-cities">
+          <div class="route-from-to">Miami <span>→</span> Orlando</div>
+          <div class="route-detail">~4 hrs · Daily departures</div>
+        </div>
+        <div class="route-price">from $18</div>
+      </a>
+      <a href="/search/?from=Chicago&to=Indianapolis" class="route-card">
+        <div class="route-icon">🌆</div>
+        <div class="route-cities">
+          <div class="route-from-to">Chicago <span>→</span> Indianapolis</div>
+          <div class="route-detail">~3 hrs · Budget-friendly</div>
+        </div>
+        <div class="route-price">from $12</div>
+      </a>
+      <a href="/search/?from=Seattle&to=Portland" class="route-card">
+        <div class="route-icon">🌲</div>
+        <div class="route-cities">
+          <div class="route-from-to">Seattle <span>→</span> Portland</div>
+          <div class="route-detail">~3.5 hrs · Scenic route</div>
+        </div>
+        <div class="route-price">from $14</div>
+      </a>
+      <a href="/search/?from=Dallas&to=Houston" class="route-card">
+        <div class="route-icon">🤠</div>
+        <div class="route-cities">
+          <div class="route-from-to">Dallas <span>→</span> Houston</div>
+          <div class="route-detail">~4 hrs · Frequent service</div>
+        </div>
+        <div class="route-price">from $16</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY BUSGO -->
+<section class="section why-section">
+  <div class="section-inner">
+    <div style="text-align:center">
+      <div class="section-eyebrow">Why Choose Us</div>
+      <h2 class="section-title">Built for Comfort & Convenience</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">⚡</div>
+        <div class="why-title">Instant Route Search</div>
+        <div class="why-desc">Real-time results across 535+ routes — no waiting, no signup required.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">💺</div>
+        <div class="why-title">Live Seat Availability</div>
+        <div class="why-desc">See exactly how many seats remain before you commit to a route.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📍</div>
+        <div class="why-title">Live Bus Tracking</div>
+        <div class="why-desc">Track your bus on the map in real time so you're never caught off guard.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">💬</div>
+        <div class="why-title">WhatsApp Booking</div>
+        <div class="why-desc">No complicated checkout — just message us and your seat is confirmed.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🛡️</div>
+        <div class="why-title">No Hidden Fees</div>
+        <div class="why-desc">The price you see is the price you pay. Clear, honest fares always.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🕐</div>
+        <div class="why-title">7-Day Support</div>
+        <div class="why-desc">Our team is available 6 AM – 11 PM daily to help with any question.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact-section" id="contact">
+  <div class="section-inner">
+    <div style="text-align:center">
+      <div class="section-eyebrow">Get in Touch</div>
+      <h2 class="section-title">Need Help Booking?</h2>
+      <p class="section-sub" style="margin:0 auto">Our team is here to help you find the right route and secure your seat.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card wa">
+        <div class="contact-icon2">💬</div>
+        <div class="contact-title2">WhatsApp</div>
+        <div class="contact-desc2">Send us a message anytime. We reply fast and can confirm your seat in minutes.</div>
+        <a href="https://wa.me/{{ support_phone|cut:'-'|cut:'+' }}?text=Hi!%20I%20need%20help%20booking%20a%20bus." class="contact-link link-wa" target="_blank">💬 Chat Now</a>
+      </div>
+      <div class="contact-card ph">
+        <div class="contact-icon2">📞</div>
+        <div class="contact-title2">Call Us</div>
+        <div class="contact-desc2">Speak directly with our booking team. Available 7 days, 6 AM – 11 PM.</div>
+        <a href="tel:{{ support_phone }}" class="contact-link link-ph">📞 {{ support_phone }}</a>
+      </div>
+      <div class="contact-card em">
+        <div class="contact-icon2">✉️</div>
+        <div class="contact-title2">Email</div>
+        <div class="contact-desc2">Send your travel details and we'll respond within a few hours.</div>
+        <a href="mailto:{{ support_email }}" class="contact-link link-em">✉️ Send Email</a>
+      </div>
+      <div class="contact-card mp">
+        <div class="contact-icon2">🗺️</div>
+        <div class="contact-title2">Route Map</div>
+        <div class="contact-desc2">Not sure if we cover your area? View our interactive map of all US routes.</div>
+        <a href="/map/" class="contact-link link-mp">🗺️ View Map</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
-  <p>© 2026 BusGo. All rights reserved. &nbsp;|&nbsp; <a href="tel:{{ support_phone }}" style="color:var(--accent);text-decoration:none">{{ support_phone }}</a> &nbsp;|&nbsp; <a href="mailto:{{ support_email }}" style="color:var(--accent);text-decoration:none">{{ support_email }}</a></p>
+  <p>© 2026 BusGo — America's Trusted Bus Network &nbsp;|&nbsp;
+    <a href="tel:{{ support_phone }}">{{ support_phone }}</a> &nbsp;|&nbsp;
+    <a href="mailto:{{ support_email }}">{{ support_email }}</a>
+  </p>
 </footer>
 
-<!-- ── Floating CTA buttons (visible on ALL pages) ── -->
+<!-- FLOAT BTNS -->
 <div class="float-cta">
-  <a href="https://wa.me/{{ support_phone|cut:'-'|cut:'+' }}?text=Hi!%20I%20need%20help%20booking%20a%20bus." class="float-btn float-whatsapp" target="_blank">
+  <a href="https://wa.me/{{ support_phone|cut:'-'|cut:'+' }}?text=Hi!%20I%20need%20help%20booking%20a%20bus." class="float-btn fb-wa" target="_blank">
     💬 <span class="float-label">WhatsApp</span>
   </a>
-  <a href="tel:{{ support_phone }}" class="float-btn float-phone">
+  <a href="tel:{{ support_phone }}" class="float-btn fb-ph">
     📞 <span class="float-label">Call Us</span>
-  </a>
-  <a href="mailto:{{ support_email }}" class="float-btn float-email">
-    ✉ <span class="float-label">Email</span>
   </a>
 </div>
 
+<script>
+  // Swap cities
+  document.querySelector('.swap-btn')?.addEventListener('click', () => {
+    const from = document.querySelector('select[name="from"]');
+    const to = document.querySelector('select[name="to"]');
+    const temp = from.value;
+    from.value = to.value;
+    to.value = temp;
+  });
+
+  // Search tab UI
+  document.querySelectorAll('.search-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.search-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+</script>
 </body>
 </html>
