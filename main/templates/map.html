@@ -267,7 +267,7 @@ async function drawAllRoutes() {
     if (route.arr_time) html += `<div class="popup-row">🏁 Arrives: <strong>${route.arr_time}</strong></div>`;
     if (route.bus_name) html += `<div class="popup-row">🚍 <strong>${route.bus_name}</strong></div>`;
     if (route.price)    html += `<div class="popup-row">💵 From <strong>$${route.price}</strong></div>`;
-    if (route.distance_km) html += `<div class="popup-row">📏 <strong>${route.distance_km} km</strong></div>`;
+    if (route.distance_miles) html += `<div class="popup-row">📏 <strong>${route.distance_miles} mi</strong></div>`;
     line.bindPopup(html);
 
     line.on('mouseover', () => line.setStyle({ color: '#fb923c', weight: 5, opacity: 1 }));

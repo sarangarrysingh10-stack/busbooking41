@@ -83,7 +83,7 @@
     </div>
     <div class="info-box">
       <div class="info-label">Speed</div>
-      <div class="info-value green" id="speedVal">0 km/h</div>
+      <div class="info-value green" id="speedVal">0 mph</div>
     </div>
     <div class="info-box">
       <div class="info-label">Last Sent</div>
@@ -147,11 +147,11 @@ function setStatus(active) {
 async function sendLocation() {
   if (!currentPos) return;
   const { latitude, longitude, speed } = currentPos.coords;
-  const speedKmh = speed ? (speed * 3.6).toFixed(1) : 0;
+  const speedKmh = speed ? (speed * 2.237).toFixed(1) : 0;
 
   document.getElementById('latVal').textContent = latitude.toFixed(5);
   document.getElementById('lngVal').textContent = longitude.toFixed(5);
-  document.getElementById('speedVal').textContent = `${speedKmh} km/h`;
+  document.getElementById('speedVal').textContent = `${speedKmh} mph`;
 
   try {
     const res = await fetch(API_URL, {

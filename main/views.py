@@ -101,7 +101,7 @@ def map_view(request):
             'to_lat': r.to_city.latitude,
             'to_lng': r.to_city.longitude,
             'trips': r.trips.count(),
-            'distance_km': r.distance_km,
+            'distance_miles': r.distance_miles,
             'dep_time': dep_time,
             'arr_time': arr_time,
             'bus_name': first_trip.bus_name if first_trip else None,
@@ -133,7 +133,7 @@ def live_locations_api(request):
             'to': trip.route.to_city.name,
             'lat': loc.latitude,
             'lng': loc.longitude,
-            'speed_kmh': loc.speed_kmh,
+            'speed_mph': loc.speed_mph,
             'last_updated': loc.last_updated.strftime('%H:%M:%S'),
         })
     return JsonResponse({'buses': data})
@@ -155,7 +155,7 @@ def update_location_api(request, token):
 
     BusLocation.objects.update_or_create(
         trip=trip,
-        defaults={'latitude': lat, 'longitude': lng, 'speed_kmh': speed, 'is_active': True}
+        defaults={'latitude': lat, 'longitude': lng, 'speed_mph': speed, 'is_active': True}
     )
     return JsonResponse({'status': 'ok', 'bus': trip.bus_name})
 

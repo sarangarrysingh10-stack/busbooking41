@@ -150,7 +150,7 @@ async function fetchLocations() {
 
       if (statusEl) { statusEl.textContent = 'Live'; statusEl.className = 'bus-status live'; }
       if (coordsEl) coordsEl.textContent = `${bus.lat.toFixed(5)}, ${bus.lng.toFixed(5)}`;
-      if (speedEl)  speedEl.textContent = `Speed: ${bus.speed_kmh} km/h`;
+      if (speedEl)  speedEl.textContent = `Speed: ${bus.speed_mph} mph`;
       if (updatedEl)updatedEl.textContent = `Updated: ${bus.last_updated}`;
       if (cardEl)   cardEl.classList.add('active-bus');
 
@@ -174,7 +174,7 @@ async function fetchLocations() {
         marker.bindPopup(`
           <div class="popup-name">🚌 ${bus.bus_name}</div>
           <div class="popup-row">📍 ${bus.from} → ${bus.to}</div>
-          <div class="popup-row">🚀 Speed: <strong>${bus.speed_kmh} km/h</strong></div>
+          <div class="popup-row">🚀 Speed: <strong>${bus.speed_mph} mph</strong></div>
           <div class="popup-row">🕐 Updated: <strong>${bus.last_updated}</strong></div>
         `);
         busMarkers[id] = marker;

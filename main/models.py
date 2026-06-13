@@ -19,7 +19,7 @@ class City(models.Model):
 class Route(models.Model):
     from_city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='departures')
     to_city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='arrivals')
-    distance_km = models.PositiveIntegerField(null=True, blank=True)
+    distance_miles = models.PositiveIntegerField(null=True, blank=True)
 
     class Meta:
         unique_together = ('from_city', 'to_city')
@@ -77,7 +77,7 @@ class BusLocation(models.Model):
     trip = models.OneToOneField(BusTrip, on_delete=models.CASCADE, related_name='location')
     latitude = models.FloatField()
     longitude = models.FloatField()
-    speed_kmh = models.FloatField(default=0)
+    speed_mph = models.FloatField(default=0)
     is_active = models.BooleanField(default=True)
     last_updated = models.DateTimeField(auto_now=True)
 

@@ -12,7 +12,7 @@ class CityAdmin(admin.ModelAdmin):
 
 @admin.register(Route)
 class RouteAdmin(admin.ModelAdmin):
-    list_display = ('from_city', 'to_city', 'distance_km')
+    list_display = ('from_city', 'to_city', 'distance_miles')
     list_filter = ('from_city', 'to_city')
     search_fields = ('from_city__name', 'to_city__name')
 
@@ -32,7 +32,7 @@ class BusTripAdmin(admin.ModelAdmin):
 
 @admin.register(BusLocation)
 class BusLocationAdmin(admin.ModelAdmin):
-    list_display = ('trip', 'latitude', 'longitude', 'speed_kmh', 'is_active', 'last_updated')
+    list_display = ('trip', 'latitude', 'longitude', 'speed_mph', 'is_active', 'last_updated')
     list_filter = ('is_active',)
     readonly_fields = ('last_updated',)
     list_editable = ('is_active',)

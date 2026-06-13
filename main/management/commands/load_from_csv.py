@@ -210,14 +210,14 @@ class Command(BaseCommand):
             route_key = f'{from_name}→{to_name}'
             if route_key not in route_cache:
                 try:
-                    dist_km = int(row['Distance_KM'])
+                    dist_miles = int(row['Distance_Miles'])
                 except (ValueError, KeyError):
-                    dist_km = None
+                    dist_miles = None
 
                 obj, created = Route.objects.get_or_create(
                     from_city=from_city_obj,
                     to_city=to_city_obj,
-                    defaults={'distance_km': dist_km}
+                    defaults={'distance_miles': dist_miles}
                 )
                 route_cache[route_key] = obj
                 if created:

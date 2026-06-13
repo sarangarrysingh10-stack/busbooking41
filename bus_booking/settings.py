@@ -124,7 +124,10 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SUPPORT_PHONE = '+1-800-BUS-GOGO'
-SUPPORT_EMAIL = 'support@busgo.com'
+SUPPORT_EMAIL = 'cscservice5500@gmail.com'
+ADMINS = [('BusGo Admin', 'cscservice5500@gmail.com')]
+DEFAULT_FROM_EMAIL = 'cscservice5500@gmail.com'
+SERVER_EMAIL = 'cscservice5500@gmail.com'
 
 # ── Logging ───────────────────────────────────────────────
 LOGGING = {
