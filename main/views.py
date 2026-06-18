@@ -155,7 +155,7 @@ def booking_lookup(request):
 
 # ── Map view ──────────────────────────────────────────────────────────────────
 def map_view(request):
-    # Optional route id used after booking success, for example: /map/?route=12
+    # Used after booking success, for example: /map/?route=12
     highlight_route_id = request.GET.get('route') or request.GET.get('route_id') or ''
 
     cities = City.objects.exclude(latitude=None).exclude(longitude=None)
@@ -197,6 +197,7 @@ def map_view(request):
         'total_routes': len(route_data),
         'highlight_route_id': highlight_route_id,
     })
+
 
 
 # ── API: get all live bus locations ──────────────────────────────────────────
