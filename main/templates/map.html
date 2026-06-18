@@ -94,6 +94,7 @@
   .city-item, .route-item { display: flex; align-items: center; gap: 0.7rem; padding: 0.55rem 0.7rem; border-radius: 8px; cursor: pointer; transition: background 0.15s; font-size: 0.88rem; margin-bottom: 0.3rem; }
   .city-item:hover, .route-item:hover { background: rgba(255,255,255,0.05); }
   .city-item:hover .city-name { color: var(--accent); }
+  .route-item.highlight-booked { background: #fff3e8 !important; border: 1px solid #fed7aa; color: #c2410c !important; font-weight: 800; }
 
   .city-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
   .route-arrow { color: var(--accent); font-size: 0.8rem; }
@@ -287,6 +288,7 @@ label{color:var(--mutedText)!important;}
 <script>
 const cities = {{ cities_json|safe }};
 const routes = {{ routes_json|safe }};
+const highlightedRouteId = '{{ highlight_route_id|default:"" }}';
 
 // ── Map init ──────────────────────────────────────────────
 const map = L.map('map', { zoomControl: true }).setView([39.5, -98.35], 4);
@@ -370,6 +372,12 @@ const loadingBar = document.getElementById('loadingBar');
 // Rate-limit OSRM calls — 1 per second to be respectful
 async function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
+function focusRoute(obj) {
+  map.fitBounds(obj.line.getBounds(), { padding: [60, 60] });
+  obj.line.openPopup();
+  simulateTracking(obj.route, obj.pts);
+}
+
 async function drawAllRoutes() {
   loadingBar.classList.add('active');
   let done = 0;
@@ -403,12 +411,18 @@ async function drawAllRoutes() {
       if (roadPoints) statusEl.classList.add('ok');
     }
 
+    const isHighlighted = highlightedRouteId && String(route.id) === String(highlightedRouteId);
+
     const line = L.polyline(pts, {
-      color: '#f97316', weight: 3, opacity: 0.75, dashArray: '10, 6'
+      color: isHighlighted ? '#087b7a' : '#f97316',
+      weight: isHighlighted ? 6 : 3,
+      opacity: isHighlighted ? 1 : 0.75,
+      dashArray: isHighlighted ? null : '10, 6'
     }).addTo(map);
 
     // Popup
     let html = `<div class="popup-route">${route.from} → ${route.to}</div>`;
+    if (isHighlighted) html += `<div class="popup-row">✅ <strong>Your booked route</strong></div>`;
     html += `<div class="popup-row">🚌 <strong>${route.trips}</strong> trip${route.trips !== 1 ? 's' : ''} available</div>`;
     if (route.dep_time) html += `<div class="popup-row">🕐 Departs: <strong>${route.dep_time}</strong></div>`;
     if (route.arr_time) html += `<div class="popup-row">🏁 Arrives: <strong>${route.arr_time}</strong></div>`;
@@ -418,16 +432,23 @@ async function drawAllRoutes() {
     line.bindPopup(html);
 
     line.on('mouseover', () => line.setStyle({ color: '#fb923c', weight: 5, opacity: 1 }));
-    line.on('mouseout',  () => line.setStyle({ color: '#f97316', weight: 3, opacity: 0.75 }));
+    line.on('mouseout',  () => {
+      if (isHighlighted) {
+        line.setStyle({ color: '#087b7a', weight: 6, opacity: 1, dashArray: null });
+      } else {
+        line.setStyle({ color: '#f97316', weight: 3, opacity: 0.75, dashArray: '10, 6' });
+      }
+    });
 
     drawnRoutes.push({ line, route, pts });
     routeItems.push({ element: item, route, line, pts });
 
-    item.onclick = () => {
-      map.fitBounds(line.getBounds(), { padding: [60, 60] });
-      line.openPopup();
-      simulateTracking(route, pts);
-    };
+    item.onclick = () => focusRoute({ element: item, route, line, pts });
+
+    if (isHighlighted) {
+      item.classList.add('highlight-booked');
+      item.innerHTML += '<span class="route-status ok">Booked</span>';
+    }
 
     filterMapLists();
 
@@ -437,6 +458,14 @@ async function drawAllRoutes() {
   }
 
   loadingBar.classList.remove('active');
+
+  // If user came from booking success page, open/highlight the booked route automatically.
+  if (highlightedRouteId) {
+    const bookedRoute = routeItems.find(obj => String(obj.route.id) === String(highlightedRouteId));
+    if (bookedRoute) {
+      setTimeout(() => focusRoute(bookedRoute), 300);
+    }
+  }
 }
 
 drawAllRoutes();

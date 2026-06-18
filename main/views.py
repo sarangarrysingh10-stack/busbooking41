@@ -155,6 +155,9 @@ def booking_lookup(request):
 
 # ── Map view ──────────────────────────────────────────────────────────────────
 def map_view(request):
+    # Optional route id used after booking success, for example: /map/?route=12
+    highlight_route_id = request.GET.get('route') or request.GET.get('route_id') or ''
+
     cities = City.objects.exclude(latitude=None).exclude(longitude=None)
     routes = Route.objects.select_related('from_city', 'to_city').prefetch_related('trips')
 
@@ -172,6 +175,7 @@ def map_view(request):
         arr_time = first_trip.arrival_time.strftime('%I:%M %p') if first_trip else None
 
         route_data.append({
+            'id': r.id,
             'from': r.from_city.name,
             'to': r.to_city.name,
             'from_lat': r.from_city.latitude,
@@ -191,6 +195,7 @@ def map_view(request):
         'routes_json': json.dumps(route_data),
         'total_cities': cities.count(),
         'total_routes': len(route_data),
+        'highlight_route_id': highlight_route_id,
     })
 
 
