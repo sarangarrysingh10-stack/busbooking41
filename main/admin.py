@@ -1,8 +1,12 @@
+import logging
 from django.contrib import admin
+from django.contrib import messages
 from django.utils.html import format_html
 from django.urls import reverse
 from .models import City, Route, BusTrip, BusLocation, Inquiry, Booking
 from .email_utils import send_booking_confirmed_email, send_booking_cancelled_email, send_payment_paid_email
+
+logger = logging.getLogger(__name__)
 
 
 @admin.register(City)
@@ -87,15 +91,25 @@ class BookingAdmin(admin.ModelAdmin):
         if not change:
             return
 
-        booking_url, map_url = self._booking_links(request, obj)
+        # Email notification must never break Django Admin save.
+        try:
+            booking_url, map_url = self._booking_links(request, obj)
 
-        # Email passenger only when admin changes booking status.
-        if old_status != obj.status:
-            if obj.status == 'CONFIRMED':
-                send_booking_confirmed_email(obj, booking_url=booking_url, map_url=map_url)
-            elif obj.status == 'CANCELLED':
-                send_booking_cancelled_email(obj, booking_url=booking_url, map_url=map_url)
+            # Email passenger only when admin changes booking status.
+            if old_status != obj.status:
+                if obj.status == 'CONFIRMED':
+                    send_booking_confirmed_email(obj, booking_url=booking_url, map_url=map_url)
+                elif obj.status == 'CANCELLED':
+                    send_booking_cancelled_email(obj, booking_url=booking_url, map_url=map_url)
 
-        # Optional: email passenger when admin verifies payment.
-        if old_payment_status != obj.payment_status and obj.payment_status == 'PAID':
-            send_payment_paid_email(obj, booking_url=booking_url, map_url=map_url)
+            # Optional: email passenger when admin verifies payment.
+            if old_payment_status != obj.payment_status and obj.payment_status == 'PAID':
+                send_payment_paid_email(obj, booking_url=booking_url, map_url=map_url)
+
+        except Exception as exc:
+            logger.warning("Booking was saved, but email notification failed: %s", exc)
+            self.message_user(
+                request,
+                "Booking saved, but email notification could not be sent. Check Railway email variables.",
+                level=messages.WARNING,
+            )
