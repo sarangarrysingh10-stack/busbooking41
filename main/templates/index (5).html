@@ -365,10 +365,11 @@
     <!-- Search card -->
     <div class="search-card">
       <div class="search-tabs">
-        <div class="stab active" onclick="setTab(this)">One Way</div>
-        <div class="stab" onclick="setTab(this)">Round Trip</div>
+        <div class="stab active" data-trip-type="oneway" onclick="setTab(this)">One Way</div>
+        <div class="stab" data-trip-type="round" onclick="setTab(this)">Round Trip</div>
       </div>
       <form action="/search/" method="GET">
+        <input type="hidden" name="trip_type" id="trip-type" value="oneway">
         <div class="search-row">
           <div class="fwrap">
             <label class="flbl">From</label>
@@ -524,10 +525,12 @@
     setTimeout(() => btn.style.transform = '', 400);
   }
 
-  // Tab toggle
+  // Tab toggle + trip type value
   function setTab(el) {
     document.querySelectorAll('.stab').forEach(t => t.classList.remove('active'));
     el.classList.add('active');
+    const tripTypeInput = document.getElementById('trip-type');
+    if (tripTypeInput) tripTypeInput.value = el.dataset.tripType || 'oneway';
   }
 </script>
 </body>

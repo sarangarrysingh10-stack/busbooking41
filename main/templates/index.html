@@ -453,10 +453,11 @@
 
     <div class="search-card">
       <div class="search-tabs">
-        <div class="search-tab active">One Way</div>
-        <div class="search-tab">Round Trip</div>
+        <div class="search-tab active" data-trip-type="oneway">One Way</div>
+        <div class="search-tab" data-trip-type="round">Round Trip</div>
       </div>
       <form action="/search/" method="GET">
+        <input type="hidden" name="trip_type" id="trip-type" value="oneway">
         <div class="search-row">
           <div class="field-wrap">
             <label class="field-label">From</label>
@@ -712,11 +713,13 @@
     to.value = temp;
   });
 
-  // Search tab UI
+  // Search tab UI + trip type value
   document.querySelectorAll('.search-tab').forEach(tab => {
     tab.addEventListener('click', () => {
       document.querySelectorAll('.search-tab').forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
+      const tripTypeInput = document.getElementById('trip-type');
+      if (tripTypeInput) tripTypeInput.value = tab.dataset.tripType || 'oneway';
     });
   });
 </script>

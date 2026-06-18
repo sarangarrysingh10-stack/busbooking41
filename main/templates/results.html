@@ -87,6 +87,24 @@
     margin-top: 0.4rem;
   }
 
+  .section-heading {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin: 1.4rem 0 1rem;
+    color: var(--text);
+  }
+
+  .round-note {
+    background: rgba(249,115,22,0.12);
+    border: 1px solid rgba(249,115,22,0.25);
+    color: #fed7aa;
+    padding: 0.9rem 1rem;
+    border-radius: 12px;
+    margin: 1rem 0;
+    line-height: 1.5;
+  }
+
   .trip-card {
     background: var(--card);
     border: 1px solid var(--border);
@@ -261,10 +279,13 @@
       <span class="route-arrow">→</span>
       {{ to_city }}
     </div>
-    <div class="results-count">{{ trips|length }} trip{{ trips|length|pluralize }} found</div>
+    <div class="results-count">{% if is_round_trip %}Round trip search{% else %}{{ trips|length }} trip{{ trips|length|pluralize }} found{% endif %}</div>
   </div>
 
   {% if trips %}
+    {% if is_round_trip %}
+      <div class="section-heading">Departure Trips: {{ from_city }} → {{ to_city }}</div>
+    {% endif %}
     {% for trip in trips %}
     <div class="trip-card" style="animation-delay: {{ forloop.counter0 }}00ms">
       <div class="trip-info">
@@ -293,34 +314,56 @@
             <div class="time-label">Arrives</div>
           </div>
         </div>
-        {% if trip.amenities %}
-        <div class="amenities">🎒 {{ trip.amenities }}</div>
-        {% endif %}
+        {% if trip.amenities %}<div class="amenities">🎒 {{ trip.amenities }}</div>{% endif %}
       </div>
-
-      <div class="trip-price">
-        <div class="price-amount">${{ trip.price }}</div>
-        <div class="price-label">per person</div>
-      </div>
-
+      <div class="trip-price"><div class="price-amount">${{ trip.price }}</div><div class="price-label">per person</div></div>
       <div class="trip-actions">
-        {% if trip.available_seats > 0 %}
-          <a href="{% url 'book_trip' trip.id %}" class="btn btn-book">🎟 Book Now</a>
-        {% endif %}
+        {% if trip.available_seats > 0 %}<a href="{% url 'book_trip' trip.id %}" class="btn btn-book">🎟 Book Now</a>{% endif %}
         <a href="tel:{{ support_phone }}" class="btn btn-call">📞 Call</a>
-        <a href="mailto:{{ support_email }}?subject=Booking: {{ from_city }} to {{ to_city }} - {{ trip.bus_name }}&body=Hello BusGo,%0A%0AI want to book {{ trip.bus_name }} from {{ from_city }} to {{ to_city }}.%0ADeparture: {{ trip.departure_time|time:'H:i' }}%0APrice: ${{ trip.price }}%0A%0AName:%0APhone:%0ASeats:" class="btn btn-email">✉ Email</a>
+        <a href="mailto:{{ support_email }}?subject=Booking: {{ from_city }} to {{ to_city }} - {{ trip.bus_name }}" class="btn btn-email">✉ Email</a>
       </div>
     </div>
     {% endfor %}
-
-  {% else %}
-    <div class="empty-state">
-      <div style="font-size:3rem; margin-bottom:1rem">🚌</div>
-      <h3 style="font-family:'Syne',sans-serif; margin-bottom:0.5rem">No trips found</h3>
-      <p>Try different cities or contact us directly.</p>
-    </div>
   {% endif %}
 
+  {% if is_round_trip %}
+    <div class="section-heading">Return Trips: {{ to_city }} → {{ from_city }}</div>
+    {% if return_trips %}
+      {% for trip in return_trips %}
+      <div class="trip-card" style="animation-delay: {{ forloop.counter0 }}00ms">
+        <div class="trip-info">
+          <div class="bus-name">{{ trip.bus_name }}</div>
+          <div class="bus-meta">
+            <span class="badge badge-type">{{ trip.get_bus_type_display }}</span>
+            {% if trip.available_seats > 10 %}
+              <span class="badge badge-seats-ok">✓ {{ trip.available_seats }} seats left</span>
+            {% elif trip.available_seats > 0 %}
+              <span class="badge badge-seats-low">⚡ Only {{ trip.available_seats }} left!</span>
+            {% else %}
+              <span class="badge badge-full">✗ Fully Booked</span>
+            {% endif %}
+          </div>
+          <div class="timing">
+            <div class="time-block"><div class="time-big">{{ trip.departure_time|time:"H:i" }}</div><div class="time-label">Departs</div></div>
+            <div class="duration-line"><div class="duration-text">{{ trip.duration_display }}</div><div class="duration-bar"></div></div>
+            <div class="time-block"><div class="time-big">{{ trip.arrival_time|time:"H:i" }}</div><div class="time-label">Arrives</div></div>
+          </div>
+          {% if trip.amenities %}<div class="amenities">🎒 {{ trip.amenities }}</div>{% endif %}
+        </div>
+        <div class="trip-price"><div class="price-amount">${{ trip.price }}</div><div class="price-label">per person</div></div>
+        <div class="trip-actions">
+          {% if trip.available_seats > 0 %}<a href="{% url 'book_trip' trip.id %}" class="btn btn-book">🎟 Book Return</a>{% endif %}
+          <a href="tel:{{ support_phone }}" class="btn btn-call">📞 Call</a>
+          <a href="mailto:{{ support_email }}?subject=Return Booking: {{ to_city }} to {{ from_city }} - {{ trip.bus_name }}" class="btn btn-email">✉ Email</a>
+        </div>
+      </div>
+      {% endfor %}
+    {% else %}
+      <div class="round-note">Return route is not available in the current dataset for {{ to_city }} → {{ from_city }}. Try a route pair such as Atlanta ↔ Birmingham, New York ↔ Newark, Seattle ↔ Tacoma, or Baltimore ↔ Washington DC.</div>
+    {% endif %}
+  {% elif not trips %}
+    <div class="empty-state"><div style="font-size:3rem; margin-bottom:1rem">🚌</div><h3 style="font-family:'Syne',sans-serif; margin-bottom:0.5rem">No trips found</h3><p>Try different cities or contact us directly.</p></div>
+  {% endif %}
 </div>
 
 <!-- Floating CTA -->

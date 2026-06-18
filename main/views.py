@@ -28,6 +28,8 @@ def home(request):
 def search(request):
     from_city = request.GET.get('from', '').strip()
     to_city = request.GET.get('to', '').strip()
+    trip_type = request.GET.get('trip_type', 'oneway').strip().lower()
+    is_round_trip = trip_type == 'round'
 
     if not from_city or not to_city:
         messages.error(request, 'Please select both From and To cities.')
@@ -37,18 +39,29 @@ def search(request):
         messages.error(request, 'From and To cities cannot be the same.')
         return redirect('home')
 
-    routes = Route.objects.filter(from_city__name=from_city, to_city__name=to_city)
+    outbound_routes = Route.objects.filter(from_city__name=from_city, to_city__name=to_city)
+    return_routes = Route.objects.none()
 
-    if routes.exists():
-        trips = BusTrip.objects.filter(route__in=routes).select_related('route__from_city', 'route__to_city')
-        context = {'trips': trips, 'from_city': from_city, 'to_city': to_city}
+    if is_round_trip:
+        return_routes = Route.objects.filter(from_city__name=to_city, to_city__name=from_city)
+
+    if outbound_routes.exists() or return_routes.exists():
+        trips = BusTrip.objects.filter(route__in=outbound_routes).select_related('route__from_city', 'route__to_city')
+        return_trips = BusTrip.objects.filter(route__in=return_routes).select_related('route__from_city', 'route__to_city') if is_round_trip else []
+        context = {
+            'trips': trips,
+            'return_trips': return_trips,
+            'from_city': from_city,
+            'to_city': to_city,
+            'is_round_trip': is_round_trip,
+        }
         context.update(support_context())
         return render(request, 'results.html', context)
-    else:
-        suggestions = Route.objects.filter(from_city__name=from_city).select_related('to_city')
-        context = {'suggestions': suggestions, 'from_city': from_city, 'to_city': to_city}
-        context.update(support_context())
-        return render(request, 'no_routes.html', context)
+
+    suggestions = Route.objects.filter(from_city__name=from_city).select_related('to_city')
+    context = {'suggestions': suggestions, 'from_city': from_city, 'to_city': to_city, 'is_round_trip': is_round_trip}
+    context.update(support_context())
+    return render(request, 'no_routes.html', context)
 
 
 def inquiry(request):
