@@ -359,6 +359,136 @@
     .float-label { display: none; }
     .float-btn { padding: 0.8rem; border-radius: 50%; }
   }
+
+
+/* ===== BusGo cover-page theme override: light teal/orange style ===== */
+:root{
+  --teal:#087b7a!important;
+  --teal2:#0f8f8b!important;
+  --deep:#173634!important;
+  --orange:#ff6b1a!important;
+  --cream:#fbfaf6!important;
+  --cardLight:#ffffff!important;
+  --soft:#e8f5f3!important;
+  --ink:#203735!important;
+  --mutedText:#5f7270!important;
+  --line:#d8e8e5!important;
+  --bg:#fbfaf6!important;
+  --surface:#ffffff!important;
+  --card:#ffffff!important;
+  --accent:#ff6b1a!important;
+  --accent2:#e85618!important;
+  --text:#203735!important;
+  --muted:#5f7270!important;
+  --border:#d8e8e5!important;
+  --green:#16a34a!important;
+  --red:#dc2626!important;
+}
+html{scroll-behavior:smooth;}
+body{
+  background:
+    radial-gradient(circle at 12% 8%, rgba(8,123,122,.13), transparent 28%),
+    radial-gradient(circle at 88% 2%, rgba(255,107,26,.10), transparent 25%),
+    linear-gradient(180deg,#ffffff 0%,#f7fbfa 45%,#eef8f5 100%)!important;
+  color:var(--ink)!important;
+}
+nav{
+  background:rgba(255,255,255,.96)!important;
+  border-bottom:1px solid var(--line)!important;
+  box-shadow:0 10px 30px rgba(8,123,122,.08)!important;
+  backdrop-filter:blur(14px)!important;
+}
+.logo{font-family:'Playfair Display','Syne',serif!important;color:var(--teal)!important;font-weight:800!important;letter-spacing:-.7px!important;}
+.logo span{color:var(--orange)!important;}
+nav a:not(.logo), .nav-links a{color:var(--mutedText)!important;font-weight:700!important;}
+nav a:not(.logo):hover,.nav-links a:hover,.nav-links a.active{color:var(--orange)!important;}
+.wrap,.main{max-width:1100px!important;}
+.title,.route-title,.sidebar-title,.bus-name,.trip-name,.card h1,.card h2,.card h3,.popup-route,.popup-city,.track-title{
+  color:var(--ink)!important;
+}
+.title,.route-title{font-family:'Playfair Display','Syne',serif!important;font-weight:800!important;}
+.sub,.breadcrumb,.results-count,.muted,.time-label,.duration-text,.amenities,.price-label,.note,.track-bus,.section-label,.stat-label{color:var(--mutedText)!important;}
+.card,.trip-card,.booking-card,.summary-card,.search-card,.info-card,.bus-card,.track-panel{
+  background:rgba(255,255,255,.92)!important;
+  color:var(--ink)!important;
+  border:1px solid var(--line)!important;
+  box-shadow:0 18px 45px rgba(8,123,122,.10)!important;
+}
+.trip-card:hover,.card:hover,.bus-card:hover{border-color:rgba(255,107,26,.35)!important;box-shadow:0 20px 50px rgba(255,107,26,.12)!important;}
+.row{border-bottom:1px solid var(--line)!important;color:var(--mutedText)!important;}
+.row strong,.popup-row strong,.time-big,.bus-card-name,.info-value{color:var(--ink)!important;}
+input,select,textarea{
+  background:#fffdf8!important;
+  color:var(--ink)!important;
+  border:1px solid var(--line)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7)!important;
+}
+input:focus,select:focus,textarea:focus{outline:none!important;border-color:var(--teal)!important;box-shadow:0 0 0 3px rgba(8,123,122,.12)!important;}
+input::placeholder,textarea::placeholder{color:#8aa09c!important;}
+label{color:var(--mutedText)!important;}
+.btn,.submit-btn,.nav-cta,.btn-book,.home,.lookup,.admin,.offline-btn,.toggle-btn,.driver-link{
+  border-radius:12px!important;
+  box-shadow:0 10px 25px rgba(8,123,122,.14)!important;
+}
+.btn,.submit-btn,.btn-book,.home,.nav-cta,.offline-btn{
+  background:var(--teal)!important;color:white!important;border:0!important;
+}
+.btn:hover,.submit-btn:hover,.btn-book:hover,.home:hover,.nav-cta:hover,.offline-btn:hover{background:var(--teal2)!important;transform:translateY(-1px)!important;}
+.btn-call,.lookup,.toggle-btn.start{background:#22c55e!important;color:white!important;}
+.btn-email,.admin{background:var(--orange)!important;color:white!important;}
+.price-amount,.route-arrow,.stat-num,.popup-city,.bus-coords,.driver-link{color:var(--orange)!important;}
+.badge-type{background:#e9f7f4!important;color:var(--teal)!important;}
+.badge-seats-ok{background:#e9fbef!important;color:#15803d!important;}
+.badge-seats-low{background:#fff3e8!important;color:#c2410c!important;}
+.badge-full{background:#fff0f0!important;color:#dc2626!important;}
+.float-btn{box-shadow:0 12px 28px rgba(8,123,122,.18)!important;}
+.float-phone{background:var(--teal)!important;}
+.float-email{background:var(--orange)!important;}
+.messages .msg,.msg{background:#fff3e8!important;color:#9a3412!important;border:1px solid #fed7aa!important;}
+/* Map and tracking pages */
+.sidebar{
+  background:#ffffff!important;
+  color:var(--ink)!important;
+  border-right:1px solid var(--line)!important;
+  box-shadow:12px 0 35px rgba(8,123,122,.08)!important;
+}
+.sidebar-header{border-bottom:1px solid var(--line)!important;background:linear-gradient(180deg,#ffffff,#f0fbf8)!important;}
+.stat{background:#f2fbf8!important;border:1px solid #ccebe5!important;}
+.city-item,.route-item{color:var(--ink)!important;}
+.city-item:hover,.route-item:hover{background:#eef8f5!important;}
+.map-search-box input{background:#fff!important;color:var(--ink)!important;border:1px solid #ccebe5!important;}
+.map-search-hint{color:var(--mutedText)!important;}
+.leaflet-popup-content-wrapper{background:#ffffff!important;color:var(--ink)!important;border:1px solid var(--line)!important;box-shadow:0 18px 45px rgba(8,123,122,.18)!important;}
+.leaflet-popup-tip{background:#ffffff!important;}
+.popup-row{color:var(--mutedText)!important;}
+.track-panel{background:#ffffff!important;color:var(--ink)!important;}
+.live-badge{background:#e9fbef!important;border-color:#b8f3c9!important;color:#15803d!important;}
+.bus-status.live{background:#e9fbef!important;color:#15803d!important;}
+.bus-status.offline{background:#fff0f0!important;color:#dc2626!important;}
+@media(max-width:700px){nav{padding:1rem!important}.wrap,.main{padding:2rem 1rem!important}.grid{grid-template-columns:1fr!important}.trip-card{grid-template-columns:1fr!important}.trip-actions{width:100%!important}}
+
+
+
+/* ===== Phone button visibility fix ===== */
+nav .nav-book, nav .nav-cta, .nav-links a.nav-book, .nav-links a.nav-cta{
+  background:#087b7a!important;
+  color:#ffffff!important;
+  border:1px solid rgba(255,255,255,.25)!important;
+  box-shadow:0 10px 24px rgba(8,123,122,.22)!important;
+}
+nav .nav-book:hover, nav .nav-cta:hover, .nav-links a.nav-book:hover, .nav-links a.nav-cta:hover{
+  background:#0a6f6e!important;
+  color:#ffffff!important;
+}
+.contact-link.link-ph, .clink.lph, .btn-call, .float-btn.float-phone, .fbtn.fph, .fb-ph{
+  background:#087b7a!important;
+  color:#ffffff!important;
+}
+.contact-link.link-ph:hover, .clink.lph:hover, .btn-call:hover, .float-btn.float-phone:hover, .fbtn.fph:hover, .fb-ph:hover{
+  background:#0a6f6e!important;
+  color:#ffffff!important;
+}
+
 </style>
 </head>
 <body>
@@ -369,7 +499,7 @@
   <div class="nav-links">
     <a href="/map/" class="nl-hide">🗺 Routes</a>
     <a href="#contact" class="nl-hide">Contact</a>
-    <a href="tel:{{ support_phone }}" class="nav-book">📞 {{ support_phone }}</a>
+    <a href="tel:{{ support_phone }}" class="nav-book">☎ {{ support_phone }}</a>
   </div>
 </nav>
 
@@ -453,11 +583,10 @@
 
     <div class="search-card">
       <div class="search-tabs">
-        <div class="search-tab active" data-trip-type="oneway">One Way</div>
-        <div class="search-tab" data-trip-type="round">Round Trip</div>
+        <div class="search-tab active">One Way</div>
+        <div class="search-tab">Round Trip</div>
       </div>
       <form action="/search/" method="GET">
-        <input type="hidden" name="trip_type" id="trip-type" value="oneway">
         <div class="search-row">
           <div class="field-wrap">
             <label class="field-label">From</label>
@@ -664,10 +793,10 @@
         <a href="https://wa.me/{{ support_phone_digits }}?text=Hi!%20I%20need%20help%20booking%20a%20bus." class="contact-link link-wa" target="_blank">💬 Chat Now</a>
       </div>
       <div class="contact-card ph">
-        <div class="contact-icon2">📞</div>
+        <div class="contact-icon2">☎</div>
         <div class="contact-title2">Call Us</div>
         <div class="contact-desc2">Speak directly with our booking team. Available 7 days, 6 AM – 11 PM.</div>
-        <a href="tel:{{ support_phone }}" class="contact-link link-ph">📞 {{ support_phone }}</a>
+        <a href="tel:{{ support_phone }}" class="contact-link link-ph">☎ {{ support_phone }}</a>
       </div>
       <div class="contact-card em">
         <div class="contact-icon2">✉️</div>
@@ -713,13 +842,11 @@
     to.value = temp;
   });
 
-  // Search tab UI + trip type value
+  // Search tab UI
   document.querySelectorAll('.search-tab').forEach(tab => {
     tab.addEventListener('click', () => {
       document.querySelectorAll('.search-tab').forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
-      const tripTypeInput = document.getElementById('trip-type');
-      if (tripTypeInput) tripTypeInput.value = tab.dataset.tripType || 'oneway';
     });
   });
 </script>
