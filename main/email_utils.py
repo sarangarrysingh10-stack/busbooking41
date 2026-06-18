@@ -61,14 +61,41 @@ def booking_public_message(booking, heading, note, booking_url=None, map_url=Non
     return "\n".join(lines)
 
 
+def _print_email_debug(message):
+    # Railway captures stdout/stderr, so these lines will appear in Deploy Logs.
+    print(message, flush=True)
+    logger.info(message)
+
+
 def send_passenger_email(booking, subject, heading, note, booking_url=None, map_url=None):
     """
     Sends an email to the passenger.
-    Very important: email failure must never break booking or Django Admin save.
+    Email failure must never break booking or Django Admin save.
+    This version prints clear BUSGO_EMAIL_* lines in Railway Deploy Logs.
     """
+    to_email = getattr(booking, 'email', '')
+
     try:
-        if not getattr(booking, 'email', ''):
+        if not to_email:
+            _print_email_debug(f"BUSGO_EMAIL_SKIPPED booking=#{getattr(booking, 'id', '')} reason=no_passenger_email")
             return False
+
+        email_host_user = getattr(settings, 'EMAIL_HOST_USER', '')
+        email_host_password = getattr(settings, 'EMAIL_HOST_PASSWORD', '')
+        email_backend = getattr(settings, 'EMAIL_BACKEND', '')
+        from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', None)
+
+        _print_email_debug(
+            "BUSGO_EMAIL_ATTEMPT "
+            f"booking=#{getattr(booking, 'id', '')} "
+            f"to={to_email} "
+            f"from={from_email} "
+            f"host={getattr(settings, 'EMAIL_HOST', '')}:{getattr(settings, 'EMAIL_PORT', '')} "
+            f"tls={getattr(settings, 'EMAIL_USE_TLS', '')} "
+            f"user={email_host_user} "
+            f"backend={email_backend} "
+            f"password_set={'yes' if bool(email_host_password) else 'no'}"
+        )
 
         message = booking_public_message(
             booking=booking,
@@ -79,23 +106,32 @@ def send_passenger_email(booking, subject, heading, note, booking_url=None, map_
         )
 
         connection = get_connection(
-            fail_silently=True,
+            fail_silently=False,
             timeout=getattr(settings, 'EMAIL_TIMEOUT', 8),
         )
 
         email = EmailMessage(
             subject=subject,
             body=message,
-            from_email=getattr(settings, 'DEFAULT_FROM_EMAIL', None),
-            to=[booking.email],
+            from_email=from_email,
+            to=[to_email],
             connection=connection,
         )
-        sent_count = email.send(fail_silently=True)
+
+        sent_count = email.send(fail_silently=False)
+        _print_email_debug(
+            f"BUSGO_EMAIL_OK booking=#{getattr(booking, 'id', '')} to={to_email} sent_count={sent_count}"
+        )
         return sent_count > 0
 
     except Exception as exc:
         # Never raise this exception because it can break booking/admin pages.
-        logger.warning("BusGo email could not be sent to %s: %s", getattr(booking, 'email', ''), exc)
+        error_message = (
+            f"BUSGO_EMAIL_FAILED booking=#{getattr(booking, 'id', '')} "
+            f"to={to_email} error_type={exc.__class__.__name__} error={exc}"
+        )
+        print(error_message, flush=True)
+        logger.exception(error_message)
         return False
 
 
