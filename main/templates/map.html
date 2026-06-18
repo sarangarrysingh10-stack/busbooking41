@@ -50,6 +50,37 @@
   .sidebar-header { padding: 1.2rem 1.5rem; border-bottom: 1px solid var(--border); }
   .sidebar-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.8rem; }
 
+  .map-search-box {
+    margin-top: 1rem;
+  }
+
+  .map-search-box input {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid rgba(249,115,22,0.3);
+    background: rgba(255,255,255,0.06);
+    color: #f1f5f9;
+    font-family: 'DM Sans', sans-serif;
+    outline: none;
+  }
+
+  .map-search-box input:focus {
+    border-color: #f97316;
+    box-shadow: 0 0 0 2px rgba(249,115,22,0.15);
+  }
+
+  .map-search-box input::placeholder {
+    color: #94a3b8;
+  }
+
+  .map-search-hint {
+    margin-top: 0.45rem;
+    font-size: 0.7rem;
+    color: #94a3b8;
+    line-height: 1.3;
+  }
+
   .stats-row { display: flex; gap: 1rem; }
   .stat { flex: 1; background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.2); border-radius: 8px; padding: 0.6rem 0.8rem; text-align: center; }
   .stat-num { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.3rem; color: var(--accent); }
@@ -121,6 +152,11 @@
         <div class="stat"><div class="stat-num">{{ total_cities }}</div><div class="stat-label">Cities</div></div>
         <div class="stat"><div class="stat-num">{{ total_routes }}</div><div class="stat-label">Routes</div></div>
       </div>
+
+      <div class="map-search-box">
+        <input type="text" id="routeSearch" placeholder="Search city or route">
+        <div class="map-search-hint" id="routeSearchInfo">Example: Billings, Cheyenne, Billings to Cheyenne</div>
+      </div>
     </div>
     <div class="sidebar-body" id="sidebarBody">
       <div class="section-label">Cities</div>
@@ -155,6 +191,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 // ── City markers ──────────────────────────────────────────
 const cityMarkers = {};
 const cityList = document.getElementById('cityList');
+const cityItems = [];
 
 cities.forEach(city => {
   const marker = L.circleMarker([city.lat, city.lng], {
@@ -174,6 +211,7 @@ cities.forEach(city => {
   item.innerHTML = `<div class="city-dot"></div><span class="city-name">${city.name}</span>`;
   item.onclick = () => { map.setView([city.lat, city.lng], 8); marker.openPopup(); };
   cityList.appendChild(item);
+  cityItems.push({ element: item, city, marker });
 });
 
 // ── Real road routing via OSRM (100% free, no API key) ───
@@ -218,6 +256,7 @@ function buildCurvedLine(lat1, lng1, lat2, lng2) {
 // ── Draw all routes ───────────────────────────────────────
 const routeList = document.getElementById('routeList');
 const drawnRoutes = [];
+const routeItems = [];
 const loadingBar = document.getElementById('loadingBar');
 
 // Rate-limit OSRM calls — 1 per second to be respectful
@@ -274,12 +313,15 @@ async function drawAllRoutes() {
     line.on('mouseout',  () => line.setStyle({ color: '#f97316', weight: 3, opacity: 0.75 }));
 
     drawnRoutes.push({ line, route, pts });
+    routeItems.push({ element: item, route, line, pts });
 
     item.onclick = () => {
       map.fitBounds(line.getBounds(), { padding: [60, 60] });
       line.openPopup();
       simulateTracking(route, pts);
     };
+
+    filterMapLists();
 
     done++;
     // 800ms gap between OSRM calls to avoid rate limiting
@@ -290,6 +332,75 @@ async function drawAllRoutes() {
 }
 
 drawAllRoutes();
+
+
+// ── Search city or route from sidebar ─────────────────────
+const routeSearchInput = document.getElementById('routeSearch');
+const routeSearchInfo = document.getElementById('routeSearchInfo');
+
+function routeText(obj) {
+  return `
+    ${obj.route.from}
+    ${obj.route.to}
+    ${obj.route.from} to ${obj.route.to}
+    ${obj.route.from} ${obj.route.to}
+  `.toLowerCase();
+}
+
+function filterMapLists() {
+  if (!routeSearchInput) return;
+
+  const q = routeSearchInput.value.trim().toLowerCase();
+  let cityMatches = 0;
+  let routeMatches = 0;
+
+  cityItems.forEach(obj => {
+    const match = !q || obj.city.name.toLowerCase().includes(q);
+    obj.element.style.display = match ? 'flex' : 'none';
+    if (match) cityMatches++;
+  });
+
+  routeItems.forEach(obj => {
+    const match = !q || routeText(obj).includes(q);
+    obj.element.style.display = match ? 'flex' : 'none';
+    if (match) routeMatches++;
+  });
+
+  if (!q) {
+    routeSearchInfo.textContent = 'Example: Billings, Cheyenne, Billings to Cheyenne';
+  } else {
+    routeSearchInfo.textContent = `${cityMatches} city match(es), ${routeMatches} route match(es). Press Enter to zoom to first route.`;
+  }
+}
+
+if (routeSearchInput) {
+  routeSearchInput.addEventListener('input', filterMapLists);
+
+  routeSearchInput.addEventListener('keydown', function(e) {
+    if (e.key !== 'Enter') return;
+
+    const q = routeSearchInput.value.trim().toLowerCase();
+    if (!q) return;
+
+    const firstRoute = routeItems.find(obj => routeText(obj).includes(q));
+
+    if (firstRoute) {
+      firstRoute.element.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      map.fitBounds(firstRoute.line.getBounds(), { padding: [60, 60] });
+      firstRoute.line.openPopup();
+      simulateTracking(firstRoute.route, firstRoute.pts);
+      return;
+    }
+
+    const firstCity = cityItems.find(obj => obj.city.name.toLowerCase().includes(q));
+    if (firstCity) {
+      firstCity.element.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      map.setView([firstCity.city.lat, firstCity.city.lng], 8);
+      firstCity.marker.openPopup();
+    }
+  });
+}
+
 
 // ── Live bus tracking ────────────────────────────────────
 function simulateTracking(route, pts) {
