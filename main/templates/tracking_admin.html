@@ -169,6 +169,41 @@ label{color:var(--mutedText)!important;}
 .bus-status.offline{background:#fff0f0!important;color:#dc2626!important;}
 @media(max-width:700px){nav{padding:1rem!important}.wrap,.main{padding:2rem 1rem!important}.grid{grid-template-columns:1fr!important}.trip-card{grid-template-columns:1fr!important}.trip-actions{width:100%!important}}
 
+
+
+/* ===== Tracking page full-width map fix =====
+   The global theme limits .main to 1100px on normal pages.
+   Tracking page needs dashboard layout: sidebar + map using full browser width. */
+body{width:100vw!important; min-height:100vh!important; overflow:hidden!important;}
+nav{width:100vw!important; max-width:none!important;}
+.main{
+  max-width:none!important;
+  width:100vw!important;
+  height:calc(100vh - 73px)!important;
+  padding:0!important;
+  margin:0!important;
+  display:flex!important;
+  overflow:hidden!important;
+}
+.sidebar{
+  width:320px!important;
+  min-width:320px!important;
+  max-width:320px!important;
+  height:100%!important;
+}
+#map{
+  flex:1 1 auto!important;
+  width:calc(100vw - 320px)!important;
+  min-width:0!important;
+  height:100%!important;
+  display:block!important;
+}
+.leaflet-container{width:100%!important; height:100%!important;}
+@media(max-width:768px){
+  .sidebar{display:none!important;}
+  #map{width:100vw!important;}
+}
+
 </style>
 </head>
 <body>
@@ -217,6 +252,8 @@ const map = L.map('map').setView([39.5, -98.35], 4);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution:'© OpenStreetMap', maxZoom:19
 }).addTo(map);
+setTimeout(() => map.invalidateSize(), 250);
+window.addEventListener('resize', () => map.invalidateSize());
 
 const busMarkers = {};
 const busTails = {}; // trail lines
