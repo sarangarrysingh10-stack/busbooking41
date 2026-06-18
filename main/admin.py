@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.utils.html import format_html
+from django.urls import reverse
 from .models import City, Route, BusTrip, BusLocation, Inquiry, Booking
+from .email_utils import send_booking_confirmed_email, send_booking_cancelled_email, send_payment_paid_email
 
 
 @admin.register(City)
@@ -63,3 +65,37 @@ class BookingAdmin(admin.ModelAdmin):
     )
     readonly_fields = ('created_at', 'total_amount')
     list_editable = ('status', 'payment_status')
+
+    def _booking_links(self, request, obj):
+        booking_url = request.build_absolute_uri(reverse('booking_lookup') + f'?q={obj.phone}')
+        map_url = request.build_absolute_uri(reverse('map') + f'?route={obj.trip.route.id}')
+        return booking_url, map_url
+
+    def save_model(self, request, obj, form, change):
+        old_status = None
+        old_payment_status = None
+        if change and obj.pk:
+            try:
+                old_obj = Booking.objects.get(pk=obj.pk)
+                old_status = old_obj.status
+                old_payment_status = old_obj.payment_status
+            except Booking.DoesNotExist:
+                pass
+
+        super().save_model(request, obj, form, change)
+
+        if not change:
+            return
+
+        booking_url, map_url = self._booking_links(request, obj)
+
+        # Email passenger only when admin changes booking status.
+        if old_status != obj.status:
+            if obj.status == 'CONFIRMED':
+                send_booking_confirmed_email(obj, booking_url=booking_url, map_url=map_url)
+            elif obj.status == 'CANCELLED':
+                send_booking_cancelled_email(obj, booking_url=booking_url, map_url=map_url)
+
+        # Optional: email passenger when admin verifies payment.
+        if old_payment_status != obj.payment_status and obj.payment_status == 'PAID':
+            send_payment_paid_email(obj, booking_url=booking_url, map_url=map_url)

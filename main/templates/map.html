@@ -287,8 +287,17 @@ label{color:var(--mutedText)!important;}
 
 <script>
 const cities = {{ cities_json|safe }};
-const routes = {{ routes_json|safe }};
+const allRoutes = {{ routes_json|safe }};
 const highlightedRouteId = '{{ highlight_route_id|default:"" }}';
+
+// Put the booked route first so it highlights immediately instead of waiting
+// for all map routes to finish loading.
+const bookedRouteData = highlightedRouteId
+  ? allRoutes.find(r => String(r.id) === String(highlightedRouteId))
+  : null;
+const routes = bookedRouteData
+  ? [bookedRouteData, ...allRoutes.filter(r => String(r.id) !== String(highlightedRouteId))]
+  : allRoutes;
 
 // ── Map init ──────────────────────────────────────────────
 const map = L.map('map', { zoomControl: true }).setView([39.5, -98.35], 4);
@@ -394,8 +403,11 @@ async function drawAllRoutes() {
     `;
     routeList.appendChild(item);
 
-    // Fetch real road route from OSRM
-    const roadPoints = await fetchOSRM(
+    const isHighlighted = highlightedRouteId && String(route.id) === String(highlightedRouteId);
+
+    // For the booked route, draw instantly using a curved line first.
+    // Other routes still use OSRM road routing. This avoids a long delay.
+    const roadPoints = isHighlighted ? null : await fetchOSRM(
       route.from_lat, route.from_lng,
       route.to_lat, route.to_lng
     );
@@ -410,8 +422,6 @@ async function drawAllRoutes() {
       statusEl.textContent = roadPoints ? '🛣' : '〰';
       if (roadPoints) statusEl.classList.add('ok');
     }
-
-    const isHighlighted = highlightedRouteId && String(route.id) === String(highlightedRouteId);
 
     const line = L.polyline(pts, {
       color: isHighlighted ? '#087b7a' : '#f97316',
@@ -448,6 +458,12 @@ async function drawAllRoutes() {
     if (isHighlighted) {
       item.classList.add('highlight-booked');
       item.innerHTML += '<span class="route-status ok">Booked</span>';
+
+      // Immediately zoom and open popup for the booked route.
+      setTimeout(() => {
+        focusRoute({ element: item, route, line, pts });
+        item.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      }, 500);
     }
 
     filterMapLists();

@@ -1,12 +1,14 @@
 from decimal import Decimal
 import json
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from django.contrib import messages
 from django.conf import settings
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from .models import Route, BusTrip, City, Inquiry, BusLocation, Booking
+from .email_utils import send_booking_created_email
 
 
 def support_context():
@@ -147,6 +149,11 @@ def book_trip(request, trip_id):
         )
         trip.available_seats -= seats
         trip.save(update_fields=['available_seats'])
+
+        # Send booking-created email to passenger. If SMTP is not configured, local Django will print it in terminal.
+        booking_url = request.build_absolute_uri(reverse('booking_lookup') + f'?q={booking.phone}')
+        map_url = request.build_absolute_uri(reverse('map') + f'?route={booking.trip.route.id}')
+        send_booking_created_email(booking, booking_url=booking_url, map_url=map_url)
 
         messages.success(request, 'Booking request created successfully. Admin can confirm it from Django Admin.')
         return redirect('booking_success', booking_id=booking.id)

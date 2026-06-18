@@ -124,11 +124,33 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SUPPORT_PHONE = os.environ.get('SUPPORT_PHONE', '+917814542348')
-SUPPORT_EMAIL = os.environ.get('SUPPORT_EMAIL', 'cscservice5500@gmail.com')
+SUPPORT_EMAIL = os.environ.get('SUPPORT_EMAIL', 'sarangurjotsingh24@gmail.com')
 SUPPORT_WHATSAPP = ''.join(ch for ch in SUPPORT_PHONE if ch.isdigit())
-ADMINS = [('BusGo Admin', 'cscservice5500@gmail.com')]
-DEFAULT_FROM_EMAIL = 'cscservice5500@gmail.com'
-SERVER_EMAIL = 'cscservice5500@gmail.com'
+ADMINS = [('BusGo Admin', SUPPORT_EMAIL)]
+
+# ── Email configuration ───────────────────────────────────
+# Railway Variables to add for real email sending:
+# EMAIL_HOST=smtp.gmail.com
+# EMAIL_PORT=587
+# EMAIL_USE_TLS=True
+# EMAIL_HOST_USER=your_gmail@gmail.com
+# EMAIL_HOST_PASSWORD=your_gmail_app_password
+# DEFAULT_FROM_EMAIL=BusGo <your_gmail@gmail.com>
+# SITE_URL=https://your-railway-url.up.railway.app
+EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_PORT = int(os.environ.get('EMAIL_PORT', '587'))
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True') == 'True'
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', EMAIL_HOST_USER or SUPPORT_EMAIL)
+SERVER_EMAIL = DEFAULT_FROM_EMAIL
+SITE_URL = os.environ.get('SITE_URL', '')
+
+# If SMTP variables are missing locally, emails are printed in terminal instead of failing.
+if EMAIL_HOST_USER and EMAIL_HOST_PASSWORD:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # ── Logging ───────────────────────────────────────────────
 LOGGING = {

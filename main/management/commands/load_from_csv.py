@@ -1,5 +1,6 @@
 import csv
 import os
+from datetime import datetime, timedelta
 from django.core.management.base import BaseCommand
 from django.conf import settings
 from main.models import City, Route, BusTrip
@@ -138,6 +139,34 @@ BUS_TYPE_MAP = {
 }
 
 
+def _parse_time(value):
+    """Parse HH:MM text from CSV into a Python time object."""
+    return datetime.strptime(value.strip(), '%H:%M').time()
+
+
+def _arrival_from_duration(departure_text, arrival_text, duration_text):
+    """Return corrected arrival time.
+
+    Some short routes in the CSV have same departure and arrival time while
+    Duration_Hours contains a decimal value like 0.4 or 0.5. For demo clarity,
+    this converts the duration into minutes and fixes the arrival time.
+    """
+    dep_dt = datetime.strptime(departure_text.strip(), '%H:%M')
+    arr_dt = datetime.strptime(arrival_text.strip(), '%H:%M')
+
+    try:
+        duration_hours = float(str(duration_text).strip() or '0')
+    except ValueError:
+        duration_hours = 0
+
+    # Fix only invalid/same arrival values when a useful duration is available.
+    if duration_hours > 0 and arr_dt.time() == dep_dt.time():
+        minutes = max(1, int(round(duration_hours * 60)))
+        arr_dt = dep_dt + timedelta(minutes=minutes)
+
+    return dep_dt.time(), arr_dt.time()
+
+
 class Command(BaseCommand):
     help = 'Load cities, routes, and bus trips from us_bus_routes_all_states.csv (mainland dataset)'
 
@@ -155,6 +184,7 @@ class Command(BaseCommand):
         cities_new  = 0
         routes_new  = 0
         trips_new   = 0
+        trips_updated = 0
         skipped     = 0
 
         with open(csv_path, newline='', encoding='utf-8') as f:
@@ -239,15 +269,17 @@ class Command(BaseCommand):
                 price      = float(row['Ticket_Price_USD'])
                 total      = int(row['Total_Seats'])
                 available  = int(row['Seats_Available'])
-                dep_time   = row['Departure_Time'].strip()
-                arr_time   = row['Arrival_Time'].strip()
+                dep_time_text = row['Departure_Time'].strip()
+                arr_time_text = row['Arrival_Time'].strip()
+                duration_text = row.get('Duration_Hours', '').strip()
+                dep_time, arr_time = _arrival_from_duration(dep_time_text, arr_time_text, duration_text)
                 amenities  = row['Amenities'].strip()
             except (ValueError, KeyError) as e:
                 self.stdout.write(self.style.WARNING(f'  ⚠️  Skipping row (bad data): {e}'))
                 skipped += 1
                 continue
 
-            _, created = BusTrip.objects.get_or_create(
+            trip_obj, created = BusTrip.objects.get_or_create(
                 route=route_obj,
                 bus_name=bus_name,
                 departure_time=dep_time,
@@ -262,6 +294,26 @@ class Command(BaseCommand):
             )
             if created:
                 trips_new += 1
+            else:
+                # Update timing for existing DB records. Do not reset available_seats
+                # because live bookings may already have reduced seats.
+                changed_fields = []
+                if trip_obj.arrival_time != arr_time:
+                    trip_obj.arrival_time = arr_time
+                    changed_fields.append('arrival_time')
+                if trip_obj.bus_type != bus_type:
+                    trip_obj.bus_type = bus_type
+                    changed_fields.append('bus_type')
+                if float(trip_obj.price) != float(price):
+                    trip_obj.price = price
+                    changed_fields.append('price')
+                if trip_obj.amenities != amenities:
+                    trip_obj.amenities = amenities
+                    changed_fields.append('amenities')
+
+                if changed_fields:
+                    trip_obj.save(update_fields=changed_fields)
+                    trips_updated += 1
 
         # ── Summary ───────────────────────────────────────
         self.stdout.write('\n' + '─' * 45)
@@ -269,6 +321,7 @@ class Command(BaseCommand):
         self.stdout.write(f'  New cities added  : {cities_new}')
         self.stdout.write(f'  New routes added  : {routes_new}')
         self.stdout.write(f'  New trips added   : {trips_new}')
+        self.stdout.write(f'  Existing trips updated: {trips_updated}')
         self.stdout.write(f'  Rows skipped      : {skipped}')
         self.stdout.write('─' * 45)
         self.stdout.write(f'  Total cities in DB : {City.objects.count()}')
