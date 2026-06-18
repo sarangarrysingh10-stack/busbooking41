@@ -5,7 +5,7 @@ from django.conf import settings
 from main.models import City, Route, BusTrip
 
 
-# Full coordinates lookup for all 114 cities
+# Coordinates lookup for supported mainland dataset cities
 CITY_COORDS = {
     'Birmingham':       (33.5186,  -86.8104),
     'Montgomery':       (32.3668,  -86.3000),
@@ -139,7 +139,7 @@ BUS_TYPE_MAP = {
 
 
 class Command(BaseCommand):
-    help = 'Load all cities, routes, and bus trips from us_bus_routes_all_states.csv'
+    help = 'Load cities, routes, and bus trips from us_bus_routes_all_states.csv (mainland dataset)'
 
     def handle(self, *args, **kwargs):
         # Find CSV — try project root first, then BASE_DIR
@@ -168,6 +168,11 @@ class Command(BaseCommand):
             from_state = row['From_State'].strip()
             to_name    = row['To_City'].strip()
             to_state   = row['To_State'].strip()
+
+            # Skip non-mainland rows kept out of the presentation dataset
+            if from_state in {'Alaska', 'Hawaii'} or to_state in {'Alaska', 'Hawaii'}:
+                skipped += 1
+                continue
 
             # ── GET OR CREATE: From City ──────────────────
             fc_key = from_name

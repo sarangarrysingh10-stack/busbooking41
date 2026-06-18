@@ -1,3 +1,4 @@
+from decimal import Decimal
 import json
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
@@ -6,16 +7,22 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from django.utils import timezone
-from .models import Route, BusTrip, City, Inquiry, BusLocation
+from .models import Route, BusTrip, City, Inquiry, BusLocation, Booking
+
+
+def support_context():
+    return {
+        'support_phone': settings.SUPPORT_PHONE,
+        'support_phone_digits': settings.SUPPORT_WHATSAPP,
+        'support_email': settings.SUPPORT_EMAIL,
+    }
 
 
 def home(request):
     cities = City.objects.all()
-    return render(request, 'index.html', {
-        'cities': cities,
-        'support_phone': settings.SUPPORT_PHONE,
-        'support_email': settings.SUPPORT_EMAIL,
-    })
+    context = {'cities': cities}
+    context.update(support_context())
+    return render(request, 'index.html', context)
 
 
 def search(request):
@@ -34,22 +41,14 @@ def search(request):
 
     if routes.exists():
         trips = BusTrip.objects.filter(route__in=routes).select_related('route__from_city', 'route__to_city')
-        return render(request, 'results.html', {
-            'trips': trips,
-            'from_city': from_city,
-            'to_city': to_city,
-            'support_phone': settings.SUPPORT_PHONE,
-            'support_email': settings.SUPPORT_EMAIL,
-        })
+        context = {'trips': trips, 'from_city': from_city, 'to_city': to_city}
+        context.update(support_context())
+        return render(request, 'results.html', context)
     else:
         suggestions = Route.objects.filter(from_city__name=from_city).select_related('to_city')
-        return render(request, 'no_routes.html', {
-            'suggestions': suggestions,
-            'from_city': from_city,
-            'to_city': to_city,
-            'support_phone': settings.SUPPORT_PHONE,
-            'support_email': settings.SUPPORT_EMAIL,
-        })
+        context = {'suggestions': suggestions, 'from_city': from_city, 'to_city': to_city}
+        context.update(support_context())
+        return render(request, 'no_routes.html', context)
 
 
 def inquiry(request):
@@ -73,6 +72,72 @@ def inquiry(request):
         return redirect('home')
 
     return redirect('home')
+
+
+def book_trip(request, trip_id):
+    trip = get_object_or_404(BusTrip.objects.select_related('route__from_city', 'route__to_city'), id=trip_id)
+
+    if request.method == 'POST':
+        passenger_name = request.POST.get('passenger_name', '').strip()
+        email = request.POST.get('email', '').strip()
+        phone = request.POST.get('phone', '').strip()
+        try:
+            seats = int(request.POST.get('seats', '1'))
+        except ValueError:
+            seats = 1
+
+        if not passenger_name or not email or not phone:
+            messages.error(request, 'Please fill name, email and phone number.')
+            return redirect('book_trip', trip_id=trip.id)
+
+        if seats < 1:
+            messages.error(request, 'Please select at least 1 seat.')
+            return redirect('book_trip', trip_id=trip.id)
+
+        if seats > trip.available_seats:
+            messages.error(request, f'Only {trip.available_seats} seat(s) are available for this trip.')
+            return redirect('book_trip', trip_id=trip.id)
+
+        total_amount = Decimal(seats) * trip.price
+        booking = Booking.objects.create(
+            trip=trip,
+            passenger_name=passenger_name,
+            email=email,
+            phone=phone,
+            seats=seats,
+            total_amount=total_amount,
+            status='PENDING',
+        )
+        trip.available_seats -= seats
+        trip.save(update_fields=['available_seats'])
+
+        messages.success(request, 'Booking request created successfully. Admin can confirm it from Django Admin.')
+        return redirect('booking_success', booking_id=booking.id)
+
+    context = {'trip': trip}
+    context.update(support_context())
+    return render(request, 'booking_form.html', context)
+
+
+def booking_success(request, booking_id):
+    booking = get_object_or_404(Booking.objects.select_related('trip__route__from_city', 'trip__route__to_city'), id=booking_id)
+    context = {'booking': booking}
+    context.update(support_context())
+    return render(request, 'booking_success.html', context)
+
+
+def booking_lookup(request):
+    query = request.GET.get('q', '').strip()
+    bookings = []
+    if query:
+        bookings = Booking.objects.select_related('trip__route__from_city', 'trip__route__to_city').filter(
+            phone__icontains=query
+        ) | Booking.objects.select_related('trip__route__from_city', 'trip__route__to_city').filter(
+            email__icontains=query
+        )
+    context = {'query': query, 'bookings': bookings}
+    context.update(support_context())
+    return render(request, 'booking_lookup.html', context)
 
 
 # ── Map view ──────────────────────────────────────────────────────────────────

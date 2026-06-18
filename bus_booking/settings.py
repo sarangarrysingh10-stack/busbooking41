@@ -123,8 +123,9 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-SUPPORT_PHONE = '+1-800-BUS-GOGO'
-SUPPORT_EMAIL = 'cscservice5500@gmail.com'
+SUPPORT_PHONE = os.environ.get('SUPPORT_PHONE', '+917814542348')
+SUPPORT_EMAIL = os.environ.get('SUPPORT_EMAIL', 'cscservice5500@gmail.com')
+SUPPORT_WHATSAPP = ''.join(ch for ch in SUPPORT_PHONE if ch.isdigit())
 ADMINS = [('BusGo Admin', 'cscservice5500@gmail.com')]
 DEFAULT_FROM_EMAIL = 'cscservice5500@gmail.com'
 SERVER_EMAIL = 'cscservice5500@gmail.com'

@@ -5,7 +5,6 @@ echo "============================================"
 echo " BusGo — Container Starting"
 echo "============================================"
 
-# Wait for PostgreSQL to be ready before doing anything
 echo "Waiting for PostgreSQL at ${PGHOST}:${PGPORT:-5432}..."
 
 MAX_RETRIES=30
@@ -40,20 +39,24 @@ except psycopg2.OperationalError as e:
 done
 
 echo "--------------------------------------------"
-echo "Collecting static files..."
-python manage.py collectstatic --noinput
-
-echo "--------------------------------------------"
 echo "Running database migrations..."
 python manage.py migrate --noinput
 
 echo "--------------------------------------------"
-echo "Loading sample data (skipped if already loaded)..."
-python manage.py load_sample_data || echo "Sample data already loaded or skipped."
+echo "Removing old outside-mainland route cities if already present..."
+python manage.py shell -c "from main.models import City; City.objects.filter(name__in=['Anchorage','Fairbanks','Honolulu','Hilo']).delete()"
+
+echo "--------------------------------------------"
+echo "Loading route data from CSV..."
+python manage.py load_from_csv
+
+echo "--------------------------------------------"
+echo "Collecting static files..."
+python manage.py collectstatic --noinput
 
 echo "--------------------------------------------"
 echo "Starting Gunicorn server on port ${PORT:-8000}..."
-exec gunicorn bus_booking.wsgi \
+exec gunicorn bus_booking.wsgi:application \
     --bind "0.0.0.0:${PORT:-8000}" \
     --workers 2 \
     --timeout 120 \

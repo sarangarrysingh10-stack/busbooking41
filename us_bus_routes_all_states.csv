@@ -513,13 +513,6 @@ Route_ID,From_City,From_State,To_City,To_State,Bus_Operator,Bus_Type,Distance_Mi
 512,Wilmington,Delaware,Philadelphia,Pennsylvania,RedCoach Morning,Seater,30,48,I-70,10:00,10:00,0.5,10,38,40,"WiFi, AC, Restroom, Charging",Online
 513,Wilmington,Delaware,Philadelphia,Pennsylvania,Greyhound Morning,Luxury,30,48,I-10,06:00,06:00,0.5,10,15,40,"WiFi, AC",Online
 514,Wilmington,Delaware,Philadelphia,Pennsylvania,Southeastern Stages Afternoon,AC,30,48,I-95,16:00,16:00,0.5,10,2,40,"AC, Restroom",Station
-515,Honolulu,Hawaii,Hilo,Hawaii,Peter Pan Night,Sleeper,219,352,I-35,20:00,00:00,4.0,51,38,50,AC,Online
-516,Honolulu,Hawaii,Hilo,Hawaii,OurBus Morning,Luxury,219,352,I-10,08:00,12:00,4.0,19,40,45,"WiFi, AC, Restroom, Charging",Online/Station
-517,Honolulu,Hawaii,Hilo,Hawaii,Greyhound Night,AC,219,352,I-10,22:00,02:00,4.0,30,27,40,"AC, Restroom",Online/Station
-518,Honolulu,Hawaii,Hilo,Hawaii,FlixBus Night,Sleeper,219,352,I-10,22:00,02:00,4.0,31,0,45,"WiFi, AC",Online/Station
-519,Anchorage,Alaska,Fairbanks,Alaska,BoltBus Night,Seater,291,468,I-70,22:00,03:00,5.3,70,26,55,"WiFi, AC, Charging",Online/Station
-520,Anchorage,Alaska,Fairbanks,Alaska,Greyhound Evening,Luxury,291,468,US-1,18:00,23:00,5.3,29,11,40,"AC, Restroom",Station
-521,Anchorage,Alaska,Fairbanks,Alaska,BoltBus Evening,Sleeper,291,468,I-80,19:00,00:00,5.3,23,21,50,"AC, Charging",Online/Station
 522,Pocatello,Idaho,Boise,Idaho,Megabus Afternoon,Seater,264,424,I-90,15:00,19:00,4.8,53,27,40,"WiFi, AC",Station
 523,Pocatello,Idaho,Boise,Idaho,Greyhound Afternoon,Luxury,264,424,US-1,15:00,19:00,4.8,64,20,55,"WiFi, AC, Restroom, Charging",Online
 524,Pocatello,Idaho,Boise,Idaho,Southeastern Stages Morning,Sleeper,264,424,I-80,08:00,12:00,4.8,36,12,40,AC,Station

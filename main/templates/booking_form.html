@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Trip — BusGo</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0f1e;--card:#1a2236;--text:#f1f5f9;--muted:#94a3b8;--accent:#f97316;--border:rgba(255,255,255,.1);--green:#16a34a}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}nav{padding:1.2rem 2rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between}.logo{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:white;text-decoration:none}.logo span{color:var(--accent)}.wrap{max-width:850px;margin:0 auto;padding:3rem 1.5rem}.title{font-family:'Syne',sans-serif;font-size:2.2rem;margin-bottom:.5rem}.sub{color:var(--muted);margin-bottom:2rem}.grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.5rem}.trip-name{font-family:'Syne',sans-serif;font-size:1.3rem;margin-bottom:.6rem}.row{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid var(--border);color:var(--muted)}.row strong{color:white}label{display:block;margin:.9rem 0 .35rem;color:var(--muted);font-weight:700}input,select{width:100%;padding:.8rem;border-radius:10px;border:1px solid var(--border);background:#0f172a;color:white;font:inherit}.btn{margin-top:1rem;width:100%;padding:.9rem;border:0;border-radius:10px;background:var(--accent);color:white;font-weight:800;cursor:pointer}.note{font-size:.85rem;color:var(--muted);margin-top:1rem;line-height:1.5}.messages{margin-bottom:1rem}.msg{padding:.8rem;border-radius:10px;margin-bottom:.5rem;background:#3b1d1d;color:#fecaca}@media(max-width:700px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav><a href="/" class="logo">Bus<span>Go</span></a><a href="javascript:history.back()" style="color:#94a3b8;text-decoration:none">← Back</a></nav>
+<div class="wrap">
+  <div class="title">Confirm Booking</div>
+  <div class="sub">Fill passenger details. This creates a booking request and admin can confirm it.</div>
+  {% if messages %}<div class="messages">{% for message in messages %}<div class="msg">{{ message }}</div>{% endfor %}</div>{% endif %}
+  <div class="grid">
+    <div class="card">
+      <div class="trip-name">{{ trip.bus_name }}</div>
+      <div class="row"><span>Route</span><strong>{{ trip.route.from_city.name }} → {{ trip.route.to_city.name }}</strong></div>
+      <div class="row"><span>Time</span><strong>{{ trip.departure_time|time:"H:i" }} → {{ trip.arrival_time|time:"H:i" }}</strong></div>
+      <div class="row"><span>Duration</span><strong>{{ trip.duration_display }}</strong></div>
+      <div class="row"><span>Price</span><strong>${{ trip.price }} per seat</strong></div>
+      <div class="row"><span>Available</span><strong>{{ trip.available_seats }} seats</strong></div>
+      <p class="note">For a final exam demo: the booking is stored in the database as Pending. Admin can later mark it Confirmed from Django Admin.</p>
+    </div>
+    <form class="card" method="post">
+      {% csrf_token %}
+      <label>Passenger Name *</label>
+      <input name="passenger_name" required placeholder="Enter name">
+      <label>Email *</label>
+      <input name="email" type="email" required placeholder="Enter email">
+      <label>Phone *</label>
+      <input name="phone" required placeholder="Enter phone number">
+      <label>Seats *</label>
+      <select name="seats">
+        <option value="1">1 Seat</option><option value="2">2 Seats</option><option value="3">3 Seats</option><option value="4">4 Seats</option><option value="5">5 Seats</option><option value="6">6 Seats</option>
+      </select>
+      <button class="btn" type="submit">🎟 Submit Booking Request</button>
+      <p class="note">Call and email buttons only open phone/email apps. This form works inside the website and saves the booking.</p>
+    </form>
+  </div>
+</div>
+</body>
+</html>

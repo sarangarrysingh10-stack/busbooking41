@@ -5,6 +5,9 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('search/', views.search, name='search'),
     path('inquiry/', views.inquiry, name='inquiry'),
+    path('book/<int:trip_id>/', views.book_trip, name='book_trip'),
+    path('booking/<int:booking_id>/success/', views.booking_success, name='booking_success'),
+    path('bookings/', views.booking_lookup, name='booking_lookup'),
     path('map/', views.map_view, name='map'),
 
     # Live tracking

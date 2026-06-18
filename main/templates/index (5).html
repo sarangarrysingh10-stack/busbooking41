@@ -352,7 +352,7 @@
     </div>
 
     <h1>America Runs on<br><span class="hl">BusGo</span></h1>
-    <p class="hero-sub">Comfortable, affordable bus travel connecting 114 cities.<br>Search, compare, and book your seat in minutes.</p>
+    <p class="hero-sub">Comfortable, affordable bus travel connecting 110 cities.<br>Search, compare, and book your seat in minutes.</p>
 
     {% if messages %}
     <div class="msgs">
@@ -416,9 +416,9 @@
 
 <!-- STATS -->
 <div class="stats-bar">
-  <div class="stat"><div class="stat-n">535+</div><div class="stat-l">Bus Routes</div></div>
-  <div class="stat"><div class="stat-n">114</div><div class="stat-l">Cities</div></div>
-  <div class="stat"><div class="stat-n">51</div><div class="stat-l">States</div></div>
+  <div class="stat"><div class="stat-n">528+</div><div class="stat-l">Bus Routes</div></div>
+  <div class="stat"><div class="stat-n">110</div><div class="stat-l">Cities</div></div>
+  <div class="stat"><div class="stat-n">49</div><div class="stat-l">States</div></div>
   <div class="stat"><div class="stat-n">24/7</div><div class="stat-l">Support</div></div>
 </div>
 
@@ -431,7 +431,7 @@
       <p class="sec-sub" style="margin:0 auto;max-width:500px">From search to confirmation — no accounts, no complicated checkout.</p>
     </div>
     <div class="how-grid">
-      <div class="how-card"><div class="how-num">1</div><div class="how-icon">🏙️</div><div class="how-title">Pick Your Cities</div><div class="how-desc">Choose your departure and destination from 114 cities across all 50 states.</div></div>
+      <div class="how-card"><div class="how-num">1</div><div class="how-icon">🏙️</div><div class="how-title">Pick Your Cities</div><div class="how-desc">Choose your departure and destination from 110 cities across the mainland US.</div></div>
       <div class="how-card"><div class="how-num">2</div><div class="how-icon">🔍</div><div class="how-title">Browse Buses</div><div class="how-desc">See all available buses with departure times, prices, seat availability, and amenities.</div></div>
       <div class="how-card"><div class="how-num">3</div><div class="how-icon">💬</div><div class="how-title">Book via WhatsApp</div><div class="how-desc">Contact us directly on WhatsApp to confirm your seat instantly — no forms needed.</div></div>
       <div class="how-card"><div class="how-num">4</div><div class="how-icon">🎟️</div><div class="how-title">Board & Travel</div><div class="how-desc">Get your confirmation and enjoy a comfortable, on-time journey to your destination.</div></div>
@@ -464,7 +464,7 @@
       <h2 class="sec-title">Built for the Modern Traveler</h2>
     </div>
     <div class="why-grid">
-      <div class="wcard"><div class="wcard-icon">⚡</div><div class="wcard-title">Instant Search</div><div class="wcard-desc">Real-time results across 535+ routes with no signup or account required.</div></div>
+      <div class="wcard"><div class="wcard-icon">⚡</div><div class="wcard-title">Instant Search</div><div class="wcard-desc">Real-time results across 528+ routes with no signup or account required.</div></div>
       <div class="wcard"><div class="wcard-icon">💺</div><div class="wcard-title">Live Seat Count</div><div class="wcard-desc">See exactly how many seats are left before committing to a route.</div></div>
       <div class="wcard"><div class="wcard-icon">📍</div><div class="wcard-title">GPS Tracking</div><div class="wcard-desc">Track your bus in real time on the map — know exactly where it is.</div></div>
       <div class="wcard"><div class="wcard-icon">💬</div><div class="wcard-title">WhatsApp Booking</div><div class="wcard-desc">No lengthy checkout — just message us and your seat is confirmed.</div></div>
@@ -483,7 +483,7 @@
       <p class="sec-sub" style="margin:0 auto;max-width:480px">Our team is here to find you the right route and confirm your seat quickly.</p>
     </div>
     <div class="cg">
-      <div class="cc wa"><div class="cc-icon">💬</div><div class="cc-title">WhatsApp</div><div class="cc-desc">Message us anytime — we reply fast and confirm your seat in minutes.</div><a href="https://wa.me/{{ support_phone|cut:'-'|cut:'+' }}?text=Hi!%20I%20need%20help%20booking%20a%20bus." class="clink lwa" target="_blank">💬 Chat Now</a></div>
+      <div class="cc wa"><div class="cc-icon">💬</div><div class="cc-title">WhatsApp</div><div class="cc-desc">Message us anytime — we reply fast and confirm your seat in minutes.</div><a href="https://wa.me/{{ support_phone_digits }}?text=Hi!%20I%20need%20help%20booking%20a%20bus." class="clink lwa" target="_blank">💬 Chat Now</a></div>
       <div class="cc ph"><div class="cc-icon">📞</div><div class="cc-title">Call Us</div><div class="cc-desc">Speak directly with our booking team, 7 days a week, 6 AM – 11 PM.</div><a href="tel:{{ support_phone }}" class="clink lph">📞 {{ support_phone }}</a></div>
       <div class="cc em"><div class="cc-icon">✉️</div><div class="cc-title">Email</div><div class="cc-desc">Send your travel details and we'll respond within a few hours.</div><a href="mailto:{{ support_email }}" class="clink lem">✉️ Send Email</a></div>
       <div class="cc mp"><div class="cc-icon">🗺️</div><div class="cc-title">Route Map</div><div class="cc-desc">Browse our interactive map to see all routes across the United States.</div><a href="/map/" class="clink lmp">🗺️ View Map</a></div>
@@ -501,7 +501,7 @@
 
 <!-- FLOATING BTNS -->
 <div class="float-cta">
-  <a href="https://wa.me/{{ support_phone|cut:'-'|cut:'+' }}?text=Hi!%20I%20need%20help%20booking%20a%20bus." class="fbtn fwa" target="_blank">💬 <span class="fl">WhatsApp</span></a>
+  <a href="https://wa.me/{{ support_phone_digits }}?text=Hi!%20I%20need%20help%20booking%20a%20bus." class="fbtn fwa" target="_blank">💬 <span class="fl">WhatsApp</span></a>
   <a href="tel:{{ support_phone }}" class="fbtn fph">📞 <span class="fl">Call Us</span></a>
 </div>
 

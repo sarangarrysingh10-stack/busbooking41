@@ -222,6 +222,7 @@
 
   .btn:hover { transform: translateY(-1px); opacity: 0.9; }
 
+  .btn-book { background: #f97316; color: white; }
   .btn-call { background: #16a34a; color: white; }
   .btn-email { background: #1d4ed8; color: white; }
 
@@ -303,8 +304,11 @@
       </div>
 
       <div class="trip-actions">
-        <a href="tel:{{ support_phone }}" class="btn btn-call">📞 Call to Book</a>
-        <a href="mailto:{{ support_email }}?subject=Booking: {{ from_city }} to {{ to_city }} - {{ trip.bus_name }}" class="btn btn-email">✉ Email Us</a>
+        {% if trip.available_seats > 0 %}
+          <a href="{% url 'book_trip' trip.id %}" class="btn btn-book">🎟 Book Now</a>
+        {% endif %}
+        <a href="tel:{{ support_phone }}" class="btn btn-call">📞 Call</a>
+        <a href="mailto:{{ support_email }}?subject=Booking: {{ from_city }} to {{ to_city }} - {{ trip.bus_name }}&body=Hello BusGo,%0A%0AI want to book {{ trip.bus_name }} from {{ from_city }} to {{ to_city }}.%0ADeparture: {{ trip.departure_time|time:'H:i' }}%0APrice: ${{ trip.price }}%0A%0AName:%0APhone:%0ASeats:" class="btn btn-email">✉ Email</a>
       </div>
     </div>
     {% endfor %}
@@ -321,7 +325,7 @@
 
 <!-- Floating CTA -->
 <div class="float-cta">
-  <a href="https://wa.me/?text=Hi!%20I%20need%20help%20booking%20a%20bus." class="float-btn float-whatsapp" target="_blank">💬 <span class="float-label">WhatsApp</span></a>
+  <a href="https://wa.me/{{ support_phone_digits }}?text=Hi!%20I%20need%20help%20booking%20a%20bus." class="float-btn float-whatsapp" target="_blank">💬 <span class="float-label">WhatsApp</span></a>
   <a href="tel:{{ support_phone }}" class="float-btn float-phone">📞 <span class="float-label">Call Us</span></a>
   <a href="mailto:{{ support_email }}" class="float-btn float-email">✉ <span class="float-label">Email</span></a>
 </div>

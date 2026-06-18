@@ -101,3 +101,27 @@ class Inquiry(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.email})"
+
+
+class Booking(models.Model):
+    """Stores passenger booking requests made from the trip results page."""
+    STATUS_CHOICES = [
+        ('PENDING', 'Pending'),
+        ('CONFIRMED', 'Confirmed'),
+        ('CANCELLED', 'Cancelled'),
+    ]
+
+    trip = models.ForeignKey(BusTrip, on_delete=models.CASCADE, related_name='bookings')
+    passenger_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    seats = models.PositiveIntegerField(default=1)
+    total_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    status = models.CharField(max_length=12, choices=STATUS_CHOICES, default='PENDING')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"Booking #{self.id} - {self.passenger_name} - {self.trip.bus_name}"

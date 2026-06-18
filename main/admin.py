@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import City, Route, BusTrip, BusLocation, Inquiry
+from .models import City, Route, BusTrip, BusLocation, Inquiry, Booking
 
 
 @admin.register(City)
@@ -45,3 +45,12 @@ class InquiryAdmin(admin.ModelAdmin):
     search_fields = ('name', 'email')
     readonly_fields = ('created_at',)
     list_editable = ('is_resolved',)
+
+
+@admin.register(Booking)
+class BookingAdmin(admin.ModelAdmin):
+    list_display = ('id', 'passenger_name', 'phone', 'email', 'trip', 'seats', 'total_amount', 'status', 'created_at')
+    list_filter = ('status', 'created_at', 'trip__route__from_city', 'trip__route__to_city')
+    search_fields = ('passenger_name', 'phone', 'email', 'trip__bus_name')
+    readonly_fields = ('created_at', 'total_amount')
+    list_editable = ('status',)

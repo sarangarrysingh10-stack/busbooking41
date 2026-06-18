@@ -441,7 +441,7 @@
   <div class="hero-content">
     <div class="hero-eyebrow">🚌 America's Bus Network</div>
     <h1>Travel the <span>Open Road</span><br>Without the Hassle</h1>
-    <p class="hero-sub">Comfortable bus routes connecting 114 cities across all 50 states</p>
+    <p class="hero-sub">Comfortable bus routes connecting 110 cities across the mainland US</p>
 
     {% if messages %}
     <div class="messages-wrap">
@@ -492,15 +492,15 @@
 <!-- STATS BAR -->
 <div class="stats-bar">
   <div class="stat-item">
-    <div class="stat-num">535+</div>
+    <div class="stat-num">528+</div>
     <div class="stat-lbl">Bus Routes</div>
   </div>
   <div class="stat-item">
-    <div class="stat-num">114</div>
+    <div class="stat-num">110</div>
     <div class="stat-lbl">Cities</div>
   </div>
   <div class="stat-item">
-    <div class="stat-num">51</div>
+    <div class="stat-num">49</div>
     <div class="stat-lbl">States</div>
   </div>
   <div class="stat-item">
@@ -522,7 +522,7 @@
         <div class="how-num">1</div>
         <div class="how-icon">🏙️</div>
         <div class="how-title">Pick Your Cities</div>
-        <div class="how-desc">Choose your departure and destination from 114 cities across the US.</div>
+        <div class="how-desc">Choose your departure and destination from 110 cities across the mainland US.</div>
       </div>
       <div class="how-card">
         <div class="how-num">2</div>
@@ -616,7 +616,7 @@
       <div class="why-card">
         <div class="why-icon">⚡</div>
         <div class="why-title">Instant Route Search</div>
-        <div class="why-desc">Real-time results across 535+ routes — no waiting, no signup required.</div>
+        <div class="why-desc">Real-time results across 528+ routes — no waiting, no signup required.</div>
       </div>
       <div class="why-card">
         <div class="why-icon">💺</div>
@@ -660,7 +660,7 @@
         <div class="contact-icon2">💬</div>
         <div class="contact-title2">WhatsApp</div>
         <div class="contact-desc2">Send us a message anytime. We reply fast and can confirm your seat in minutes.</div>
-        <a href="https://wa.me/{{ support_phone|cut:'-'|cut:'+' }}?text=Hi!%20I%20need%20help%20booking%20a%20bus." class="contact-link link-wa" target="_blank">💬 Chat Now</a>
+        <a href="https://wa.me/{{ support_phone_digits }}?text=Hi!%20I%20need%20help%20booking%20a%20bus." class="contact-link link-wa" target="_blank">💬 Chat Now</a>
       </div>
       <div class="contact-card ph">
         <div class="contact-icon2">📞</div>
@@ -694,7 +694,7 @@
 
 <!-- FLOAT BTNS -->
 <div class="float-cta">
-  <a href="https://wa.me/{{ support_phone|cut:'-'|cut:'+' }}?text=Hi!%20I%20need%20help%20booking%20a%20bus." class="float-btn fb-wa" target="_blank">
+  <a href="https://wa.me/{{ support_phone_digits }}?text=Hi!%20I%20need%20help%20booking%20a%20bus." class="float-btn fb-wa" target="_blank">
     💬 <span class="float-label">WhatsApp</span>
   </a>
   <a href="tel:{{ support_phone }}" class="float-btn fb-ph">
