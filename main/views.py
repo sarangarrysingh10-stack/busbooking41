@@ -6,7 +6,6 @@ from django.conf import settings
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
-from django.utils import timezone
 from .models import Route, BusTrip, City, Inquiry, BusLocation, Booking
 
 
@@ -94,6 +93,15 @@ def book_trip(request, trip_id):
         passenger_name = request.POST.get('passenger_name', '').strip()
         email = request.POST.get('email', '').strip()
         phone = request.POST.get('phone', '').strip()
+        payment_method = request.POST.get('payment_method', 'PAY_LATER').strip()
+        payer_name = request.POST.get('payer_name', '').strip()
+        payer_upi_id = request.POST.get('payer_upi_id', '').strip()
+        payment_reference = request.POST.get('payment_reference', '').strip()
+
+        valid_methods = {'PAY_LATER', 'PAYPAL', 'CARD', 'NET_BANKING'}
+        if payment_method not in valid_methods:
+            payment_method = 'PAY_LATER'
+
         try:
             seats = int(request.POST.get('seats', '1'))
         except ValueError:
@@ -111,7 +119,18 @@ def book_trip(request, trip_id):
             messages.error(request, f'Only {trip.available_seats} seat(s) are available for this trip.')
             return redirect('book_trip', trip_id=trip.id)
 
+        # For online demo payments, collect details for admin verification.
+        if payment_method in {'PAYPAL', 'CARD', 'NET_BANKING'}:
+            if not payer_name or not payment_reference:
+                messages.error(request, 'For online payment, enter payer name and transaction/reference ID.')
+                return redirect('book_trip', trip_id=trip.id)
+            if payment_method == 'PAYPAL' and not payer_upi_id:
+                messages.error(request, 'For PayPal payment, enter PayPal email/account ID.')
+                return redirect('book_trip', trip_id=trip.id)
+
         total_amount = Decimal(seats) * trip.price
+        payment_status = 'NOT_PAID' if payment_method == 'PAY_LATER' else 'PENDING'
+
         booking = Booking.objects.create(
             trip=trip,
             passenger_name=passenger_name,
@@ -120,6 +139,11 @@ def book_trip(request, trip_id):
             seats=seats,
             total_amount=total_amount,
             status='PENDING',
+            payment_method=payment_method,
+            payment_status=payment_status,
+            payer_name=payer_name,
+            payer_upi_id=payer_upi_id,
+            payment_reference=payment_reference,
         )
         trip.available_seats -= seats
         trip.save(update_fields=['available_seats'])
@@ -197,7 +221,6 @@ def map_view(request):
         'total_routes': len(route_data),
         'highlight_route_id': highlight_route_id,
     })
-
 
 
 # ── API: get all live bus locations ──────────────────────────────────────────

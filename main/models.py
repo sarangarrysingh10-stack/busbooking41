@@ -111,6 +111,20 @@ class Booking(models.Model):
         ('CANCELLED', 'Cancelled'),
     ]
 
+    PAYMENT_METHOD_CHOICES = [
+        ('PAY_LATER', 'Pay Later / Counter'),
+        ('PAYPAL', 'PayPal'),
+        ('CARD', 'Debit / Credit Card'),
+        ('NET_BANKING', 'Net Banking'),
+    ]
+
+    PAYMENT_STATUS_CHOICES = [
+        ('NOT_PAID', 'Not Paid'),
+        ('PENDING', 'Payment Pending'),
+        ('PAID', 'Paid'),
+        ('FAILED', 'Failed'),
+    ]
+
     trip = models.ForeignKey(BusTrip, on_delete=models.CASCADE, related_name='bookings')
     passenger_name = models.CharField(max_length=100)
     email = models.EmailField()
@@ -118,6 +132,14 @@ class Booking(models.Model):
     seats = models.PositiveIntegerField(default=1)
     total_amount = models.DecimalField(max_digits=10, decimal_places=2)
     status = models.CharField(max_length=12, choices=STATUS_CHOICES, default='PENDING')
+
+    # Payment details for demo/verification. Do not store full card number or sensitive bank details.
+    payment_method = models.CharField(max_length=20, choices=PAYMENT_METHOD_CHOICES, default='PAY_LATER')
+    payment_status = models.CharField(max_length=12, choices=PAYMENT_STATUS_CHOICES, default='NOT_PAID')
+    payer_name = models.CharField(max_length=100, blank=True)
+    payer_upi_id = models.CharField(max_length=100, blank=True)
+    payment_reference = models.CharField(max_length=100, blank=True, help_text='PayPal/Card/Net Banking transaction reference ID')
+
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

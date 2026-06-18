@@ -49,8 +49,17 @@ class InquiryAdmin(admin.ModelAdmin):
 
 @admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ('id', 'passenger_name', 'phone', 'email', 'trip', 'seats', 'total_amount', 'status', 'created_at')
-    list_filter = ('status', 'created_at', 'trip__route__from_city', 'trip__route__to_city')
-    search_fields = ('passenger_name', 'phone', 'email', 'trip__bus_name')
+    list_display = (
+        'id', 'passenger_name', 'phone', 'email', 'trip', 'seats', 'total_amount',
+        'status', 'payment_method', 'payment_status', 'payment_reference', 'created_at'
+    )
+    list_filter = (
+        'status', 'payment_method', 'payment_status', 'created_at',
+        'trip__route__from_city', 'trip__route__to_city'
+    )
+    search_fields = (
+        'passenger_name', 'phone', 'email', 'trip__bus_name',
+        'payer_name', 'payer_upi_id', 'payment_reference'
+    )
     readonly_fields = ('created_at', 'total_amount')
-    list_editable = ('status',)
+    list_editable = ('status', 'payment_status')

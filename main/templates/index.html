@@ -489,6 +489,50 @@ nav .nav-book:hover, nav .nav-cta:hover, .nav-links a.nav-book:hover, .nav-links
   color:#ffffff!important;
 }
 
+
+
+/* Payment Options + extra navigation buttons */
+.nav-links{gap:1.1rem!important;}
+.payment-section{
+  background:linear-gradient(180deg,#f4fffd 0%,#ffffff 100%);
+}
+.payment-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:1.5rem;
+  margin-top:3rem;
+}
+.payment-card{
+  background:#ffffff;
+  border:1px solid #cde8e4;
+  border-radius:20px;
+  padding:2rem 1.4rem;
+  box-shadow:0 18px 40px rgba(0,121,107,.08);
+  transition:.25s ease;
+  text-align:center;
+}
+.payment-card:hover{
+  transform:translateY(-5px);
+  border-color:#087b7a;
+  box-shadow:0 22px 50px rgba(0,121,107,.14);
+}
+.payment-icon{font-size:2.4rem;margin-bottom:.9rem;}
+.payment-title{font-size:1.05rem;font-weight:800;color:#183b37;margin-bottom:.6rem;}
+.payment-desc{font-size:.88rem;line-height:1.65;color:#5b706d;}
+.payment-note{
+  margin:2rem auto 0;
+  max-width:780px;
+  background:#eefaf8;
+  border:1px solid #cde8e4;
+  border-radius:16px;
+  padding:1rem 1.2rem;
+  color:#315d58;
+  font-size:.95rem;
+  line-height:1.6;
+}
+@media(max-width:900px){.payment-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:600px){.payment-grid{grid-template-columns:1fr;}.nav-links{gap:.75rem!important;}.nav-book{padding:.55rem .85rem!important;}}
+
 </style>
 </head>
 <body>
@@ -497,7 +541,10 @@ nav .nav-book:hover, nav .nav-cta:hover, .nav-links a.nav-book:hover, .nav-links
 <nav>
   <a href="/" class="logo">Bus<em>Go</em></a>
   <div class="nav-links">
+    <a href="#book-ticket" class="nl-hide">🚌 Book Tickets</a>
     <a href="/map/" class="nl-hide">🗺 Routes</a>
+    <a href="/bookings/" class="nl-hide">🎫 My Bookings</a>
+    <a href="#payment-options" class="nl-hide">💳 Payment Options</a>
     <a href="#contact" class="nl-hide">Contact</a>
     <a href="tel:{{ support_phone }}" class="nav-book">☎ {{ support_phone }}</a>
   </div>
@@ -581,12 +628,13 @@ nav .nav-book:hover, nav .nav-cta:hover, .nav-links a.nav-book:hover, .nav-links
     </div>
     {% endif %}
 
-    <div class="search-card">
+    <div class="search-card" id="book-ticket">
       <div class="search-tabs">
-        <div class="search-tab active">One Way</div>
-        <div class="search-tab">Round Trip</div>
+        <div class="search-tab active" data-trip-type="oneway">One Way</div>
+        <div class="search-tab" data-trip-type="round">Round Trip</div>
       </div>
       <form action="/search/" method="GET">
+        <input type="hidden" name="trip_type" id="trip-type" value="oneway">
         <div class="search-row">
           <div class="field-wrap">
             <label class="field-label">From</label>
@@ -623,7 +671,7 @@ nav .nav-book:hover, nav .nav-cta:hover, .nav-links a.nav-book:hover, .nav-links
 <div class="stats-bar">
   <div class="stat-item">
     <div class="stat-num">524</div>
-    <div class="stat-lbl">Bus Routes</div>
+    <div class="stat-lbl">Bus Trips</div>
   </div>
   <div class="stat-item">
     <div class="stat-num">110</div>
@@ -746,7 +794,7 @@ nav .nav-book:hover, nav .nav-cta:hover, .nav-links a.nav-book:hover, .nav-links
       <div class="why-card">
         <div class="why-icon">⚡</div>
         <div class="why-title">Instant Route Search</div>
-        <div class="why-desc">Real-time results across 528+ routes — no waiting, no signup required.</div>
+        <div class="why-desc">Real-time results across 524 bus trips — no waiting, no signup required.</div>
       </div>
       <div class="why-card">
         <div class="why-icon">💺</div>
@@ -773,6 +821,47 @@ nav .nav-book:hover, nav .nav-cta:hover, .nav-links a.nav-book:hover, .nav-links
         <div class="why-title">7-Day Support</div>
         <div class="why-desc">Our team is available 6 AM – 11 PM daily to help with any question.</div>
       </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- PAYMENT OPTIONS -->
+<section class="section payment-section" id="payment-options">
+  <div class="section-inner">
+    <div style="text-align:center">
+      <div class="section-eyebrow">Payment Support</div>
+      <h2 class="section-title">Payment Options</h2>
+      <p class="section-sub" style="margin:0 auto">
+        Choose payment during booking. Cash is available, and PayPal, card and net banking details can be submitted for admin verification.
+      </p>
+    </div>
+
+    <div class="payment-grid">
+      <div class="payment-card">
+        <div class="payment-icon">💵</div>
+        <div class="payment-title">Cash Payment</div>
+        <div class="payment-desc">Passenger can pay at the counter or while boarding after the booking is confirmed.</div>
+      </div>
+      <div class="payment-card">
+        <div class="payment-icon">📱</div>
+        <div class="payment-title">PayPal</div>
+        <div class="payment-desc">Passenger can enter payer name, PayPal email/account ID and transaction ID while booking.</div>
+      </div>
+      <div class="payment-card">
+        <div class="payment-icon">💳</div>
+        <div class="payment-title">Card Payment</div>
+        <div class="payment-desc">For demo, card option accepts only payment reference ID. Full gateway integration can be added later.</div>
+      </div>
+      <div class="payment-card">
+        <div class="payment-icon">🏦</div>
+        <div class="payment-title">Net Banking</div>
+        <div class="payment-desc">Passenger can enter bank transaction/reference number for admin verification.</div>
+      </div>
+    </div>
+
+    <div class="payment-note">
+      <strong>Note:</strong> In this BusGo version, online payment is a demo/verification flow. Passenger selects a payment method and enters reference details. Admin verifies the payment from Django Admin and marks Payment Status as Paid.
     </div>
   </div>
 </section>
@@ -842,11 +931,13 @@ nav .nav-book:hover, nav .nav-cta:hover, .nav-links a.nav-book:hover, .nav-links
     to.value = temp;
   });
 
-  // Search tab UI
+  // Search tab UI + send trip type to Django
   document.querySelectorAll('.search-tab').forEach(tab => {
     tab.addEventListener('click', () => {
       document.querySelectorAll('.search-tab').forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
+      const tripTypeInput = document.getElementById('trip-type');
+      if (tripTypeInput) tripTypeInput.value = tab.dataset.tripType || 'oneway';
     });
   });
 </script>

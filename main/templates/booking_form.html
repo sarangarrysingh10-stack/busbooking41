@@ -6,123 +6,15 @@
 <title>Book Trip — BusGo</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0f1e;--card:#1a2236;--text:#f1f5f9;--muted:#94a3b8;--accent:#f97316;--border:rgba(255,255,255,.1);--green:#16a34a}
-*{box-sizing:border-box;margin:0;padding:0}body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}nav{padding:1.2rem 2rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between}.logo{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:white;text-decoration:none}.logo span{color:var(--accent)}.wrap{max-width:850px;margin:0 auto;padding:3rem 1.5rem}.title{font-family:'Syne',sans-serif;font-size:2.2rem;margin-bottom:.5rem}.sub{color:var(--muted);margin-bottom:2rem}.grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.5rem}.trip-name{font-family:'Syne',sans-serif;font-size:1.3rem;margin-bottom:.6rem}.row{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid var(--border);color:var(--muted)}.row strong{color:white}label{display:block;margin:.9rem 0 .35rem;color:var(--muted);font-weight:700}input,select{width:100%;padding:.8rem;border-radius:10px;border:1px solid var(--border);background:#0f172a;color:white;font:inherit}.btn{margin-top:1rem;width:100%;padding:.9rem;border:0;border-radius:10px;background:var(--accent);color:white;font-weight:800;cursor:pointer}.note{font-size:.85rem;color:var(--muted);margin-top:1rem;line-height:1.5}.messages{margin-bottom:1rem}.msg{padding:.8rem;border-radius:10px;margin-bottom:.5rem;background:#3b1d1d;color:#fecaca}@media(max-width:700px){.grid{grid-template-columns:1fr}}
-
-
-/* ===== BusGo cover-page theme override: light teal/orange style ===== */
-:root{
-  --teal:#087b7a!important;
-  --teal2:#0f8f8b!important;
-  --deep:#173634!important;
-  --orange:#ff6b1a!important;
-  --cream:#fbfaf6!important;
-  --cardLight:#ffffff!important;
-  --soft:#e8f5f3!important;
-  --ink:#203735!important;
-  --mutedText:#5f7270!important;
-  --line:#d8e8e5!important;
-  --bg:#fbfaf6!important;
-  --surface:#ffffff!important;
-  --card:#ffffff!important;
-  --accent:#ff6b1a!important;
-  --accent2:#e85618!important;
-  --text:#203735!important;
-  --muted:#5f7270!important;
-  --border:#d8e8e5!important;
-  --green:#16a34a!important;
-  --red:#dc2626!important;
-}
-html{scroll-behavior:smooth;}
-body{
-  background:
-    radial-gradient(circle at 12% 8%, rgba(8,123,122,.13), transparent 28%),
-    radial-gradient(circle at 88% 2%, rgba(255,107,26,.10), transparent 25%),
-    linear-gradient(180deg,#ffffff 0%,#f7fbfa 45%,#eef8f5 100%)!important;
-  color:var(--ink)!important;
-}
-nav{
-  background:rgba(255,255,255,.96)!important;
-  border-bottom:1px solid var(--line)!important;
-  box-shadow:0 10px 30px rgba(8,123,122,.08)!important;
-  backdrop-filter:blur(14px)!important;
-}
-.logo{font-family:'Playfair Display','Syne',serif!important;color:var(--teal)!important;font-weight:800!important;letter-spacing:-.7px!important;}
-.logo span{color:var(--orange)!important;}
-nav a:not(.logo), .nav-links a{color:var(--mutedText)!important;font-weight:700!important;}
-nav a:not(.logo):hover,.nav-links a:hover,.nav-links a.active{color:var(--orange)!important;}
-.wrap,.main{max-width:1100px!important;}
-.title,.route-title,.sidebar-title,.bus-name,.trip-name,.card h1,.card h2,.card h3,.popup-route,.popup-city,.track-title{
-  color:var(--ink)!important;
-}
-.title,.route-title{font-family:'Playfair Display','Syne',serif!important;font-weight:800!important;}
-.sub,.breadcrumb,.results-count,.muted,.time-label,.duration-text,.amenities,.price-label,.note,.track-bus,.section-label,.stat-label{color:var(--mutedText)!important;}
-.card,.trip-card,.booking-card,.summary-card,.search-card,.info-card,.bus-card,.track-panel{
-  background:rgba(255,255,255,.92)!important;
-  color:var(--ink)!important;
-  border:1px solid var(--line)!important;
-  box-shadow:0 18px 45px rgba(8,123,122,.10)!important;
-}
-.trip-card:hover,.card:hover,.bus-card:hover{border-color:rgba(255,107,26,.35)!important;box-shadow:0 20px 50px rgba(255,107,26,.12)!important;}
-.row{border-bottom:1px solid var(--line)!important;color:var(--mutedText)!important;}
-.row strong,.popup-row strong,.time-big,.bus-card-name,.info-value{color:var(--ink)!important;}
-input,select,textarea{
-  background:#fffdf8!important;
-  color:var(--ink)!important;
-  border:1px solid var(--line)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.7)!important;
-}
-input:focus,select:focus,textarea:focus{outline:none!important;border-color:var(--teal)!important;box-shadow:0 0 0 3px rgba(8,123,122,.12)!important;}
-input::placeholder,textarea::placeholder{color:#8aa09c!important;}
-label{color:var(--mutedText)!important;}
-.btn,.submit-btn,.nav-cta,.btn-book,.home,.lookup,.admin,.offline-btn,.toggle-btn,.driver-link{
-  border-radius:12px!important;
-  box-shadow:0 10px 25px rgba(8,123,122,.14)!important;
-}
-.btn,.submit-btn,.btn-book,.home,.nav-cta,.offline-btn{
-  background:var(--teal)!important;color:white!important;border:0!important;
-}
-.btn:hover,.submit-btn:hover,.btn-book:hover,.home:hover,.nav-cta:hover,.offline-btn:hover{background:var(--teal2)!important;transform:translateY(-1px)!important;}
-.btn-call,.lookup,.toggle-btn.start{background:#22c55e!important;color:white!important;}
-.btn-email,.admin{background:var(--orange)!important;color:white!important;}
-.price-amount,.route-arrow,.stat-num,.popup-city,.bus-coords,.driver-link{color:var(--orange)!important;}
-.badge-type{background:#e9f7f4!important;color:var(--teal)!important;}
-.badge-seats-ok{background:#e9fbef!important;color:#15803d!important;}
-.badge-seats-low{background:#fff3e8!important;color:#c2410c!important;}
-.badge-full{background:#fff0f0!important;color:#dc2626!important;}
-.float-btn{box-shadow:0 12px 28px rgba(8,123,122,.18)!important;}
-.float-phone{background:var(--teal)!important;}
-.float-email{background:var(--orange)!important;}
-.messages .msg,.msg{background:#fff3e8!important;color:#9a3412!important;border:1px solid #fed7aa!important;}
-/* Map and tracking pages */
-.sidebar{
-  background:#ffffff!important;
-  color:var(--ink)!important;
-  border-right:1px solid var(--line)!important;
-  box-shadow:12px 0 35px rgba(8,123,122,.08)!important;
-}
-.sidebar-header{border-bottom:1px solid var(--line)!important;background:linear-gradient(180deg,#ffffff,#f0fbf8)!important;}
-.stat{background:#f2fbf8!important;border:1px solid #ccebe5!important;}
-.city-item,.route-item{color:var(--ink)!important;}
-.city-item:hover,.route-item:hover{background:#eef8f5!important;}
-.map-search-box input{background:#fff!important;color:var(--ink)!important;border:1px solid #ccebe5!important;}
-.map-search-hint{color:var(--mutedText)!important;}
-.leaflet-popup-content-wrapper{background:#ffffff!important;color:var(--ink)!important;border:1px solid var(--line)!important;box-shadow:0 18px 45px rgba(8,123,122,.18)!important;}
-.leaflet-popup-tip{background:#ffffff!important;}
-.popup-row{color:var(--mutedText)!important;}
-.track-panel{background:#ffffff!important;color:var(--ink)!important;}
-.live-badge{background:#e9fbef!important;border-color:#b8f3c9!important;color:#15803d!important;}
-.bus-status.live{background:#e9fbef!important;color:#15803d!important;}
-.bus-status.offline{background:#fff0f0!important;color:#dc2626!important;}
-@media(max-width:700px){nav{padding:1rem!important}.wrap,.main{padding:2rem 1rem!important}.grid{grid-template-columns:1fr!important}.trip-card{grid-template-columns:1fr!important}.trip-actions{width:100%!important}}
-
+:root{--bg:#f4fffd;--card:#ffffff;--text:#183b37;--muted:#506a67;--teal:#087b7a;--teal2:#0a6f6e;--orange:#e05c2a;--green:#22c55e;--border:#cde8e4;--shadow:rgba(0,121,107,.12)}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'DM Sans',sans-serif;background:linear-gradient(120deg,#eefaf8 0%,#fffaf5 100%);color:var(--text);min-height:100vh}nav{height:72px;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:#ffffff}.logo{font-family:'Syne',sans-serif;font-size:1.7rem;font-weight:800;color:#087b7a;text-decoration:none}.logo span{color:var(--orange)}nav a.back{color:var(--muted);text-decoration:none;font-weight:800}.wrap{max-width:1100px;margin:0 auto;padding:3rem 1.5rem}.title{font-family:'Playfair Display',serif;font-size:2.6rem;margin-bottom:.5rem}.sub{color:var(--muted);margin-bottom:2rem}.grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:1.3rem}.card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:1.5rem;box-shadow:0 18px 50px var(--shadow)}.trip-name{font-family:'Syne',sans-serif;font-size:1.35rem;margin-bottom:.6rem;color:#123633}.row{display:flex;justify-content:space-between;gap:1rem;padding:.65rem 0;border-bottom:1px solid var(--border);color:var(--muted)}.row strong{color:#123633;text-align:right}label{display:block;margin:.9rem 0 .35rem;color:#244b47;font-weight:800}input,select{width:100%;padding:.88rem;border-radius:12px;border:1px solid #bcded8;background:#fff;color:#123633;font:inherit;outline:none}input:focus,select:focus{border-color:var(--teal);box-shadow:0 0 0 4px rgba(8,123,122,.08)}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}.section-title{font-family:'Syne',sans-serif;font-size:1rem;margin-top:1.3rem;padding-top:1.1rem;border-top:1px dashed #bcded8;color:#087b7a}.payment-panel{margin-top:.9rem;padding:1rem;border-radius:16px;background:#f6fffd;border:1px solid #cde8e4}.hint{font-size:.86rem;color:var(--muted);line-height:1.5;margin-top:.55rem}.btn{margin-top:1.2rem;width:100%;padding:1rem;border:0;border-radius:12px;background:var(--teal);color:white;font-weight:900;cursor:pointer;font-size:1rem}.btn:hover{background:var(--teal2)}.messages{margin-bottom:1rem}.msg{padding:.8rem;border-radius:10px;margin-bottom:.5rem;background:#fff2f2;color:#991b1b;border:1px solid #fecaca}.pay-badge{display:inline-flex;padding:.35rem .7rem;border-radius:999px;background:#fff6ed;color:#9a3412;font-weight:900;margin-top:.8rem;font-size:.82rem}.total-box{margin-top:1rem;padding:1rem;border-radius:14px;background:#eefaf8;border:1px solid #cde8e4}.total-box b{color:#087b7a;font-size:1.1rem}@media(max-width:850px){.grid,.form-grid{grid-template-columns:1fr}.title{font-size:2.1rem}}
 </style>
 </head>
 <body>
-<nav><a href="/" class="logo">Bus<span>Go</span></a><a href="javascript:history.back()" style="color:#94a3b8;text-decoration:none">← Back</a></nav>
+<nav><a href="/" class="logo">Bus<span>Go</span></a><a href="javascript:history.back()" class="back">← Back</a></nav>
 <div class="wrap">
   <div class="title">Confirm Booking</div>
-  <div class="sub">Fill passenger details. This creates a booking request and admin can confirm it.</div>
+  <div class="sub">Fill passenger and payment details. The booking stays Pending until admin verifies it.</div>
   {% if messages %}<div class="messages">{% for message in messages %}<div class="msg">{{ message }}</div>{% endfor %}</div>{% endif %}
   <div class="grid">
     <div class="card">
@@ -132,24 +24,69 @@ label{color:var(--mutedText)!important;}
       <div class="row"><span>Duration</span><strong>{{ trip.duration_display }}</strong></div>
       <div class="row"><span>Price</span><strong>${{ trip.price }} per seat</strong></div>
       <div class="row"><span>Available</span><strong>{{ trip.available_seats }} seats</strong></div>
-      <p class="note">For a final exam demo: the booking is stored in the database as Pending. Admin can later mark it Confirmed from Django Admin.</p>
+      <div class="pay-badge">Payment verification by admin</div>
+      <p class="hint">This project does not store card numbers or bank passwords. Online payment options only collect transaction/reference details for final-project demo and admin verification.</p>
     </div>
+
     <form class="card" method="post">
       {% csrf_token %}
-      <label>Passenger Name *</label>
-      <input name="passenger_name" required placeholder="Enter name">
+      <div class="section-title">Passenger Details</div>
+      <div class="form-grid">
+        <div><label>Passenger Name *</label><input name="passenger_name" required placeholder="Enter name"></div>
+        <div><label>Phone *</label><input name="phone" required placeholder="Enter phone number"></div>
+      </div>
       <label>Email *</label>
       <input name="email" type="email" required placeholder="Enter email">
-      <label>Phone *</label>
-      <input name="phone" required placeholder="Enter phone number">
       <label>Seats *</label>
-      <select name="seats">
+      <select name="seats" id="seats">
         <option value="1">1 Seat</option><option value="2">2 Seats</option><option value="3">3 Seats</option><option value="4">4 Seats</option><option value="5">5 Seats</option><option value="6">6 Seats</option>
       </select>
+
+      <div class="section-title">Payment Details</div>
+      <label>Payment Method *</label>
+      <select name="payment_method" id="payment-method">
+        <option value="PAY_LATER">Cash / Pay Later</option>
+        <option value="PAYPAL">PayPal</option>
+        <option value="CARD">Debit / Credit Card</option>
+        <option value="NET_BANKING">Net Banking</option>
+      </select>
+
+      <div class="payment-panel" id="online-payment-box" style="display:none">
+        <div class="form-grid">
+          <div><label>Payer Name *</label><input name="payer_name" id="payer-name" placeholder="Name used for payment"></div>
+          <div><label>PayPal Email / Account ID</label><input name="payer_upi_id" id="payer-upi" placeholder="yourname@example.com"></div>
+        </div>
+        <label>Transaction / Reference ID *</label>
+        <input name="payment_reference" id="payment-ref" placeholder="Enter payment reference ID">
+        <p class="hint">For PayPal, enter PayPal email/account ID. For Card/Net Banking, enter only transaction/reference ID. Do not enter card number, CVV, or password.</p>
+      </div>
+
+      <div class="total-box">Total Amount: <b id="total-amount">${{ trip.price }}</b></div>
       <button class="btn" type="submit">🎟 Submit Booking Request</button>
-      <p class="note">Call and email buttons only open phone/email apps. This form works inside the website and saves the booking.</p>
+      <p class="hint">Admin will verify the booking and payment status from Django Admin.</p>
     </form>
   </div>
 </div>
+<script>
+const price = parseFloat("{{ trip.price }}");
+const seats = document.getElementById('seats');
+const total = document.getElementById('total-amount');
+function updateTotal(){ total.textContent = '$' + (price * parseInt(seats.value || '1')).toFixed(2); }
+seats.addEventListener('change', updateTotal);
+updateTotal();
+
+const method = document.getElementById('payment-method');
+const box = document.getElementById('online-payment-box');
+const payerName = document.getElementById('payer-name');
+const paymentRef = document.getElementById('payment-ref');
+function togglePayment(){
+  const online = method.value !== 'PAY_LATER';
+  box.style.display = online ? 'block' : 'none';
+  payerName.required = online;
+  paymentRef.required = online;
+}
+method.addEventListener('change', togglePayment);
+togglePayment();
+</script>
 </body>
 </html>
