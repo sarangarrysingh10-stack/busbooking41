@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — BusGo</title>
+  <style>
+    :root{--teal:#0b8078;--orange:#ff6b22;--dark:#183333;--muted:#607271;--line:#cfe3e1;--bg:#eefaf8;--white:#fff;}
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:linear-gradient(135deg,#eefaf8,#fff7f0);color:var(--dark);min-height:100vh;}
+    nav{height:72px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 44px;}
+    .logo{font-size:28px;font-weight:900;text-decoration:none;color:var(--teal)} .logo span{color:var(--orange)}
+    .navlinks a{margin-left:22px;text-decoration:none;color:var(--muted);font-weight:700}.navlinks a:hover{color:var(--orange)}
+    .wrap{min-height:calc(100vh - 72px);display:flex;align-items:center;justify-content:center;padding:40px 20px;}
+    .card{width:100%;max-width:460px;background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:0 24px 60px rgba(11,128,120,.14);padding:34px;}
+    .badge{display:inline-block;background:#effaf8;border:1px solid var(--line);border-radius:999px;padding:8px 16px;color:var(--teal);font-size:12px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;margin-bottom:18px;}
+    h1{font-size:36px;line-height:1.05;margin:0 0 10px;font-weight:900;} p{color:var(--muted);line-height:1.55;margin:0 0 22px;}
+    label{display:block;font-weight:800;margin:15px 0 7px;} input{width:100%;padding:15px 16px;border:1px solid var(--line);border-radius:12px;font-size:16px;outline:none;background:#fbfffe;} input:focus{border-color:var(--teal);box-shadow:0 0 0 4px rgba(11,128,120,.12)}
+    .btn{width:100%;border:0;border-radius:14px;background:var(--teal);color:white;padding:15px 18px;font-size:17px;font-weight:900;margin-top:20px;cursor:pointer;box-shadow:0 10px 20px rgba(11,128,120,.2)} .btn:hover{background:#096b65}
+    .alt{margin-top:20px;text-align:center;color:var(--muted)} .alt a{color:var(--orange);font-weight:900;text-decoration:none}
+    .msg{padding:12px 14px;border-radius:12px;margin-bottom:14px;font-weight:700}.success{background:#e9fbef;color:#15803d}.error{background:#fff1f1;color:#b91c1c}
+    .errors{background:#fff1f1;border:1px solid #fecaca;color:#b91c1c;border-radius:12px;padding:12px;margin:10px 0;font-size:14px;}
+    .helptext{display:block;color:#7b8d8b;font-size:12px;margin-top:6px;line-height:1.4}
+    @media(max-width:600px){nav{padding:0 18px}.navlinks a{margin-left:10px}.card{padding:24px}h1{font-size:30px}}
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">Bus<span>Go</span></a>
+    <div class="navlinks"><a href="/">Home</a><a href="/signup/">Sign Up</a></div>
+  </nav>
+  <main class="wrap">
+    <section class="card">
+      <div class="badge">Passenger Login</div>
+      <h1>Welcome back</h1>
+      <p>Login to your BusGo account and continue checking routes, bookings and trip status.</p>
+      {% if messages %}{% for message in messages %}<div class="msg {{ message.tags }}">{{ message }}</div>{% endfor %}{% endif %}
+      {% if form.non_field_errors %}<div class="errors">{{ form.non_field_errors }}</div>{% endif %}
+      <form method="post">
+        {% csrf_token %}
+        <label for="id_username">Username</label>
+        {{ form.username }}
+        <label for="id_password">Password</label>
+        {{ form.password }}
+        <button type="submit" class="btn">Login</button>
+      </form>
+      <div class="alt">New passenger? <a href="/signup/">Create an account</a></div>
+    </section>
+  </main>
+</body>
+</html>

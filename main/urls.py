@@ -1,8 +1,16 @@
 from django.urls import path
 from . import views
+from . import auth_views
 
 urlpatterns = [
     path('', views.home, name='home'),
+
+    # User authentication
+    path('login/', auth_views.login_page, name='login'),
+    path('signup/', auth_views.signup_page, name='signup'),
+    path('singnup/', auth_views.signup_page, name='singnup'),  # typo-friendly URL
+    path('logout/', auth_views.logout_page, name='logout'),
+    path('account/', auth_views.account_dashboard, name='account_dashboard'),
     path('search/', views.search, name='search'),
     path('inquiry/', views.inquiry, name='inquiry'),
     path('book/<int:trip_id>/', views.book_trip, name='book_trip'),
