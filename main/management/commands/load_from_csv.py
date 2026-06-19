@@ -167,6 +167,71 @@ def _arrival_from_duration(departure_text, arrival_text, duration_text):
     return dep_dt.time(), arr_dt.time()
 
 
+def _calculate_ticket_price(row, bus_type, distance_miles, available_seats):
+    """Create more realistic demo fares for BusGo.
+
+    The original CSV contains many short-route prices as $10. This function
+    makes fares different using route distance, bus type, amenities, time band,
+    and low-seat demand. It keeps demo pricing simple but more believable.
+    """
+    try:
+        distance = float(distance_miles or row.get('Distance_Miles') or 0)
+    except (TypeError, ValueError):
+        distance = 0
+
+    # Distance-based base fare. Short routes still need a minimum fare.
+    amount = max(12.0, distance * 0.18)
+
+    # Bus category multiplier.
+    type_multiplier = {
+        'SEATER': 1.00,
+        'NAC': 1.08,
+        'AC': 1.20,
+        'LUXURY': 1.45,
+    }.get(bus_type, 1.00)
+    amount *= type_multiplier
+
+    amenities = (row.get('Amenities') or '').lower()
+    if 'ac' in amenities and bus_type not in {'AC', 'LUXURY'}:
+        amount += 1.50
+    if 'wifi' in amenities:
+        amount += 2.00
+    if 'restroom' in amenities:
+        amount += 2.00
+    if 'snacks' in amenities:
+        amount += 2.00
+    if 'charging' in amenities:
+        amount += 1.00
+
+    # Time based variation so morning/evening/night trips do not look identical.
+    operator = (row.get('Bus_Operator') or '').lower()
+    departure_text = (row.get('Departure_Time') or '00:00').strip()
+    try:
+        dep_hour = int(departure_text.split(':')[0])
+    except (ValueError, IndexError):
+        dep_hour = 0
+
+    if 'night' in operator or dep_hour >= 21:
+        amount += 1.00
+    elif 'evening' in operator or dep_hour >= 17:
+        amount += 3.00
+    elif 'afternoon' in operator or dep_hour >= 12:
+        amount += 2.00
+
+    # Low seats left means demand is higher.
+    try:
+        available = int(available_seats)
+    except (TypeError, ValueError):
+        available = 40
+    if available <= 6:
+        amount += 5.00
+    elif available <= 12:
+        amount += 3.00
+
+    # Round to clean whole-dollar demo fare.
+    return float(max(10, round(amount)))
+
+
 class Command(BaseCommand):
     help = 'Load cities, routes, and bus trips from us_bus_routes_all_states.csv (mainland dataset)'
 
@@ -266,7 +331,6 @@ class Command(BaseCommand):
             bus_type = BUS_TYPE_MAP.get(raw_type, 'SEATER')
 
             try:
-                price      = float(row['Ticket_Price_USD'])
                 total      = int(row['Total_Seats'])
                 available  = int(row['Seats_Available'])
                 dep_time_text = row['Departure_Time'].strip()
@@ -274,6 +338,7 @@ class Command(BaseCommand):
                 duration_text = row.get('Duration_Hours', '').strip()
                 dep_time, arr_time = _arrival_from_duration(dep_time_text, arr_time_text, duration_text)
                 amenities  = row['Amenities'].strip()
+                price      = _calculate_ticket_price(row, bus_type, route_obj.distance_miles, available)
             except (ValueError, KeyError) as e:
                 self.stdout.write(self.style.WARNING(f'  ⚠️  Skipping row (bad data): {e}'))
                 skipped += 1
